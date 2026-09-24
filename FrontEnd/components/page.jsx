@@ -1,7 +1,18 @@
+import Link from "next/link"
+import styles from "./homePage.css"
+
 function Header(){
     return(
-        <div style = {{width : "100%" , height : "100px", backgroundColor : "black" , color : 'white', display : 'flex' , justifyContent : "space-between" , alignItems : 'center' }}>
-            <h2>headers Movie</h2>
+        <div className="navbar">
+            <div>
+                    <h2>headers Movie</h2>
+            </div>
+            
+            <div style={{display : 'flex',gap : "100px"}}>
+                <Link href={"/profile"}>Profile</Link>
+                <Link href={"/login"}>Login</Link>
+            </div>
+                
         </div>
     )
 }

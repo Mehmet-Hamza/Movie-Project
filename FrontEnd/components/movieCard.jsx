@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import styles from "./homePage.css"
 
 
 function Movie({popApi , newApi, scorApi, typeApi}){
     
-    // const [movieType , setMovieType] = useState(typeApi)
+    
     const [scorMovie , scorSetMovie] = useState(scorApi)
     const [newMovie , newSetMovie] = useState(newApi)
     const [popMovie , setPopMovie] = useState(popApi)
@@ -32,7 +33,7 @@ useEffect(() => {
 
         setMovie(data.data);
     
-        // typeFilter = movieType.data.filter(item => item.nameTr.toLowerCase() === "komedi")
+       
     }
     fetchData()
     console.log(filtered)
@@ -51,19 +52,22 @@ useEffect(() => {
     return () =>clearInterval(timer);
 }, [movie])
     
+
     const  typeButton = () =>{
-       setShowAll(true)
+       setShowAll(prev => !prev )
     }
     return(
     <>
-    <div className="films">
-        <div className="header text card">
+    <div className="homePage">
+        <div className="featured">
+
+            <div className="header-text-card">
           <h2>Öne Çıkan Filmler</h2>
         </div>
 
           <div>
             {movie[index]?.posterUrl && (
-              <Image src={movie[index].posterUrl} alt="headerPhoto" width={250} height={250}/>
+              <Image quality={95} className="sliderImg" src={movie[index].posterUrl} alt="headerPhoto" width={800} height={400}/>
 
               )}
               <div className="dialog-Text">
@@ -72,6 +76,8 @@ useEffect(() => {
               </div>
           </div>
 
+        </div>
+        
           <div className="popularFilms">
                     <div className="films-Text">
                         <h3>Popüler Fİlmler</h3>
@@ -119,8 +125,7 @@ useEffect(() => {
                           </ul>
                         </div>
               </div>
-    </div>
-
+    
     <div>
               <div style = {{display : 'flex' , justifyContent : "center"}}>
                 <h2>Film Türleri</h2>
@@ -146,11 +151,19 @@ useEffect(() => {
 
 
                 )}
+       
+                 
+                <button onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>
                 
-                <button onClick ={typeButton} >Daha Fazlasını Keşfet</button>
+                
+             
               </div>
               
         </div>
+    
+    </div>
+
+    
     </>
     )
 }
