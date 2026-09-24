@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Movie API</title>
+<style>
+  :root { --bg:#0b1020; --card:#161e38; --line:#253052; --text:#e6ebf7; --muted:#93a1c4; --accent:#6ea8ff; --green:#34d399; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:radial-gradient(1200px 600px at 20% -10%, #1b2547 0%, var(--bg) 55%); color:var(--text);
+         font:16px/1.65 ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif; }
+  a { color:var(--accent); }
+  .wrap { max-width:980px; margin:0 auto; padding:56px 22px 80px; }
+  h1 { font-size:40px; margin:0 0 8px; letter-spacing:-.5px; }
+  h2 { font-size:20px; margin:38px 0 12px; }
+  .lead { color:var(--muted); font-size:18px; margin:0 0 26px; max-width:70ch; }
+  .row { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:26px; }
+  .btn { display:inline-block; text-decoration:none; padding:11px 18px; border-radius:10px; font-weight:600;
+         background:var(--accent); color:#06122b; }
+  .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--text); }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .card b { display:block; font-size:26px; }
+  .card span { color:var(--muted); font-size:13px; }
+  pre { background:#070b17; border:1px solid var(--line); border-radius:10px; padding:16px; overflow:auto;
+        font:13px/1.6 ui-monospace, Consolas, monospace; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th,td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; }
+
+  td code, li code, p code { background:#0d142a; padding:1px 6px; border-radius:5px; font-family:ui-monospace,Consolas,monospace; font-size:13px; }
+  ul { padding-left:20px; } li { margin:4px 0; }
+  footer { margin-top:50px; color:var(--muted); font-size:13px; border-top:1px solid var(--line); padding-top:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎬 Movie API</h1>
+  <p class="lead">
+    Node.js + Express ile yazılmış, dosya tabanlı JSON veritabanı kullanan film API'si.
+    Kurulum gerektirmez, veritabanı projeyle birlikte taşınır. Frontend alıştırmaları için
+    85 film, 40 kullanıcı, gerçek poster görselleri ve binlerce beğeni/puan/yorum ile hazır gelir.
+  </p>
+
+  <div class="row">
+    <a class="btn" href="/swagger">Swagger dokümantasyonu →</a>
+    <a class="btn ghost" href="/docs">Sade doküman + canlı test</a>
+    <a class="btn ghost" href="/openapi.json">openapi.json</a>
+    <a class="btn ghost" href="/api/movies?limit=3">Örnek istek</a>
+  </div>
+
+  <div class="cards" id="cards">
+    <div class="card"><b>—</b><span>film</span></div>
+    <div class="card"><b>—</b><span>tür</span></div>
+    <div class="card"><b>—</b><span>kullanıcı</span></div>
+    <div class="card"><b>—</b><span>yorum</span></div>
+  </div>
+
+  <h2>Hangi dokümana bakmalı?</h2>
+  <table>
+    <thead><tr><th>Adres</th><th>Ne işe yarar</th></tr></thead>
+    <tbody>
+      <tr><td><a href="/swagger">/swagger</a></td><td><b>Swagger UI.</b> Tüm uçlar, istek/yanıt şemaları ve "Try it out" ile canlı deneme. Buradan başlayın.</td></tr>
+      <tr><td><a href="/docs">/docs</a></td><td>Aynı içeriğin sade, Türkçe anlatımlı hâli; her uç için tek tıkla deneme.</td></tr>
+      <tr><td><a href="/openapi.json">/openapi.json</a></td><td>Ham OpenAPI 3 tanımı. Postman veya Insomnia'ya içe aktarabilirsiniz.</td></tr>
+      <tr><td><a href="/api">/api</a></td><td>Endpoint listesinin JSON hâli.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Hızlı başlangıç</h2>
+  <pre>npm install
+npm start        # http://localhost:4000
+npm run reset    # dummy verileri sıfırdan üretir</pre>
+
+  <h2>Test hesapları</h2>
+  <table>
+    <thead><tr><th>Kullanıcı adı</th><th>Şifre</th><th>Rol</th></tr></thead>
+    <tbody>
+      <tr><td><code>admin</code></td><td><code>123456</code></td><td>Yönetici — film/tür ekleme, silme</td></tr>
+      <tr><td><code>elif</code>, <code>mert</code>, <code>zeynep</code>, …</td><td><code>123456</code></td><td>Normal kullanıcı (toplam 39 kişi)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>İlk isteğiniz</h2>
+  <pre>// Filmleri puana göre sıralı getir
+const res  = await fetch("http://localhost:4000/api/movies?sort=-rating&limit=12");
+const json = await res.json();
+
+console.log(json.data);            // film dizisi
+console.log(json.meta.pagination); // { page, limit, total, totalPages, hasNextPage, ... }</pre>
+
+  <h2>Giriş yapıp beğenmek</h2>
+  <pre>// 1) Giriş yap, token al
+const login = await fetch("http://localhost:4000/api/auth/login", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ identifier: "elif", password: "123456" })
+}).then(r =&gt; r.json());
+
+const token = login.data.token;
+
+// 2) Token ile beğen
+await fetch("http://localhost:4000/api/movies/mv_043/like", {
+  method: "POST",
+  headers: { Authorization: `Bearer ${token}` }
+});</pre>
+
+  <h2>Bilmeniz gerekenler</h2>
+  <ul>
+    <li>Tüm yanıtlar <code>{ success, data, meta }</code>, hatalar <code>{ success:false, error:{ code, message, details } }</code> formatındadır.</li>
+    <li>Her liste ucu <code>page</code> ve <code>limit</code> ile sayfalanır; <code>meta.pagination</code> içinde sonraki/önceki sayfa bilgisi gelir.</li>
+    <li>Token gönderirseniz filmler <code>isLiked</code>, <code>isFavorite</code>, <code>isInWatchlist</code>, <code>myRating</code> alanlarıyla döner.</li>
+    <li>Herhangi bir isteğe <code>?delay=1500</code> ekleyerek yükleniyor (loading) durumlarını test edebilirsiniz.</li>
+    <li>CORS açıktır; frontend'inizi istediğiniz portta çalıştırabilirsiniz.</li>
+  </ul>
+
+  <footer>
+    Veritabanı <code>data/</code> klasöründeki JSON dosyalarıdır — dosyaları açıp içeriği inceleyebilirsiniz.
+    Film adı, yılı, kadrosu, özeti ve poster görselleri Wikipedia film veri setinden gelir; puan, beğeni ve yorumlar üretilmiş örnek verilerdir.
+  </footer>
+</div>
+
+<script>
+  fetch('/api/stats/overview')
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      var t = j.data.totals;
+      var items = [[t.movies, 'film'], [t.genres, 'tür'], [t.users, 'kullanıcı'], [t.comments, 'yorum']];
+      document.getElementById('cards').innerHTML = items
+        .map(function (i) { return '<div class="card"><b>' + i[0] + '</b><span>' + i[1] + '</span></div>'; })
+        .join('');
+    })
+    .catch(function () {});
+</script>
+</body>
+</html>

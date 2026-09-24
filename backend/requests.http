@@ -1,0 +1,211 @@
+### Movie API - hazır istekler
+# VS Code'da "REST Client" eklentisi veya JetBrains IDE'lerin HTTP Client'ı ile
+# her isteğin üstündeki "Send Request" bağlantısına tıklayarak çalıştırabilirsiniz.
+
+@base = http://localhost:4000/api
+@movie = mv_043
+# Giriş yaptıktan sonra dönen token'ı buraya yapıştırın:
+@token = BURAYA_TOKEN
+
+### Sağlık kontrolü
+GET {{base}}/health
+
+### Tüm endpoint listesi
+GET {{base}}
+
+### ---------- KİMLİK DOĞRULAMA ----------
+
+### Giriş (admin)
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "identifier": "admin", "password": "123456" }
+
+### Giriş (normal kullanıcı)
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "identifier": "elif", "password": "123456" }
+
+### Kayıt
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "yenikullanici",
+  "email": "yeni@ornek.com",
+  "password": "123456",
+  "fullName": "Yeni Kullanıcı"
+}
+
+### Profilim
+GET {{base}}/auth/me
+Authorization: Bearer {{token}}
+
+### Profilimi güncelle
+PATCH {{base}}/auth/me
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "bio": "Film izlemeyi seviyorum." }
+
+### ---------- FİLMLER ----------
+
+### Liste
+GET {{base}}/movies?limit=5
+
+### Puana göre sıralı
+GET {{base}}/movies?sort=-rating&limit=10
+
+### Tür + puan filtresi
+GET {{base}}/movies?genre=science-fiction&minRating=8&sort=-rating
+
+### Arama
+GET {{base}}/movies?search=batman
+
+### Yıl aralığı + sayfalama
+GET {{base}}/movies?yearMin=2010&yearMax=2020&page=2&limit=8
+
+### Yapay gecikme (loading state testi)
+GET {{base}}/movies?limit=6&delay=2000
+
+### Öne çıkanlar
+GET {{base}}/movies/featured
+
+### Popüler
+GET {{base}}/movies/trending?limit=5
+
+### En yüksek puanlılar
+GET {{base}}/movies/top-rated?limit=5
+
+### Rastgele film
+GET {{base}}/movies/random
+
+### Detay (slug ile)
+GET {{base}}/movies/inception-2010
+
+### Detay (id ile, token varsa isLiked/myRating gelir)
+GET {{base}}/movies/{{movie}}
+Authorization: Bearer {{token}}
+
+### Benzer filmler
+GET {{base}}/movies/{{movie}}/similar?limit=6
+
+### ---------- ETKİLEŞİMLER ----------
+
+### Beğen
+POST {{base}}/movies/{{movie}}/like
+Authorization: Bearer {{token}}
+
+### Beğeniyi aç/kapat
+POST {{base}}/movies/{{movie}}/like/toggle
+Authorization: Bearer {{token}}
+
+### Favoriye ekle
+POST {{base}}/movies/{{movie}}/favorite
+Authorization: Bearer {{token}}
+
+### İzleme listesine ekle
+POST {{base}}/movies/{{movie}}/watchlist
+Authorization: Bearer {{token}}
+
+### Puan ver
+POST {{base}}/movies/{{movie}}/rate
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "score": 9 }
+
+### Puan dağılımı
+GET {{base}}/movies/{{movie}}/ratings
+
+### ---------- YORUMLAR ----------
+
+### Filmin yorumları
+GET {{base}}/movies/{{movie}}/comments?sort=likes&limit=5
+
+### Yorum yaz
+POST {{base}}/movies/{{movie}}/comments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "content": "Kurgusu muhteşemdi, ikinci kez izleyince yeni detaylar çıkıyor.", "rating": 9 }
+
+### Yoruma cevap yaz (parentId'yi üstteki yanıttan alın)
+POST {{base}}/movies/{{movie}}/comments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "content": "Kesinlikle katılıyorum.", "parentId": "cm_0001" }
+
+### Yorumu beğen
+POST {{base}}/comments/cm_0001/like
+Authorization: Bearer {{token}}
+
+### Son yorumlar
+GET {{base}}/comments?limit=10
+
+### ---------- TÜRLER ----------
+
+### Tüm türler
+GET {{base}}/genres
+
+### Türe ait filmler
+GET {{base}}/genres/action/movies?sort=-rating&limit=6
+
+### ---------- KULLANICILAR ----------
+
+### Kullanıcılar
+GET {{base}}/users?limit=10
+
+### Profil
+GET {{base}}/users/elif
+
+### Favorileri
+GET {{base}}/users/elif/favorites?limit=6
+
+### Önerileri
+GET {{base}}/users/elif/recommendations?limit=6
+
+### Kendi listelerim
+GET {{base}}/me/favorites
+Authorization: Bearer {{token}}
+
+### ---------- İSTATİSTİK ----------
+
+### Genel bakış
+GET {{base}}/stats/overview
+
+### Tür dağılımı
+GET {{base}}/stats/genres
+
+### Aktivite akışı
+GET {{base}}/stats/activity?limit=10
+
+### ---------- ADMIN ----------
+
+### Film ekle (admin token gerekir)
+POST {{base}}/movies
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Yeni Film",
+  "year": 2024,
+  "genres": ["drama"],
+  "runtime": 118,
+  "director": "Yönetmen Adı",
+  "overview": "Kısa özet.",
+  "posterUrl": "https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg"
+}
+
+### Filmi güncelle
+PATCH {{base}}/movies/{{movie}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "featured": true }
+
+### Filmi sil
+DELETE {{base}}/movies/mv_XXX
+Authorization: Bearer {{token}}

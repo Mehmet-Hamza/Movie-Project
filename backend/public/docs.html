@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Movie API - Dokümantasyon</title>
+<style>
+  :root {
+    --bg: #0b1020;
+    --bg-soft: #131a30;
+    --card: #161e38;
+    --line: #253052;
+    --text: #e6ebf7;
+    --muted: #93a1c4;
+    --accent: #6ea8ff;
+    --green: #34d399;
+    --amber: #fbbf24;
+    --red: #f87171;
+    --purple: #c084fc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.6 ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  a { color: var(--accent); }
+  code, pre { font-family: ui-monospace, "SF Mono", Consolas, monospace; }
+
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,16,32,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 22px;
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  }
+  header h1 { font-size: 18px; margin: 0; letter-spacing: .2px; }
+  header .spacer { flex: 1; }
+  .pill {
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 999px; padding: 5px 12px; font-size: 12px; color: var(--muted);
+  }
+  input, select, textarea, button {
+    font: inherit; color: var(--text);
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 8px; padding: 7px 10px;
+  }
+  button { cursor: pointer; }
+  button.primary { background: var(--accent); color: #06122b; border-color: transparent; font-weight: 600; }
+  button.primary:hover { filter: brightness(1.08); }
+  button.ghost:hover { border-color: var(--accent); }
+
+  .layout { display: grid; grid-template-columns: 250px 1fr; gap: 24px; padding: 24px; max-width: 1400px; margin: 0 auto; }
+  nav { position: sticky; top: 86px; align-self: start; max-height: calc(100vh - 110px); overflow: auto; }
+  nav h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 18px 0 8px; }
+  nav a { display: block; padding: 5px 10px; border-radius: 6px; text-decoration: none; color: var(--muted); font-size: 13px; }
+  nav a:hover { background: var(--bg-soft); color: var(--text); }
+
+  section.group { margin-bottom: 40px; }
+  section.group > h2 { font-size: 22px; margin: 0 0 6px; }
+  section.group > p.desc { color: var(--muted); margin: 0 0 18px; }
+
+  .ep { background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
+  .ep > summary { list-style: none; cursor: pointer; padding: 14px 16px; display: flex; gap: 12px; align-items: center; }
+  .ep > summary::-webkit-details-marker { display: none; }
+  .ep[open] > summary { border-bottom: 1px solid var(--line); }
+  .m { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; min-width: 62px; text-align: center; }
+  .m.GET { background: rgba(52,211,153,.15); color: var(--green); }
+  .m.POST { background: rgba(110,168,255,.15); color: var(--accent); }
+  .m.PATCH { background: rgba(251,191,36,.15); color: var(--amber); }
+  .m.PUT { background: rgba(192,132,252,.15); color: var(--purple); }
+  .m.DELETE { background: rgba(248,113,113,.15); color: var(--red); }
+  .path { font-family: ui-monospace, Consolas, monospace; font-size: 14px; }
+  .sum { color: var(--muted); font-size: 13px; margin-left: auto; text-align: right; }
+  .lock { font-size: 11px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; color: var(--amber); }
+
+  .body { padding: 16px; display: grid; gap: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  td code { background: var(--bg-soft); padding: 1px 6px; border-radius: 5px; }
+
+  .try { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .try input { flex: 1; min-width: 220px; }
+  textarea { width: 100%; min-height: 90px; resize: vertical; }
+  pre.out {
+    background: #070b17; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px; max-height: 340px; overflow: auto; font-size: 12.5px; margin: 0; white-space: pre-wrap; word-break: break-word;
+  }
+  .status { font-size: 12px; font-weight: 600; }
+  .status.ok { color: var(--green); }
+  .status.err { color: var(--red); }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    nav { position: static; max-height: none; }
+    .sum { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎬 Movie API</h1>
+  <span class="pill" id="healthPill">bağlanıyor…</span>
+  <div class="spacer"></div>
+  <input id="tokenBox" placeholder="JWT token (giriş yapınca otomatik dolar)" style="width:280px" />
+  <button class="ghost" id="loginAdmin">admin girişi</button>
+  <button class="ghost" id="loginUser">elif girişi</button>
+  <button class="ghost" id="clearToken">temizle</button>
+  <a href="/swagger" class="pill" style="text-decoration:none">Swagger UI</a>
+  <a href="/" class="pill" style="text-decoration:none">← ana sayfa</a>
+</header>
+
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+<script src="/docs-data.js"></script>
+<script src="/docs-app.js"></script>
+</body>
+</html>
