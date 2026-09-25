@@ -1,7 +1,11 @@
 :root{
     --home-background : #2F2F2F;
+    --text-color : #E5E5E5;
 }
 
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 .navbar{
     width : 100% ;
@@ -24,11 +28,51 @@
 }
 
 .featured{
-  
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 40%;
+    padding: 40px;
+  
 }
 
+.sliderImg{
+    border-radius : 10px ;
+}
+
+.header-text-card{
+    color : var(--text-color);
+    font-size: 30px;
+    
+}
+
+.films{
+    background-color: #0a0a0a;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.filmCard{
+    background-color: #121212;
+    overflow: hidden;
+    overflow-x: scroll;
+    margin-bottom: 50px;
+    border-radius: 15px;
+}
+
+.filmsImage{
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+}
+
+.films-text{
+    color : var(--text-color);
+    padding-bottom: 15px;
+    font-size: 25px;
+    
+}

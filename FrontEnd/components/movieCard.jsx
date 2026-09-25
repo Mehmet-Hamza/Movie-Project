@@ -77,9 +77,9 @@ useEffect(() => {
           </div>
 
         </div>
-        
+        <div className="films">
           <div className="popularFilms">
-                    <div className="films-Text">
+                    <div className="films-text">
                         <h3>Popüler Fİlmler</h3>
                     </div>
                           <div  className="filmCard">
@@ -87,7 +87,7 @@ useEffect(() => {
                                 
                                 {popMovie.data.map((item, index) => {
                                     return(
-                                        <li key={index}><Image src = {item.posterUrl} width = {70} height = {70} alt= "popularPhoto"/></li>
+                                        <li key={index}><Image className="filmsImage" src = {item.posterUrl} width = {70} height = {70} alt= "popularPhoto"/></li>
                                     )
                                 })}
                               </ul>
@@ -95,7 +95,7 @@ useEffect(() => {
               </div>
 
               <div className="NewFilms">
-                    <div className="films-Text">
+                    <div className="films-text">
                         <h3>Yeni Çıkanlars</h3>
                     </div>
 
@@ -103,7 +103,7 @@ useEffect(() => {
                           <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
                             {newMovie.data.map((item , index) => {
                                 return(
-                                    <li key = {index}><Image alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li>
+                                    <li key = {index}><Image className="filmsImage" alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li>
                                 )
                             })}
                           </ul>
@@ -119,12 +119,13 @@ useEffect(() => {
                           <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
                             {scorMovie.data.map((item , index) => {
                                 return(
-                                <li key = {index }><Image alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li>
+                                <li key = {index }><Image className="filmsImage" alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li>
                                 )
                             })}
                           </ul>
                         </div>
               </div>
+        </div>
     
     <div>
               <div style = {{display : 'flex' , justifyContent : "center"}}>
