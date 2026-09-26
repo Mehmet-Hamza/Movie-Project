@@ -5,6 +5,8 @@ import Image from "next/image";
 import styles from "./homePage.css"
 
 
+
+
 function Movie({popApi , newApi, scorApi, typeApi}){
     
     
@@ -60,7 +62,14 @@ useEffect(() => {
     <>
     <div className="homePage">
         <div className="featured">
-
+            <video 
+                    src="testVideo.mp4" 
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline 
+                    className="kapsayici-video"
+                />
             <div className="header-text-card">
           <h2>Öne Çıkan Filmler</h2>
         </div>
@@ -127,16 +136,16 @@ useEffect(() => {
               </div>
         </div>
     
-    <div>
-              <div style = {{display : 'flex' , justifyContent : "center"}}>
+    <div className="filmTypes">
+              <div className="filmTypeText">
                 <h2>Film Türleri</h2>
               </div>
 
             
-              <div style={{display : 'grid' , gridTemplateColumns : '80px 80px', justifyContent : 'center'}}>
+              <div className="typeCard" >
                 {filtered.map((item , index) => {
                     return(
-                        <div key = {index}><Image  alt = "typePhoto" src={item.coverUrl} width = {70} height = {70}/></div>
+                        <div className="img1" key = {index}><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div>
                     
                         
                     )
@@ -152,9 +161,7 @@ useEffect(() => {
 
 
                 )}
-       
-                 
-                <button onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>
+                <button  onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>
                 
                 
              
