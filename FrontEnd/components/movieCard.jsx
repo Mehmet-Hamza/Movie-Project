@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./homePage.css"
+import Link from 'next/link'
 
 
 
@@ -72,7 +73,7 @@ useEffect(() => {
 
           <div>
             {movie[index]?.posterUrl && (
-              <Image quality={95} className="sliderImg" src={movie[index].posterUrl} alt="headerPhoto" width={400} height={400}/>
+              <Link key={index} href="#"><Image quality={95} className="sliderImg" src={movie[index].posterUrl} alt="headerPhoto" width={400} height={400}/></Link>
 
               )}
               <div className="dialog-Text">
@@ -92,7 +93,7 @@ useEffect(() => {
                                 
                                 {popMovie.data.map((item, index) => {
                                     return(
-                                        <li key={index}><Image className="filmsImage" src = {item.posterUrl} width = {70} height = {70} alt= "popularPhoto"/></li>
+                                        <Link key={index} href="#"><li ><Image className="filmsImage" src = {item.posterUrl} width = {70} height = {70} alt= "popularPhoto"/></li></Link> 
                                     )
                                 })}
                               </ul>
@@ -108,7 +109,7 @@ useEffect(() => {
                           <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
                             {newMovie.data.map((item , index) => {
                                 return(
-                                    <li key = {index}><Image className="filmsImage" alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li>
+                                    <Link key = {index} href= "#"><li><Image className="filmsImage" alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li></Link>
                                 )
                             })}
                           </ul>
@@ -124,7 +125,7 @@ useEffect(() => {
                           <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
                             {scorMovie.data.map((item , index) => {
                                 return(
-                                <li key = {index }><Image className="filmsImage" alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li>
+                                <Link  key = {index } href="#"><li><Image className="filmsImage" alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li> </Link>
                                 )
                             })}
                           </ul>
@@ -141,8 +142,13 @@ useEffect(() => {
               <div className="typeCard" >
                 {filtered.map((item , index) => {
                     return(
-                        <div className="img1" key = {index}><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div>
+
+                    <div key = {index} style={{ position : 'relative'}}>
+                        <h3 className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white', }}>{`${item.nameTr} ${item.emoji}`}</h3>
+                        
+                        <Link href = "#"><div className="img1"><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div></Link>
                     
+                    </div>
                         
                     )
                 })}
@@ -150,19 +156,22 @@ useEffect(() => {
 
                     typeApi.data.map((element , index) => {
                     return(
-                        <div key = {index}><Image  alt = "typePhoto" src={element.coverUrl} width = {70} height = {70}/></div>
+                        <div key = {index} style={{ position : 'relative'}}>
+                             <h3  className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white'}}>{element.nameTr}</h3>
+                            <Link href="#" ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {150} height = {150}/></div></Link>
+                        </div>
                     )
                 }
             )
 
 
                 )}
-                <button  onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>
+                
                 
                 
              
               </div>
-              
+              <button className="buttonMore"  onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>
         </div>
     
     </div>
