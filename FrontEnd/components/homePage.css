@@ -29,8 +29,10 @@ Image {
     background-color : black ;
     color : white;
     display : flex ;
-    justify-Content : space-around; 
-    align-Items : center 
+    justify-Content : space-between; 
+    align-Items : center;
+    padding-inline: 40px;
+    
 }
 
 

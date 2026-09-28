@@ -2,6 +2,8 @@ import axios from "axios"
 import  Movie  from "@/components/movieCard.jsx"
 
 
+
+
 async function Home(){
 
    
@@ -44,7 +46,7 @@ async function Home(){
 
    
       <Movie popApi = {popData} newApi = {newData} scorApi = {puanData} typeApi = {typeData} backMov = {dataVideo}/>
-
+      
         
       
     </div>
