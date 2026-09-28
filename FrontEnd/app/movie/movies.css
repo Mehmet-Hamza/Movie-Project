@@ -18,7 +18,7 @@
 }
 .movies{
     width: 100%;
-    height: 100vh;
+   
     display: flex;
 }
 .moviesList{
@@ -29,14 +29,37 @@
     display: grid;
     padding: 20px;
     padding-inline: 30px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 30px;
     
 }
 
 .filterMenü{
  background-color: pink;
  min-width: 15%;
+ position: sticky;
+ top: 0;
+ height: 100vh;
 }
 
+.movieİnfo{
+    padding: 20px;
+   
+    
+}
+.link{
+    text-decoration: none;
+     color: black;
+     
+}
+.poster{
+    width : 350px;
+    height : 400px;
+    background-Color : lightgray
+}
+.poster:hover{
+    opacity: 0.8;
+}
 
 
 
