@@ -6,14 +6,64 @@ import styles from "./movies.css"
 import { Search } from 'lucide-react';
 import  Image  from "next/image";
 import Link from "next/link"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
-export default function Movies({allData = []}){
+export default function Movies({allData}){
 
-        
     const [movieData , setMovieData] = useState(allData)
+    const [searchValue , setSearchValue] = useState("");
+
+    // Search value
+    const search = (e) => {
+        const value = e.target.value;
+        setSearchValue(value)
+    }
+    console.log(searchValue)
     
+// 300 ms Debounce
+useEffect(() => {
+
+    if (!searchValue.trim()){
+
+        return setMovieData(allData)
+    }
+
+    const time = setTimeout(() => {
+        const fetchData = async () => {
+            const res = await  fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
+            const data = await res.json();
+            setMovieData(data.data)
+           /*  console.log(res)
+            console.log(data)
+            if(data.data.length === 0){
+                return(
+                    <div>Aranan Film Bulunamadı</div>
+                )
+            } */
+          
+        }
+        fetchData()
+    }, 300)
+
+    return () => clearTimeout(time)
+        
+
+}, [searchValue])
+   
+    // Button Click
+   const searchButton = async () => {
+
+     if (!searchValue.trim()){
+
+        return setMovieData(allData)
+    }
+        
+    const res = await  fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
+        const data = await res.json();
+        setMovieData(data.data)
+
+   }
    
     return(
     <div className="filmList">
@@ -24,8 +74,8 @@ export default function Movies({allData = []}){
             <div className="searchBar">
                
                 <div className="input-group mb-3">
-                <input type="text" className="form-control searchInput" placeholder="Film Ara" aria-label="Recipient’s username" aria-describedby="button-addon2" />
-                <button className="btn btn-outline-secondary" type="button" id="button-addon2"><Search/></button>
+                <input onChange={search} type="text" className="form-control searchInput" placeholder="Film Ara" aria-label="Recipient’s username" aria-describedby="button-addon2" />
+                <button onClick={searchButton} className="btn btn-outline-secondary" type="button" id="button-addon2"><Search/></button>
             </div>
                 
             </div>
@@ -38,7 +88,8 @@ export default function Movies({allData = []}){
 
             <div className="moviesList">
 
-                {movieData?.map((item , index) => {
+                {movieData.length === 0 ? <h2>Film Bulunamadı</h2> : 
+                movieData?.map((item , index) => {
                    
                    return(
                    <Link className="link" href = "#" key = {index}><div className="poster">
