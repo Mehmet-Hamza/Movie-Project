@@ -61,5 +61,23 @@
     opacity: 0.8;
 }
 
+.filterType{
+    background-color: antiquewhite;
+    padding: 20px;
+    display: grid;
+    
+}
+
+.typeFilterMovie{
+    font-size: 15px;
+    list-style: none;
+    font-weight: 600;
+}
+.typeMovie{
+    display: flex;
+    gap: 10px;
+}
+
+
 
 

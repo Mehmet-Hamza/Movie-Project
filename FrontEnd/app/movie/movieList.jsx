@@ -1,11 +1,11 @@
  
 "use client"
 
-
 import styles from "./movies.css"
 import { Search } from 'lucide-react';
 import  Image  from "next/image";
 import Link from "next/link"
+
 import { useEffect, useState } from "react";
 
 
@@ -34,13 +34,8 @@ useEffect(() => {
             const res = await  fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
             const data = await res.json();
             setMovieData(data.data)
-           /*  console.log(res)
-            console.log(data)
-            if(data.data.length === 0){
-                return(
-                    <div>Aranan Film Bulunamadı</div>
-                )
-            } */
+            
+          //  const res = await fetch(`http://localhost:4000/api/movies?genre=${genres}`)
           
         }
         fetchData()
@@ -65,6 +60,7 @@ useEffect(() => {
 
    }
    
+   const uniqType = [...new Set(movieData.flatMap(movie => movie.genreDetails[0].nameTr))]
     return(
     <div className="filmList">
 
@@ -83,7 +79,22 @@ useEffect(() => {
 
         <div className="movies">
             <div className="filterMenü">
-                filtre
+                <h3>Film Tür Filtreleme</h3>
+                
+                <div className="filterType">
+                            <ul>
+                                {uniqType?.map((item, index) => {
+                                    
+                                    return(
+                                    <div key={index} className="typeMovie">
+                                        <input type="checkbox"/>
+                                        <li className="typeFilterMovie">{item}</li>
+                                    </div>
+                                    )
+                                })}
+
+                            </ul>
+                </div>
             </div>
 
             <div className="moviesList">
