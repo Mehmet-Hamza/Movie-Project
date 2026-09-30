@@ -139,6 +139,16 @@ Image {
     align-items: center; 
 }
 
+.filmTypeText{
+    color: #E5E5E5;
+    
+    margin-top: 40px;
+    display: flex;
+    justify-content: left;
+    min-width: 100%;
+    padding-inline: 20px  ;
+}
+
 .typeCard{
     background-color:#2F2F2F;
     width: 100%;
@@ -157,6 +167,14 @@ Image {
     opacity: 0.8;
     cursor: pointer;
     
+}
+
+.buttonMore{
+    background-color: var(--home-background);
+    border: none;
+    font-size: 20px;
+    color:#E5E5E5;
+
 }
 
 

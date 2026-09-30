@@ -11,15 +11,17 @@ import { useEffect, useState } from "react";
 
 export default function Movies({allData}){
 
+    const [selectedGen , setSelectedGen] = useState([])
     const [movieData , setMovieData] = useState(allData)
     const [searchValue , setSearchValue] = useState("");
+    const [forFİlterData , setForFilterData] = useState(allData)
 
     // Search value
     const search = (e) => {
         const value = e.target.value;
         setSearchValue(value)
     }
-    console.log(searchValue)
+
     
 // 300 ms Debounce
 useEffect(() => {
@@ -35,7 +37,7 @@ useEffect(() => {
             const data = await res.json();
             setMovieData(data.data)
             
-          //  const res = await fetch(`http://localhost:4000/api/movies?genre=${genres}`)
+         
           
         }
         fetchData()
@@ -60,7 +62,34 @@ useEffect(() => {
 
    }
    
-   const uniqType = [...new Set(movieData.flatMap(movie => movie.genreDetails[0].nameTr))]
+   const uniqType = [...new Set(forFİlterData.flatMap(movie => movie?.genreDetails?.map(genre => genre.nameTr || [])))]
+
+   // Type Filter
+   const changeGen = (e) => {
+        const GenreName = e.target.value
+        const isCheck = e.target.checked
+
+        if(isCheck){
+            setSelectedGen(prev => [...prev , GenreName])
+        }
+        else{
+            setSelectedGen(prev => prev.filter(item => item !== GenreName))
+        }
+   }
+
+   useEffect(() => {
+
+        if(selectedGen.length === 0){
+            return setMovieData(allData)
+        }
+
+        const filteredMovies = allData.filter(genre =>
+            genre.genreDetails?.some(genreData =>
+                selectedGen.includes(genreData.nameTr)))
+
+        setMovieData(filteredMovies)
+   },[selectedGen, allData])
+   
     return(
     <div className="filmList">
 
@@ -79,15 +108,15 @@ useEffect(() => {
 
         <div className="movies">
             <div className="filterMenü">
-                <h3>Film Tür Filtreleme</h3>
+                <h3 style={{fontSize : '20px', marginTop : '20px', paddingInline : '10px'}}>Film Tür Filtreleme</h3>
                 
                 <div className="filterType">
                             <ul>
                                 {uniqType?.map((item, index) => {
-                                    
+                                   
                                     return(
                                     <div key={index} className="typeMovie">
-                                        <input type="checkbox"/>
+                                        <input  value={item}  onChange = {changeGen} type="checkbox"/>
                                         <li className="typeFilterMovie">{item}</li>
                                     </div>
                                     )
@@ -99,12 +128,12 @@ useEffect(() => {
 
             <div className="moviesList">
 
-                {movieData.length === 0 ? <h2>Film Bulunamadı</h2> : 
+                {movieData.length === 0 ? <h2 style={{color : 'white'}}>Film Bulunamadı</h2> : 
                 movieData?.map((item , index) => {
                    
                    return(
                    <Link className="link" href = "#" key = {index}><div className="poster">
-                    <Image  src={item.posterUrl} alt="poster" width={350} height={175}/>
+                    <Image  src={item.posterUrl} alt="poster" width={350} height={175} style={{ width: "100%", height: "200px"}}/>
                     {/*Image Location */}
                     
                    
@@ -112,7 +141,7 @@ useEffect(() => {
                             <h4 className="MovieTitle">{item.title}</h4>
                             <p className="MovieYear">{item.year}</p>
                             <p className="MoviePuan">{item.rating}</p>
-                            <p className="MovieType">{item.genres[0]}</p>
+                            <p className="MovieType">{item?.genreDetails.map(g => g.nameTr).join(" , ")}</p>
 
                         </div>    
                     </div></Link>

@@ -24,27 +24,32 @@
 .moviesList{
     background-color: #353535;
     min-height: 100vh;
-    min-width: 85%;
+    flex : 1;
     box-sizing: border-box;
     display: grid;
     padding: 20px;
-    padding-inline: 30px;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 30px;
     
+    grid-template-columns: repeat(auto-fit, minmax(250px,250px));
+    gap: 30px;
+    justify-content: center;
 }
 
+
+
 .filterMenü{
- background-color: pink;
+ 
  min-width: 15%;
  position: sticky;
  top: 0;
  height: 100vh;
+ flex-shrink: 0;
 }
 
 .movieİnfo{
     padding: 20px;
-   
+    display: flex;
+    flex-direction: column;
+    align-items: start;
     
 }
 .link{
@@ -53,9 +58,10 @@
      
 }
 .poster{
-    width : 350px;
-    height : 400px;
+    width: 100%;
+    height: 400px;
     background-Color : lightgray
+
 }
 .poster:hover{
     opacity: 0.8;

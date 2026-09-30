@@ -102,7 +102,7 @@ useEffect(() => {
 
               <div className="NewFilms">
                     <div className="films-text">
-                        <h3>Yeni Çıkanlars</h3>
+                        <h3>Yeni Çıkanlar</h3>
                     </div>
 
                         <div className="filmCard">
@@ -168,10 +168,10 @@ useEffect(() => {
                 )}
                 
                 
-                
+              <button className="buttonMore"  onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>  
              
               </div>
-              <button className="buttonMore"  onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>
+              
         </div>
     
     </div>
