@@ -9,7 +9,7 @@ async function Home(){
    
   // Öne Çıkan Fİlmler
   const res = await axios.get(`http://localhost:4000/api/movies/featured`);
-  console.log(res.data.data)
+  const featureData = res.data.data
 
   // Öne Çıkan Film Background
   const resVideo = await fetch('http://localhost:3001/videoUrl');
@@ -45,7 +45,7 @@ async function Home(){
     <div className="homePage">
 
    
-      <Movie popApi = {popData} newApi = {newData} scorApi = {puanData} typeApi = {typeData} backMov = {dataVideo}/>
+      <Movie featData = {featureData} popApi = {popData} newApi = {newData} scorApi = {puanData} typeApi = {typeData} backMov = {dataVideo}/>
       
         
       

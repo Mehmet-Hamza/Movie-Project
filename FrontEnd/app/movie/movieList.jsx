@@ -5,12 +5,13 @@ import styles from "./movies.css"
 import { Search } from 'lucide-react';
 import  Image  from "next/image";
 import Link from "next/link"
-
+import Dropdown from 'react-bootstrap/Dropdown';
 import { useEffect, useState } from "react";
 
 
 export default function Movies({allData}){
-
+    
+    const [sortValue, setSortValue] = useState("")
     const [selectedGen , setSelectedGen] = useState([])
     const [movieData , setMovieData] = useState(allData)
     const [searchValue , setSearchValue] = useState("");
@@ -89,6 +90,25 @@ useEffect(() => {
 
         setMovieData(filteredMovies)
    },[selectedGen, allData])
+
+   // Sort  
+   const place = async (e) => {
+
+    const value = e.target.value
+        setSortValue(value)
+        console.log(value)
+
+         if(!value){
+            return setMovieData(allData)
+        }
+
+        const res = await fetch(`http://localhost:4000/api/movies?sort=${value}&limit=85`)
+        const data = await res.json()
+        console.log(data)
+       
+        setMovieData(data.data)
+        
+   }
    
     return(
     <div className="filmList">
@@ -108,7 +128,7 @@ useEffect(() => {
 
         <div className="movies">
             <div className="filterMenü">
-                <h3 style={{fontSize : '20px', marginTop : '20px', paddingInline : '10px'}}>Film Tür Filtreleme</h3>
+                <h3 style={{fontSize : '20px', marginTop : '20px', paddingInline : '10px'}}>Filtreleme Ölçütü</h3>
                 
                 <div className="filterType">
                             <ul>
@@ -124,6 +144,17 @@ useEffect(() => {
 
                             </ul>
                 </div>
+
+                    <select onChange={place} className="form-select sortChange" aria-label="Default select example">
+                        <option value="">Sırala</option>
+                        <option value="-rating">Azalan Puan</option>
+                        <option value="+rating">Artan Puan</option>
+                        <option value="-year">Azalan Yıl</option>
+                        <option value="+year">Artan Yıl</option>
+                        <option value="-popularity"> Azalan Popülerlik</option>
+                        <option value="+popularity"> Artan Popülerlik</option>
+                        <option value="title">Alfabetik</option>
+                </select>
             </div>
 
             <div className="moviesList">

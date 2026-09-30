@@ -8,13 +8,13 @@ import Link from 'next/link'
 
 
 
-function Movie({popApi , newApi, scorApi, typeApi , backMov}){
+function Movie({featData,popApi , newApi, scorApi, typeApi , backMov}){
     
 
     const [scorMovie , scorSetMovie] = useState(scorApi)
     const [newMovie , newSetMovie] = useState(newApi)
     const [popMovie , setPopMovie] = useState(popApi)
-    const [movie , setMovie] = useState([]);
+    const [movie , setMovie] = useState(featData);
     const [index , setİndex] = useState(0);
     const [filtered , setFilter] = useState([])
     const [showAll, setShowAll] = useState(false)
@@ -29,17 +29,7 @@ useEffect(() => {
 
     setFilter(filterData)
     
-    console.log(filtered)
-    const fetchData = async () => {
-        const res = await fetch(`http://localhost:4000/api/movies/featured`);
-        const data  = await res.json();
-
-        setMovie(data.data);
     
-       
-    }
-    fetchData()
-    console.log(filtered)
 
 }, [])
 
@@ -73,7 +63,7 @@ useEffect(() => {
 
           <div>
             {movie[index]?.posterUrl && (
-              <Link key={index} href="#"><Image quality={95} className="sliderImg" src={movie[index].posterUrl} alt="headerPhoto" width={400} height={400}/></Link>
+              <Link key={index} href="#"><Image quality={95} className="sliderImg" src={featData[index].posterUrl} alt="headerPhoto" width={400} height={400}/></Link>
 
               )}
               <div className="dialog-Text">

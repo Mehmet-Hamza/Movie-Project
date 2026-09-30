@@ -43,6 +43,9 @@
  top: 0;
  height: 100vh;
  flex-shrink: 0;
+ display: flex;
+ flex-direction: column;
+ gap: 35px;
 }
 
 .movieİnfo{
@@ -82,6 +85,9 @@
 .typeMovie{
     display: flex;
     gap: 10px;
+}
+.sortChange{
+    width: 50%;
 }
 
 
