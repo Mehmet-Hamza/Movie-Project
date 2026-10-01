@@ -5,7 +5,6 @@ import styles from "./movies.css"
 import { Search } from 'lucide-react';
 import  Image  from "next/image";
 import Link from "next/link"
-import Dropdown from 'react-bootstrap/Dropdown';
 import { useEffect, useState } from "react";
 
 
@@ -20,7 +19,8 @@ export default function Movies({allData}){
     const [movieData , setMovieData] = useState(allData)
     const [searchValue , setSearchValue] = useState("");
     const [forFİlterData , setForFilterData] = useState(allData)
-
+    
+    const [currentPage , setCurrentPage] = useState(1)
 
 
     // Search value
@@ -44,8 +44,6 @@ useEffect(() => {
             const data = await res.json();
             setMovieData(data.data)
             
-         
-          
         }
         fetchData()
     }, 300)
@@ -102,16 +100,14 @@ useEffect(() => {
 
     const value = e.target.value
         setSortValue(value)
-        console.log(value)
-
+        
          if(!value){
             return setMovieData(allData)
         }
 
         const res = await fetch(`http://localhost:4000/api/movies?sort=${value}&limit=85`)
         const data = await res.json()
-        console.log(data)
-       
+        
         setMovieData(data.data)
         
    }
@@ -119,36 +115,37 @@ useEffect(() => {
    // Year Sort
    const sortYear = () => {
     
-    if(!minYear && !maxYear){
-        return setMovieData(allData)
-    }
+        if(!minYear && !maxYear){
+            return setMovieData(allData)
+        }
 
-    let filterYears = allData.filter(item => {
-        return(
-      (item.year >= Number(minYear))  && (item.year <= Number(maxYear))
-        ) 
-    })
-    
-    setMovieData(filterYears)
+        // Filter Year
+        let filterYears = allData.filter(item => {
+            return(
+        (item.year >= Number(minYear))  && (item.year <= Number(maxYear))
+            ) 
+        })
+        setMovieData(filterYears)
 
-   
-     
    }
 
+   // Rating Sort
    const sortRating = () => {
 
     if(!minRating && !maxRating){
-        return setMovieData(allData)
-    }
-         let filterRating = allData.filter((item) => {
-        return(
-            (item.rating >= Number(minRating)) && (item.rating <= Number(maxRating))
-        )
-    })
+            return setMovieData(allData)
+        }
+            // Filter Rating
+            let filterRating = allData.filter((item) => {
+            return(
+                (item.rating >= Number(minRating)) && (item.rating <= Number(maxRating))
+            )
+        })
 
-    setMovieData(filterRating)
+        setMovieData(filterRating)
    }
 
+   // UseEffect Year and Rating
    useEffect(() => {
 
     sortYear();
@@ -161,8 +158,6 @@ useEffect(() => {
 
 
 
-
-   
     return(
     <div className="filmList">
 
@@ -170,7 +165,6 @@ useEffect(() => {
             <h3>Film Listesi</h3>
             
             <div className="searchBar">
-               
                 <div className="input-group mb-3">
                 <input onChange={search} type="text" className="form-control searchInput" placeholder="Film Ara" aria-label="Recipient’s username" aria-describedby="button-addon2" />
                 <button onClick={searchButton} className="btn btn-outline-secondary" type="button" id="button-addon2"><Search/></button>
@@ -239,7 +233,7 @@ useEffect(() => {
             <div className="moviesList">
 
                 {movieData.length === 0 ? <h2 style={{color : 'white'}}>Film Bulunamadı</h2> : 
-                movieData?.map((item , index) => {
+                movieData.slice((currentPage - 1) * 10, currentPage * 10).map((item , index) => {
                    
                    return(
                    <Link className="link" href = "#" key = {index}><div className="poster">
@@ -266,7 +260,19 @@ useEffect(() => {
         </div>
         
 
-
+            <div className="pagination">
+                <ul className="paginationList">
+                    <button onClick={() => setCurrentPage(1)} className="paginationItem">1</button>
+                    <button onClick={() => setCurrentPage(2)} className="paginationItem">2</button>
+                    <button onClick={() => setCurrentPage(3)} className="paginationItem">3</button>
+                    <button onClick={() => setCurrentPage(4)} className="paginationItem">4</button>
+                    <button onClick={() => setCurrentPage(5)} className="paginationItem">5</button>
+                    <button onClick={() => setCurrentPage(6)} className="paginationItem">6</button>
+                    <button onClick={() => setCurrentPage(7)} className="paginationItem">7</button>
+                    <button onClick={() => setCurrentPage(8)} className="paginationItem">8</button>
+                    <button onClick={() => setCurrentPage(9)} className="paginationItem">9</button>
+                </ul>
+            </div>  
     </div>
     )
 }
