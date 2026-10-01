@@ -10,8 +10,8 @@
     "role": "admin",
     "isActive": true,
     "createdAt": "2024-05-10T19:43:23.000Z",
-    "lastLoginAt": "2025-05-22T15:02:21.000Z",
-    "updatedAt": "2026-08-19T08:06:43.247Z"
+    "lastLoginAt": "2026-10-01T14:55:31.951Z",
+    "updatedAt": "2026-10-01T14:55:31.951Z"
   },
   {
     "id": "us_002",
@@ -24,8 +24,8 @@
     "role": "user",
     "isActive": true,
     "createdAt": "2025-04-26T20:45:06.000Z",
-    "lastLoginAt": "2025-05-12T16:20:17.000Z",
-    "updatedAt": "2026-08-19T08:06:43.247Z"
+    "lastLoginAt": "2026-10-01T14:55:37.214Z",
+    "updatedAt": "2026-10-01T14:55:37.214Z"
   },
   {
     "id": "us_003",

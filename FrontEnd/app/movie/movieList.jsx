@@ -10,12 +10,18 @@ import { useEffect, useState } from "react";
 
 
 export default function Movies({allData}){
-    
+
+    const [maxRating, setMaxRating] = useState("")
+    const [minRating , setMinRating] = useState("");
+    const [minYear , setMinYear] = useState("")
+    const [maxYear , setMaxYear] = useState("")
     const [sortValue, setSortValue] = useState("")
     const [selectedGen , setSelectedGen] = useState([])
     const [movieData , setMovieData] = useState(allData)
     const [searchValue , setSearchValue] = useState("");
     const [forFİlterData , setForFilterData] = useState(allData)
+
+
 
     // Search value
     const search = (e) => {
@@ -109,6 +115,53 @@ useEffect(() => {
         setMovieData(data.data)
         
    }
+
+   // Year Sort
+   const sortYear = () => {
+    
+    if(!minYear && !maxYear){
+        return setMovieData(allData)
+    }
+
+    let filterYears = allData.filter(item => {
+        return(
+      (item.year >= Number(minYear))  && (item.year <= Number(maxYear))
+        ) 
+    })
+    
+    setMovieData(filterYears)
+
+   
+     
+   }
+
+   const sortRating = () => {
+
+    if(!minRating && !maxRating){
+        return setMovieData(allData)
+    }
+         let filterRating = allData.filter((item) => {
+        return(
+            (item.rating >= Number(minRating)) && (item.rating <= Number(maxRating))
+        )
+    })
+
+    setMovieData(filterRating)
+   }
+
+   useEffect(() => {
+
+    sortYear();
+   },[minYear, maxYear])
+
+   useEffect(() => {
+    sortRating()
+
+   },[minRating, maxRating])
+
+
+
+
    
     return(
     <div className="filmList">
@@ -155,6 +208,32 @@ useEffect(() => {
                         <option value="+popularity"> Artan Popülerlik</option>
                         <option value="title">Alfabetik</option>
                 </select>
+
+
+                <div className="yearAndRatingSort">
+                    <div className="yearSort">
+                        <div className="yearHeader">
+                            <h4>Yıl</h4>
+                        </div>
+                                <label htmlFor="min">En Az</label>
+                                    <input onChange={(e) => {let minData = e.target.value ;setMinYear(minData)}} className="sortInput" type="number" />
+                                <label htmlFor="max">En Fazla</label>
+                                    <input onChange={(e) => {let maxData = e.target.value ; setMaxYear(maxData)} } className="sortInput" type="number" />
+                    </div>
+
+                    <div className="ratingSort">
+                        <div className="ratingHeader">
+                                <h4>Puan</h4>
+                        </div>
+
+                                <label htmlFor="min">En Az</label>
+                                    <input onChange={(e) => {let minDataRating = e.target.value ;setMinRating(minDataRating)}} className="sortRatingInput" type="number" />
+                                <label htmlFor="max">En Fazla</label>
+                                    <input onChange={(e) => {let maxDataRating = e.target.value ; setMaxRating(maxDataRating)} } className="sortRatingInput" type="number" />
+
+
+                    </div>
+                </div>
             </div>
 
             <div className="moviesList">
