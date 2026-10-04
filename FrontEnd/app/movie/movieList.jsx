@@ -11,18 +11,46 @@ import {useRouter , useSearchParams} from "next/navigation"
 
 export default function Movies({allData}){
 
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Search Params
+    const [searchParamsValue , setSearchParamsValue] = useState(searchParams.get("search") || "")
+    const [sortParamsValue , setSortParamsValue] = useState(searchParams.get("sort") || "")
+    const [pageParamsValue , setPageParamsValue] = useState(searchParams.get("page") || Number(searchParams.get("page")) || 1)
+
+
     const [maxRating, setMaxRating] = useState("")
     const [minRating , setMinRating] = useState("");
     const [minYear , setMinYear] = useState("")
     const [maxYear , setMaxYear] = useState("")
-    const [sortValue, setSortValue] = useState("")
+    const [sortValue, setSortValue] = useState(sortParamsValue || "")
     const [selectedGen , setSelectedGen] = useState([])
     const [movieData , setMovieData] = useState(allData)
-    const [searchValue , setSearchValue] = useState("");
+    const [searchValue , setSearchValue] = useState(searchParamsValue || "");
     const [forFİlterData , setForFilterData] = useState(allData)
     
-    const [currentPage , setCurrentPage] = useState(1)
+    // Pagination
+    const [currentPage , setCurrentPage] = useState(pageParamsValue || 1 )
 
+    
+
+    useEffect(() => {
+
+        router.push(`/movie?search=${searchParamsValue}&sort=${sortParamsValue}&page=${pageParamsValue}`)
+
+    }, [searchParamsValue, sortParamsValue, pageParamsValue])
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            const res = await fetch(`http://localhost:4000/api/movies?search=${searchParamsValue}&sort=${sortParamsValue}&page=${pageParamsValue}`)
+            const data = await res.json();
+            setMovieData(data.data ?? [])
+            
+        }
+        fetchData()
+    },[searchParamsValue])
 
     // Search value
     const search = (e) => {
@@ -43,7 +71,8 @@ useEffect(() => {
         const fetchData = async () => {
             const res = await  fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
             const data = await res.json();
-            setMovieData(data.data)
+            setMovieData(data.data ?? [])
+            
             
         }
         fetchData()
@@ -61,6 +90,7 @@ useEffect(() => {
 
         return setMovieData(allData)
     }
+   
         
     const res = await  fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
         const data = await res.json();
@@ -94,6 +124,7 @@ useEffect(() => {
                 selectedGen.includes(genreData.nameTr)))
 
         setMovieData(filteredMovies)
+        
    },[selectedGen, allData])
 
    // Sort  
