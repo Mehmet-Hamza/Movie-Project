@@ -14,74 +14,64 @@ export default function Movies({allData}){
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    // Search Params
-    const [searchParamsValue , setSearchParamsValue] = useState(searchParams.get("search") || "")
-    const [sortParamsValue , setSortParamsValue] = useState(searchParams.get("sort") || "")
-    const [pageParamsValue , setPageParamsValue] = useState(searchParams.get("page") || Number(searchParams.get("page")) || 1)
-
 
     const [maxRating, setMaxRating] = useState("")
     const [minRating , setMinRating] = useState("");
     const [minYear , setMinYear] = useState("")
     const [maxYear , setMaxYear] = useState("")
-    const [sortValue, setSortValue] = useState(sortParamsValue || "")
-    const [selectedGen , setSelectedGen] = useState([])
+    const [sortValue, setSortValue] = useState("")
+    const [selectedGen , setSelectedGen] = useState(() => {
+        const genreParam = searchParams.get("genre");
+        return genreParam ? genreParam.split(",") : [];
+    })
+    
     const [movieData , setMovieData] = useState(allData)
-    const [searchValue , setSearchValue] = useState(searchParamsValue || "");
+    const [searchValue , setSearchValue] = useState(searchParams.get("search") || "");
     const [forFİlterData , setForFilterData] = useState(allData)
-    
-    // Pagination
-    const [currentPage , setCurrentPage] = useState(pageParamsValue || 1 )
+    const [currentPage , setCurrentPage] = useState(1)
 
     
-
-    useEffect(() => {
-
-        router.push(`/movie?search=${searchParamsValue}&sort=${sortParamsValue}&page=${pageParamsValue}`)
-
-    }, [searchParamsValue, sortParamsValue, pageParamsValue])
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-            const res = await fetch(`http://localhost:4000/api/movies?search=${searchParamsValue}&sort=${sortParamsValue}&page=${pageParamsValue}`)
-            const data = await res.json();
-            setMovieData(data.data ?? [])
-            
-        }
-        fetchData()
-    },[searchParamsValue])
-
     // Search value
     const search = (e) => {
-        const value = e.target.value;
-        setSearchValue(value)
+        
+        setSearchValue(e.target.value)
     }
 
     
+
 // 300 ms Debounce
 useEffect(() => {
+    const timer = setTimeout(() => {
+        const params = new URLSearchParams(searchParams.toString());
 
-    if (!searchValue.trim()){
-
-        return setMovieData(allData)
-    }
-
-    const time = setTimeout(() => {
-        const fetchData = async () => {
-            const res = await  fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
-            const data = await res.json();
-            setMovieData(data.data ?? [])
-            
-            
+        if (searchValue.trim()) {
+            params.set("search", searchValue);
+        } else {
+            params.delete("search");
         }
-        fetchData()
-    }, 300)
 
-    return () => clearTimeout(time)
-        
+        router.push(`?${params.toString()}`, { scroll: false });
 
-}, [searchValue])
+        const fetchData = async () => {
+            if (!searchValue.trim()) {
+                setMovieData(allData);
+                return;
+            }
+            try {
+                const res = await fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
+                const data = await res.json();
+                setMovieData(data.data ?? []);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+        setCurrentPage(currentPage);
+    }, 300);
+
+    return () => clearTimeout(timer);
+}, [searchValue]);
    
     // Button Click
    const searchButton = async () => {
@@ -90,7 +80,6 @@ useEffect(() => {
 
         return setMovieData(allData)
     }
-   
         
     const res = await  fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
         const data = await res.json();
@@ -100,32 +89,51 @@ useEffect(() => {
    
    const uniqType = [...new Set(forFİlterData.flatMap(movie => movie?.genreDetails?.map(genre => genre.nameTr || [])))]
 
+
    // Type Filter
    const changeGen = (e) => {
-        const GenreName = e.target.value
-        const isCheck = e.target.checked
+        const genreName = e.target.value;
+        const checked = e.target.checked;
 
-        if(isCheck){
-            setSelectedGen(prev => [...prev , GenreName])
-        }
-        else{
-            setSelectedGen(prev => prev.filter(item => item !== GenreName))
-        }
-   }
+        const nextSelected = checked
+            ? [...selectedGen, genreName]
+            : selectedGen.filter(item => item !== genreName);
+
+  setSelectedGen(nextSelected);
+
+  const params = new URLSearchParams(searchParams.toString());
+
+  if (nextSelected.length > 0) {
+    params.set("genre", nextSelected.join(","));
+  } else {
+    params.delete("genre");
+  }
+
+  router.push(`?${params.toString()}`);
+};
+
+
+
+
 
    useEffect(() => {
+    
+    if (searchValue.trim()) return;
 
-        if(selectedGen.length === 0){
-            return setMovieData(allData)
-        }
+    if (selectedGen.length === 0) {
+        setMovieData(allData);
+        return;
+    }
 
-        const filteredMovies = allData.filter(genre =>
-            genre.genreDetails?.some(genreData =>
-                selectedGen.includes(genreData.nameTr)))
+    const filteredMovies = allData.filter(genre =>
+        genre.genreDetails?.some(genreData =>
+            selectedGen.includes(genreData.nameTr)
+        )
+    );
 
-        setMovieData(filteredMovies)
-        
-   },[selectedGen, allData])
+    setMovieData(filteredMovies);
+    setCurrentPage(currentPage)
+}, [selectedGen, allData, searchValue]);
 
    // Sort  
    const place = async (e) => {
@@ -198,7 +206,7 @@ useEffect(() => {
             
             <div className="searchBar">
                 <div className="input-group mb-3">
-                <input onChange={search} type="text" className="form-control searchInput" placeholder="Film Ara" aria-label="Recipient’s username" aria-describedby="button-addon2" />
+                <input value={searchValue} onChange={search} type="text" className="form-control searchInput" placeholder="Film Ara" aria-label="Recipient’s username" aria-describedby="button-addon2" />
                 <button onClick={searchButton} className="btn btn-outline-secondary" type="button" id="button-addon2"><Search/></button>
             </div>
                 
@@ -215,7 +223,7 @@ useEffect(() => {
                                    
                                     return(
                                     <div key={index} className="typeMovie">
-                                        <input  value={item}  onChange = {changeGen} type="checkbox"/>
+                                        <input  value={item}  onChange = {changeGen} checked={selectedGen.includes(item)} type="checkbox"/>
                                         <li className="typeFilterMovie">{item}</li>
                                     </div>
                                     )
