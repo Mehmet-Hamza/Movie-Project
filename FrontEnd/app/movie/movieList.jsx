@@ -19,7 +19,7 @@ export default function Movies({allData}){
     const [minRating , setMinRating] = useState("");
     const [minYear , setMinYear] = useState("")
     const [maxYear , setMaxYear] = useState("")
-    const [sortValue, setSortValue] = useState("")
+    const [sortValue, setSortValue] = useState(searchParams.get("sort") || "");
     const [selectedGen , setSelectedGen] = useState(() => {
         const genreParam = searchParams.get("genre");
         return genreParam ? genreParam.split(",") : [];
@@ -39,6 +39,8 @@ export default function Movies({allData}){
 
     
 
+    
+
 // 300 ms Debounce
 useEffect(() => {
     const timer = setTimeout(() => {
@@ -46,17 +48,17 @@ useEffect(() => {
 
         if (searchValue.trim()) {
             params.set("search", searchValue);
+           
         } else {
             params.delete("search");
+             
+            
         }
 
         router.push(`?${params.toString()}`, { scroll: false });
 
         const fetchData = async () => {
-            if (!searchValue.trim()) {
-                setMovieData(allData);
-                return;
-            }
+            
             try {
                 const res = await fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
                 const data = await res.json();
@@ -77,7 +79,8 @@ useEffect(() => {
    const searchButton = async () => {
 
      if (!searchValue.trim()){
-
+        setSelectedGen([]);
+        
         return setMovieData(allData)
     }
         
@@ -87,9 +90,10 @@ useEffect(() => {
 
    }
    
-   const uniqType = [...new Set(forFİlterData.flatMap(movie => movie?.genreDetails?.map(genre => genre.nameTr || [])))]
+   const uniqType = [...new Set(allData.flatMap(movie => movie?.genreDetails?.map(genre => genre.nameTr) || []))]
 
-
+   console.log(allData)
+   
    // Type Filter
    const changeGen = (e) => {
         const genreName = e.target.value;
@@ -113,16 +117,14 @@ useEffect(() => {
 };
 
 
-
-
-
    useEffect(() => {
     
     if (searchValue.trim()) return;
 
-    if (selectedGen.length === 0) {
+
+    if(selectedGen.length === 0){
         setMovieData(allData);
-        return;
+        return
     }
 
     const filteredMovies = allData.filter(genre =>
@@ -135,22 +137,39 @@ useEffect(() => {
     setCurrentPage(currentPage)
 }, [selectedGen, allData, searchValue]);
 
+
    // Sort  
    const place = async (e) => {
 
     const value = e.target.value
         setSortValue(value)
+
+        const sortParams = new URLSearchParams(searchParams.toString())
         
          if(!value){
-            return setMovieData(allData)
+            sortParams.delete("sort")
+            router.push(`?${sortParams.toString()}`, {scroll : false})
+            setMovieData(allData)
+            return;
         }
 
+        sortParams.set("sort", value)
+        router.push(`?${sortParams.toString()}`, {scroll : false})
+        
+
+        
         const res = await fetch(`http://localhost:4000/api/movies?sort=${value}&limit=85`)
         const data = await res.json()
         
-        setMovieData(data.data)
+        
+            setMovieData(data.data)
+        
+        
+        
         
    }
+
+   
 
    // Year Sort
    const sortYear = () => {
@@ -232,8 +251,8 @@ useEffect(() => {
                             </ul>
                 </div>
 
-                    <select onChange={place} className="form-select sortChange" aria-label="Default select example">
-                        <option value="">Sırala</option>
+                    <select value={sortValue}  onChange={place} className="form-select sortChange" aria-label="Default select example">
+                        <option value="-popularity">Sırala</option>
                         <option value="-rating">Azalan Puan</option>
                         <option value="+rating">Artan Puan</option>
                         <option value="-year">Azalan Yıl</option>
