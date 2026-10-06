@@ -241,7 +241,7 @@ useEffect(() => {
                         <option value="-popularity"> Azalan Popülerlik</option>
                         <option value="+popularity"> Artan Popülerlik</option>
                         <option value="title">Alfabetik</option>
-                </select>
+                    </select>
 
 
                 <div className="yearAndRatingSort">
@@ -249,21 +249,45 @@ useEffect(() => {
                         <div className="yearHeader">
                             <h4>Yıl</h4>
                         </div>
-                                <label htmlFor="min">En Az</label>
-                                    <input onChange={(e) => {let minData = e.target.value ;setMinYear(minData)}} className="sortInput" type="number" />
-                                <label htmlFor="max">En Fazla</label>
-                                    <input onChange={(e) => {let maxData = e.target.value ; setMaxYear(maxData)} } className="sortInput" type="number" />
+                            <div className="sortYearİnside">
+
+                                <div className="SortMin">
+                                    <label htmlFor="min">En Az</label>
+                                    <input placeholder = "1972" onChange={(e) => {let minData = e.target.value ;setMinYear(minData)}} className="sortInput" type="number" />
+
+                                </div>
+                                
+                                <div className="SortMax">
+                                    <label htmlFor="max">En Fazla</label>
+                                    <input  placeholder="2026" onChange={(e) => {let maxData = e.target.value ; setMaxYear(maxData)} } className="sortInput" type="number" />
+
+                                </div>
+                                
+                            </div>
+                                
                     </div>
 
                     <div className="ratingSort">
                         <div className="ratingHeader">
                                 <h4>Puan</h4>
                         </div>
+                            
+                            <div className="sortYearİnside">
+                                <div className="SortMin">
+                                    <label htmlFor="min">En Az</label>
+                                    <input placeholder="0" onChange={(e) => {let minDataRating = e.target.value ;setMinRating(minDataRating)}} className="sortRatingInput" type="number" />
 
-                                <label htmlFor="min">En Az</label>
-                                    <input onChange={(e) => {let minDataRating = e.target.value ;setMinRating(minDataRating)}} className="sortRatingInput" type="number" />
-                                <label htmlFor="max">En Fazla</label>
-                                    <input onChange={(e) => {let maxDataRating = e.target.value ; setMaxRating(maxDataRating)} } className="sortRatingInput" type="number" />
+                                </div>
+
+                                <div className="SortMax">
+                                    
+                                    <label htmlFor="max">En Fazla</label>
+                                    <input placeholder="10" onChange={(e) => {let maxDataRating = e.target.value ; maxDataRating <= 10 ? setMaxRating(maxDataRating) : 10} } className="sortRatingInput" type="number" />
+                                </div>
+                                
+                                
+                            </div>
+                                
 
 
                     </div>
@@ -277,7 +301,7 @@ useEffect(() => {
                    
                    return(
                    <Link className="link" href = "#" key = {index}><div className="poster">
-                    <Image  src={item.posterUrl} alt="poster" width={350} height={175} style={{ width: "100%", height: "200px"}}/>
+                    <Image  src={item.posterUrl} alt="poster" width={350} height={175} style={{ width: "100%", height: "180px", borderTopLeftRadius :'20px', borderTopRightRadius : '20px'}}/>
                     {/*Image Location */}
                     
                    

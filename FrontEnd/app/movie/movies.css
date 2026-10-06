@@ -28,43 +28,64 @@
     box-sizing: border-box;
     display: grid;
     padding: 20px;
-    
     grid-template-columns: repeat(auto-fit, minmax(250px,250px));
-    gap: 30px;
+    gap: 50px;
     justify-content: center;
 }
 
 
 
 .filterMenü{
- background-color: #403d39;
- min-width: 15%;
+ background-color: #fdfffc;
+ min-width: 18%;
  position: sticky;
  top: 0;
  min-height: 100vh;
  flex-shrink: 0;
  display: flex;
  flex-direction: column;
- gap: 15px;
+ gap: 50px;
+ padding: 20px;
 
 }
 
 .movieİnfo{
-    padding: 20px;
+ padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0; 
+    overflow: hidden;
+    
+    
     
 }
+.MovieTitle{
+    width: 100%;
+    margin-bottom: 8px; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    word-break: break-word; 
+    
+   
+}
+
 .link{
     text-decoration: none;
      color: black;
      
 }
 .poster{
-    width: 100%;
+    width: 110%;
     height: 400px;
-    background-Color : lightgray
+    background-Color : lightgray;
+    border-radius: 20px;
+
+    
 
 }
 .poster:hover{
@@ -72,8 +93,7 @@
 }
 
 .filterType{
-    background-color: antiquewhite;
-    padding: 20px;
+    background-color: #fdfffc;
     display: grid;
     height: 40%;
     overflow: hidden;
@@ -96,12 +116,35 @@
 }
 
 .sortInput{
-    width: 60px;
+    width: 80px;
     margin-bottom: 50px;
 }
 .sortRatingInput{
-    width: 60px;
+    width: 80px;
 }
+
+.yearSort ,.ratingSort{
+    border: 2px solid black;
+    padding: 15px;
+    height: 120px;
+    margin-bottom: 40px;  
+      
+}
+
+.sortYearİnside{
+    
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.SortMax , .SortMin{
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 .filmList{
     background-color: #353535;
@@ -119,6 +162,7 @@
 .pagination{
     display: flex; 
     justify-content: center;
+    background-color: black;
     
 
 }
@@ -130,11 +174,14 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: #403d39;
-    color: white;
+    background-color: #F9F9F9;
+    color: #403d39;
     border: 1px solid #403d39;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.paginationItem:hover{
+    background-color: lightgray;
 }
 
 
