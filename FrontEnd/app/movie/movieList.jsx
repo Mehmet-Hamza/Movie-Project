@@ -59,11 +59,13 @@ useEffect(() => {
 
         const fetchData = async () => {
             
+
             if (!searchValue.trim()) {
                 
                 return;
             }
             
+
             try {
                 const res = await fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
                 const data = await res.json();
@@ -129,7 +131,7 @@ useEffect(() => {
 
     if(selectedGen.length === 0){
         setMovieData(allData);
-        return;
+        return
     }
 
     const filteredMovies = allData.filter(genre =>
@@ -169,9 +171,11 @@ useEffect(() => {
         
         
             setMovieData(data.data)
-        
+    
         
    }
+
+   
 
    // Year Sort
    const sortYear = () => {
