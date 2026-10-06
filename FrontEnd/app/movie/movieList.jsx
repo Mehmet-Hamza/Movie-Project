@@ -1,4 +1,4 @@
- 
+
 "use client"
 
 import styles from "./movies.css"
@@ -19,7 +19,7 @@ export default function Movies({allData}){
     const [minRating , setMinRating] = useState("");
     const [minYear , setMinYear] = useState("")
     const [maxYear , setMaxYear] = useState("")
-    const [sortValue, setSortValue] = useState("")
+    const [sortValue, setSortValue] = useState(searchParams.get("sort") || "");
     const [selectedGen , setSelectedGen] = useState(() => {
         const genreParam = searchParams.get("genre");
         return genreParam ? genreParam.split(",") : [];
@@ -39,6 +39,8 @@ export default function Movies({allData}){
 
     
 
+    
+
 // 300 ms Debounce
 useEffect(() => {
     const timer = setTimeout(() => {
@@ -46,17 +48,22 @@ useEffect(() => {
 
         if (searchValue.trim()) {
             params.set("search", searchValue);
+           
         } else {
             params.delete("search");
+             
+            
         }
 
         router.push(`?${params.toString()}`, { scroll: false });
 
         const fetchData = async () => {
+            
             if (!searchValue.trim()) {
-                setMovieData(allData);
+                
                 return;
             }
+            
             try {
                 const res = await fetch(`http://localhost:4000/api/movies?search=${searchValue}`);
                 const data = await res.json();
@@ -77,7 +84,8 @@ useEffect(() => {
    const searchButton = async () => {
 
      if (!searchValue.trim()){
-
+        setSelectedGen([]);
+        
         return setMovieData(allData)
     }
         
@@ -87,9 +95,10 @@ useEffect(() => {
 
    }
    
-   const uniqType = [...new Set(forFİlterData.flatMap(movie => movie?.genreDetails?.map(genre => genre.nameTr || [])))]
+   const uniqType = [...new Set(allData.flatMap(movie => movie?.genreDetails?.map(genre => genre.nameTr) || []))]
 
-
+   console.log(allData)
+   
    // Type Filter
    const changeGen = (e) => {
         const genreName = e.target.value;
@@ -109,18 +118,16 @@ useEffect(() => {
     params.delete("genre");
   }
 
-  router.push(`?${params.toString()}`);
+  router.push(`?${params.toString()}`, { scroll: false });
 };
-
-
-
 
 
    useEffect(() => {
     
     if (searchValue.trim()) return;
 
-    if (selectedGen.length === 0) {
+
+    if(selectedGen.length === 0){
         setMovieData(allData);
         return;
     }
@@ -130,25 +137,39 @@ useEffect(() => {
             selectedGen.includes(genreData.nameTr)
         )
     );
+    console.log("Filtrelenmiş Film Sayısı:", filteredMovies);
 
     setMovieData(filteredMovies);
     setCurrentPage(currentPage)
 }, [selectedGen, allData, searchValue]);
+
 
    // Sort  
    const place = async (e) => {
 
     const value = e.target.value
         setSortValue(value)
+
+        const sortParams = new URLSearchParams(searchParams.toString())
         
          if(!value){
-            return setMovieData(allData)
+            sortParams.delete("sort")
+            router.push(`?${sortParams.toString()}`, {scroll : false})
+            setMovieData(allData)
+            return;
         }
 
+        sortParams.set("sort", value)
+        router.push(`?${sortParams.toString()}`, {scroll : false})
+        
+
+        
         const res = await fetch(`http://localhost:4000/api/movies?sort=${value}&limit=85`)
         const data = await res.json()
         
-        setMovieData(data.data)
+        
+            setMovieData(data.data)
+        
         
    }
 
@@ -232,8 +253,8 @@ useEffect(() => {
                             </ul>
                 </div>
 
-                    <select onChange={place} className="form-select sortChange" aria-label="Default select example">
-                        <option value="">Sırala</option>
+                    <select value={sortValue}  onChange={place} className="form-select sortChange" aria-label="Default select example">
+                        <option value="-popularity">Sırala</option>
                         <option value="-rating">Azalan Puan</option>
                         <option value="+rating">Artan Puan</option>
                         <option value="-year">Azalan Yıl</option>
@@ -241,7 +262,7 @@ useEffect(() => {
                         <option value="-popularity"> Azalan Popülerlik</option>
                         <option value="+popularity"> Artan Popülerlik</option>
                         <option value="title">Alfabetik</option>
-                </select>
+                    </select>
 
 
                 <div className="yearAndRatingSort">
@@ -249,21 +270,45 @@ useEffect(() => {
                         <div className="yearHeader">
                             <h4>Yıl</h4>
                         </div>
-                                <label htmlFor="min">En Az</label>
-                                    <input onChange={(e) => {let minData = e.target.value ;setMinYear(minData)}} className="sortInput" type="number" />
-                                <label htmlFor="max">En Fazla</label>
-                                    <input onChange={(e) => {let maxData = e.target.value ; setMaxYear(maxData)} } className="sortInput" type="number" />
+                            <div className="sortYearİnside">
+
+                                <div className="SortMin">
+                                    <label htmlFor="min">En Az</label>
+                                    <input placeholder = "1972" onChange={(e) => {let minData = e.target.value ;setMinYear(minData)}} className="sortInput" type="number" />
+
+                                </div>
+                                
+                                <div className="SortMax">
+                                    <label htmlFor="max">En Fazla</label>
+                                    <input  placeholder="2026" onChange={(e) => {let maxData = e.target.value ; setMaxYear(maxData)} } className="sortInput" type="number" />
+
+                                </div>
+                                
+                            </div>
+                                
                     </div>
 
                     <div className="ratingSort">
                         <div className="ratingHeader">
                                 <h4>Puan</h4>
                         </div>
+                            
+                            <div className="sortYearİnside">
+                                <div className="SortMin">
+                                    <label htmlFor="min">En Az</label>
+                                    <input placeholder="0" onChange={(e) => {let minDataRating = e.target.value ;setMinRating(minDataRating)}} className="sortRatingInput" type="number" />
 
-                                <label htmlFor="min">En Az</label>
-                                    <input onChange={(e) => {let minDataRating = e.target.value ;setMinRating(minDataRating)}} className="sortRatingInput" type="number" />
-                                <label htmlFor="max">En Fazla</label>
-                                    <input onChange={(e) => {let maxDataRating = e.target.value ; setMaxRating(maxDataRating)} } className="sortRatingInput" type="number" />
+                                </div>
+
+                                <div className="SortMax">
+                                    
+                                    <label htmlFor="max">En Fazla</label>
+                                    <input placeholder="10" onChange={(e) => {let maxDataRating = e.target.value ; maxDataRating <= 10 ? setMaxRating(maxDataRating) : 10} } className="sortRatingInput" type="number" />
+                                </div>
+                                
+                                
+                            </div>
+                                
 
 
                     </div>
@@ -277,7 +322,7 @@ useEffect(() => {
                    
                    return(
                    <Link className="link" href = "#" key = {index}><div className="poster">
-                    <Image  src={item.posterUrl} alt="poster" width={350} height={175} style={{ width: "100%", height: "200px"}}/>
+                    <Image  src={item.posterUrl} alt="poster" width={350} height={175} style={{ width: "100%", height: "180px", borderTopLeftRadius :'20px', borderTopRightRadius : '20px'}}/>
                     {/*Image Location */}
                     
                    
