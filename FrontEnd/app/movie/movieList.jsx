@@ -15,10 +15,10 @@ export default function Movies({allData}){
     const searchParams = useSearchParams();
 
 
-    const [maxRating, setMaxRating] = useState("")
-    const [minRating , setMinRating] = useState("");
-    const [minYear , setMinYear] = useState("")
-    const [maxYear , setMaxYear] = useState("")
+    const [maxRating, setMaxRating] = useState(searchParams.get("sortRatingMax") || "")
+    const [minRating , setMinRating] = useState(searchParams.get("sortRatingMin") || "");
+    const [minYear , setMinYear] = useState(searchParams.get("sortMin") || "")
+    const [maxYear , setMaxYear] = useState(searchParams.get("sortMax") || "")
     const [sortValue, setSortValue] = useState(searchParams.get("sort") || "");
     const [selectedGen , setSelectedGen] = useState(() => {
         const genreParam = searchParams.get("genre");
@@ -26,9 +26,10 @@ export default function Movies({allData}){
     })
     
     const [movieData , setMovieData] = useState(allData)
+    
     const [searchValue , setSearchValue] = useState(searchParams.get("search") || "");
     const [forFİlterData , setForFilterData] = useState(allData)
-    const [currentPage , setCurrentPage] = useState(1)
+    const [currentPage , setCurrentPage] = useState(searchParams.get("page") || 1)
 
     
     // Search value
@@ -37,9 +38,6 @@ export default function Movies({allData}){
         setSearchValue(e.target.value)
     }
 
-    
-
-    
 
 // 300 ms Debounce
 useEffect(() => {
@@ -179,9 +177,16 @@ useEffect(() => {
 
    // Year Sort
    const sortYear = () => {
+
+    const sortYearParams = new URLSearchParams(searchParams.toString())
+
     
         if(!minYear && !maxYear){
+            sortYearParams.delete("sortMin")
+            sortYearParams.delete("sortMax")
+            router.push(`?${sortYearParams.toString()}`,{scroll:false})
             return setMovieData(allData)
+            
         }
 
         // Filter Year
@@ -191,13 +196,23 @@ useEffect(() => {
             ) 
         })
         setMovieData(filterYears)
+        sortYearParams.set("sortMin", minYear)
+        sortYearParams.set("sortMax", maxYear)
+        router.push(`?${sortYearParams.toString()}` ,{scroll : false})
 
    }
+   
 
    // Rating Sort
    const sortRating = () => {
 
+    const sortRatingParams = new URLSearchParams(searchParams.toString())
+
     if(!minRating && !maxRating){
+
+            sortRatingParams.delete("sortRatingMin")
+            sortRatingParams.delete("sortRatingMax")
+            router.push(`?${sortRatingParams.toString()}`, {scroll : false})
             return setMovieData(allData)
         }
             // Filter Rating
@@ -208,7 +223,11 @@ useEffect(() => {
         })
 
         setMovieData(filterRating)
-   }
+        sortRatingParams.set("sortRatingMin", minRating)
+        sortRatingParams.set("sortRatingMax", maxRating)
+        router.push(`?${sortRatingParams.toString()}`, {scroll : false})
+   
+    }
 
    // UseEffect Year and Rating
    useEffect(() => {
@@ -278,13 +297,14 @@ useEffect(() => {
 
                                 <div className="SortMin">
                                     <label htmlFor="min">En Az</label>
-                                    <input placeholder = "1972" onChange={(e) => {let minData = e.target.value ;setMinYear(minData)}} className="sortInput" type="number" />
+                                    <input value={minYear} placeholder = "1972" onChange={(e) => {
+                                    setMinYear(e.target.value)}} className="sortInput" type="number" />
 
                                 </div>
                                 
                                 <div className="SortMax">
                                     <label htmlFor="max">En Fazla</label>
-                                    <input  placeholder="2026" onChange={(e) => {let maxData = e.target.value ; setMaxYear(maxData)} } className="sortInput" type="number" />
+                                    <input value={maxYear} placeholder="2026" onChange={(e) => {setMaxYear(e.target.value)} } className="sortInput" type="number" />
 
                                 </div>
                                 
@@ -300,14 +320,14 @@ useEffect(() => {
                             <div className="sortYearİnside">
                                 <div className="SortMin">
                                     <label htmlFor="min">En Az</label>
-                                    <input placeholder="0" onChange={(e) => {let minDataRating = e.target.value ;setMinRating(minDataRating)}} className="sortRatingInput" type="number" />
+                                    <input value={minRating} placeholder="0" onChange={(e) => {setMinRating(e.target.value)}} className="sortRatingInput" type="number" />
 
                                 </div>
 
                                 <div className="SortMax">
                                     
-                                    <label htmlFor="max">En Fazla</label>
-                                    <input placeholder="10" onChange={(e) => {let maxDataRating = e.target.value ; maxDataRating <= 10 ? setMaxRating(maxDataRating) : 10} } className="sortRatingInput" type="number" />
+                                    <label htmlFor="SortMax">En Fazla</label>
+                                    <input value={maxRating} placeholder="10" onChange={(e) => {setMaxRating(e.target.value)} } className="sortRatingInput" type="number" />
                                 </div>
                                 
                                 
@@ -351,15 +371,59 @@ useEffect(() => {
 
             <div className="pagination">
                 <ul className="paginationList">
-                    <button onClick={() => setCurrentPage(1)} className="paginationItem">1</button>
-                    <button onClick={() => setCurrentPage(2)} className="paginationItem">2</button>
-                    <button onClick={() => setCurrentPage(3)} className="paginationItem">3</button>
-                    <button onClick={() => setCurrentPage(4)} className="paginationItem">4</button>
-                    <button onClick={() => setCurrentPage(5)} className="paginationItem">5</button>
-                    <button onClick={() => setCurrentPage(6)} className="paginationItem">6</button>
-                    <button onClick={() => setCurrentPage(7)} className="paginationItem">7</button>
-                    <button onClick={() => setCurrentPage(8)} className="paginationItem">8</button>
-                    <button onClick={() => setCurrentPage(9)} className="paginationItem">9</button>
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 1);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(1)}} className="paginationItem">1</button>
+                    
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 2);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(2)}} className="paginationItem">2</button>
+                    
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 3);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(3)}} className="paginationItem">3</button>
+                    
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 4);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(4)}} className="paginationItem">4</button>
+                   
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 5);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(5)}} className="paginationItem">5</button>
+                    
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 6);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(6)}} className="paginationItem">6</button>
+                    
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 7);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(7)}} className="paginationItem">7</button>
+                    
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 8);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(8)}} className="paginationItem">8</button>
+                    
+                    <button onClick={() => {
+                        const pageParams = new URLSearchParams(searchParams.toString());
+                        pageParams.set("page", 9);
+                        router.push(`?${pageParams.toString()}`, { scroll: false });
+                        setCurrentPage(9)}} className="paginationItem">9</button>
                 </ul>
             </div>  
     </div>
