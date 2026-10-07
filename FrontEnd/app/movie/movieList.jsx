@@ -17,8 +17,8 @@ export default function Movies({allData}){
 
     const [maxRating, setMaxRating] = useState("")
     const [minRating , setMinRating] = useState("");
-    const [minYear , setMinYear] = useState("")
-    const [maxYear , setMaxYear] = useState("")
+    const [minYear , setMinYear] = useState(searchParams.get("sortMin") || "")
+    const [maxYear , setMaxYear] = useState(searchParams.get("sortMax") || "")
     const [sortValue, setSortValue] = useState(searchParams.get("sort") || "");
     const [selectedGen , setSelectedGen] = useState(() => {
         const genreParam = searchParams.get("genre");
@@ -26,6 +26,7 @@ export default function Movies({allData}){
     })
     
     const [movieData , setMovieData] = useState(allData)
+    
     const [searchValue , setSearchValue] = useState(searchParams.get("search") || "");
     const [forFİlterData , setForFilterData] = useState(allData)
     const [currentPage , setCurrentPage] = useState(1)
@@ -179,9 +180,16 @@ useEffect(() => {
 
    // Year Sort
    const sortYear = () => {
+
+    const sortYearParams = new URLSearchParams(searchParams.toString())
+
     
         if(!minYear && !maxYear){
+            sortYearParams.delete("sortMin")
+            sortYearParams.delete("sortMax")
+            router.push(`?${sortYearParams.toString()},`,{scroll:false})
             return setMovieData(allData)
+            
         }
 
         // Filter Year
@@ -191,8 +199,12 @@ useEffect(() => {
             ) 
         })
         setMovieData(filterYears)
+        sortYearParams.set("sortMin", minYear)
+        sortYearParams.set("sortMax", maxYear)
+        router.push(`?${sortYearParams.toString()}` ,{scroll : false})
 
    }
+   
 
    // Rating Sort
    const sortRating = () => {
@@ -278,13 +290,14 @@ useEffect(() => {
 
                                 <div className="SortMin">
                                     <label htmlFor="min">En Az</label>
-                                    <input placeholder = "1972" onChange={(e) => {let minData = e.target.value ;setMinYear(minData)}} className="sortInput" type="number" />
+                                    <input placeholder = "1972" onChange={(e) => {
+                                    setMinYear(e.target.value)}} className="sortInput" type="number" />
 
                                 </div>
                                 
                                 <div className="SortMax">
                                     <label htmlFor="max">En Fazla</label>
-                                    <input  placeholder="2026" onChange={(e) => {let maxData = e.target.value ; setMaxYear(maxData)} } className="sortInput" type="number" />
+                                    <input  placeholder="2026" onChange={(e) => {setMaxYear(e.target.value)} } className="sortInput" type="number" />
 
                                 </div>
                                 
