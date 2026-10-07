@@ -16,6 +16,9 @@ export default async  function MoviePage({searchParams}){
   const RatingMin = params.sortRatingMin || "";
   const RatingMax = params.sortRatingMax || "";
   const page = params.page || 1;
+
+
+
   
 
 // Tüm Filmler
@@ -25,6 +28,7 @@ export default async  function MoviePage({searchParams}){
 
 console.log(sortMin)
 
+  
   return(
     <Movies allData = {movieAll}/>
   )
