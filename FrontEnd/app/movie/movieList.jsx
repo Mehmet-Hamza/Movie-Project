@@ -28,6 +28,10 @@ export default function Movies({allData}){
     const [movieData , setMovieData] = useState(allData)
     
     const [searchValue , setSearchValue] = useState(searchParams.get("search") || "");
+<<<<<<< HEAD
+=======
+    const [forFİlterData , setForFilterData] = useState(allData)
+>>>>>>> 84c1c785385887d6ab33611a33e8b3f4b5d97dca
     const [currentPage , setCurrentPage] = useState(searchParams.get("page") || 1)
 
     
