@@ -28,10 +28,7 @@ export default function Movies({allData}){
     const [movieData , setMovieData] = useState(allData)
     
     const [searchValue , setSearchValue] = useState(searchParams.get("search") || "");
-<<<<<<< HEAD
-=======
-    const [forFİlterData , setForFilterData] = useState(allData)
->>>>>>> 84c1c785385887d6ab33611a33e8b3f4b5d97dca
+
     const [currentPage , setCurrentPage] = useState(searchParams.get("page") || 1)
 
     
@@ -352,7 +349,7 @@ useEffect(() => {
                 movieData.slice((currentPage - 1) * 10, currentPage * 10).map((item , index) => {
                    
                    return(
-                   <Link className="link" href = "#" key = {index}><div className="poster">
+                   <Link className="link" href = {`/movie/${item.id}`} key = {index}><div className="poster">
                     <Image  src={item.posterUrl} alt="poster" width={350} height={175} style={{ width: "100%", height: "180px", borderTopLeftRadius :'20px', borderTopRightRadius : '20px'}}/>
                     {/*Image Location */}
                     
