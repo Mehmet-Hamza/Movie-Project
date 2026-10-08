@@ -63,7 +63,7 @@ useEffect(() => {
 
           <div>
             {movie[index]?.posterUrl && (
-              <Link key={index} href="#"><Image quality={95} className="sliderImg" src={featData[index].posterUrl} alt="headerPhoto" width={400} height={400}/></Link>
+              <Link key={index} href={`/movie/${movie[index].id}`}><Image quality={95} className="sliderImg" src={featData[index].posterUrl} alt="headerPhoto" width={400} height={400}/></Link>
 
               )}
               <div className="dialog-Text">
@@ -83,7 +83,7 @@ useEffect(() => {
                                 
                                 {popMovie.data.map((item, index) => {
                                     return(
-                                        <Link key={index} href="#"><li ><Image className="filmsImage" src = {item.posterUrl} width = {70} height = {70} alt= "popularPhoto"/></li></Link> 
+                                        <Link  key={index} href={`/movie/${item.id}`}><li ><Image className="filmsImage" src = {item.posterUrl} width = {70} height = {70} alt= "popularPhoto"/></li></Link> 
                                     )
                                 })}
                               </ul>
@@ -99,7 +99,7 @@ useEffect(() => {
                           <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
                             {newMovie.data.map((item , index) => {
                                 return(
-                                    <Link key = {index} href= "#"><li><Image className="filmsImage" alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li></Link>
+                                    <Link key = {index} href={`/movie/${item.id}`}><li><Image className="filmsImage" alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li></Link>
                                 )
                             })}
                           </ul>
@@ -115,7 +115,7 @@ useEffect(() => {
                           <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
                             {scorMovie.data.map((item , index) => {
                                 return(
-                                <Link  key = {index } href="#"><li><Image className="filmsImage" alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li> </Link>
+                                <Link  key = {index } href={`/movie/${item.id}`}><li><Image className="filmsImage" alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li> </Link>
                                 )
                             })}
                           </ul>
@@ -136,7 +136,7 @@ useEffect(() => {
                     <div key = {index} style={{ position : 'relative'}}>
                         <h3 className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white', }}>{`${item.nameTr} ${item.emoji}`}</h3>
                         
-                        <Link href = "#"><div className="img1"><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div></Link>
+                        <Link href = {`/movie?genre=${item.nameTr}`}><div className="img1"><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div></Link>
                     
                     </div>
                         
@@ -148,7 +148,7 @@ useEffect(() => {
                     return(
                         <div key = {index} style={{ position : 'relative'}}>
                              <h3  className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white'}}>{element.nameTr}</h3>
-                            <Link href="#" ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {150} height = {150}/></div></Link>
+                            <Link href={`/movie?genre=${element.nameTr}`} ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {150} height = {150}/></div></Link>
                         </div>
                     )
                 }

@@ -34,6 +34,26 @@ Image {
     padding-inline: 40px;
     
 }
+.HeaderCard{
+   
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: white;
+}
+
+.FilmListLink{
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+.FilmListLink:hover{
+    color: #0466c8;
+    
+}
 
 
 
