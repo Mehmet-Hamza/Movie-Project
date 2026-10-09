@@ -33,7 +33,9 @@ export default function Movies({allData}){
 
     
     useEffect(() => {
-        searchParams.get("page") || 1;
+        if(!selectedGen){
+            searchParams.get("page") || 1;
+        }
     },[])
     
     // Search value
@@ -118,9 +120,15 @@ useEffect(() => {
 
   if (nextSelected.length > 0) {
     params.set("genre", nextSelected.join(","));
+
+    
+
+        
+
   } else {
     params.delete("genre");
   }
+
 
   router.push(`?${params.toString()}`, { scroll: false });
 };
@@ -130,11 +138,15 @@ useEffect(() => {
     
     if (searchValue.trim()) return;
 
+    const urlPage = Number(searchParams.get("page")) || 1;
 
     if(selectedGen.length === 0){
         setMovieData(allData);
+        setCurrentPage(urlPage)
         return
     }
+
+    
 
     const filteredMovies = allData.filter(genre =>
         genre.genreDetails?.some(genreData =>
@@ -144,7 +156,9 @@ useEffect(() => {
     console.log("Filtrelenmiş Film Sayısı:", filteredMovies);
 
     setMovieData(filteredMovies);
-    setCurrentPage(currentPage)
+    setCurrentPage(1)
+    
+    
 }, [selectedGen, allData, searchValue]);
 
 
@@ -236,11 +250,20 @@ useEffect(() => {
    // UseEffect Year and Rating
    useEffect(() => {
 
-    sortYear();
+    const yeatTimer = setTimeout(() => {
+         sortYear();
+    }, 500)
+   
+    return () => clearTimeout(yeatTimer)
    },[minYear, maxYear])
 
    useEffect(() => {
-    sortRating()
+
+    const ratingTimer = setTimeout(() => {
+        sortRating()
+    }, 500)
+    
+    return () => clearTimeout(ratingTimer)
 
    },[minRating, maxRating])
 

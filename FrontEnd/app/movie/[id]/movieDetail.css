@@ -1,0 +1,40 @@
+.movieDetail{
+    background-color: gray;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+}
+.cardDetail{
+    background-color: aliceblue;
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px;
+    display: flex;
+    gap: 30px;
+}
+
+.posterDetails{
+    display: flex;
+    flex-direction: column;
+    background-color: #212529;
+    padding: 20px;
+    gap: 50px;
+    color: #f9F9F9;
+}
+.posterImgDetail{
+    border-radius: 18px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.movieProperty{
+   
+    min-height: 200px;
+}
+.textList{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-weight: 600;
+    font-size: 18px;
+}

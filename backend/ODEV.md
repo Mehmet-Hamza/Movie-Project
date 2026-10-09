@@ -11,7 +11,7 @@ hangi parametreleri aldıklarını, hangi alanları döndürdüklerini ve örnek
 buradan görebilirsin. **Try it out** ile her ucu çalıştır, dönen JSON'u incele.
 Dönen veriyi görmeden tasarıma başlama.
 
-Daha sade, Türkçe anlatımlı bir liste istersen: `http://localhost:4000/docs`
+Daha sade, Türkçe anlatımı bir liste istersen: `http://localhost:4000/docs`
 
 ---
 

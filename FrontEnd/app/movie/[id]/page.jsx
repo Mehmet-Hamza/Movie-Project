@@ -1,5 +1,6 @@
 import axios from "axios"
 import Image from "next/image"
+import styles from "./movieDetail.css"
 
 export default async function movieDetail({params}) {
     
@@ -16,22 +17,29 @@ export default async function movieDetail({params}) {
     return(
         <div className="movieDetail">
             <div className="cardDetail">
-                <div className="poster">
-                    <Image  src={film.posterUrl} alt="poster" width={350} height={350} />
+                <div className="posterDetails">
+                    <Image className="posterImgDetail"  src={film.posterUrl} alt="poster" width={350} height={350} />
+                    <div className="movieProperty">
+                <ul className="textList">
+                        {/* Yıl */}    <li>Yıl : {film.year}</li>
+                        {/* Yönetmen */}  <li>Yönetmen : {film.director}</li>
+                        {/* Süre */}    <li>Film Süresi : {date.getHours()} Saat</li>
+                        {/* Türler */}  <li>Tür : {film.genreDetails.map((genre) =>  genre.nameTr).join(" , ")}</li>
+                </ul>
+
+            </div>
 
                 </div>
 
                 <div className="detailText">
-                        <ul>
-                        {/* Başlık */}    <li><h1>{film.title}</h1></li>
-                        {/* Yıl */}    <li>{film.year}</li>
-                        {/* Yönetmen */}    <li>{film.director}</li>
-                        {/* Süre */}    <li>{date.getHours()} Saat</li>
-                        {/* Türler */}  <li>{film.genreDetails.map((genre) => <span key={genre}>{genre.nameTr}</span>).reduce((prev, curr) => [prev, ", ", curr])}</li>
-                        {/* Özet */}    <li>{film.overview}</li>
-                        </ul>
+                    {/* Başlık */}    <h1>{film.title}</h1>    
+                    {/* Özet */}    <p>{film.overview}</p>
+                        
                 </div>
+            
+                
             </div>
+            
         </div>
     )
 }
