@@ -2,8 +2,9 @@
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
 import { Heart, Star  } from 'lucide-react';
+import Image from 'next/image';
 
-export default function ScoreGraphic({distribution, id}) {
+export default function ScoreGraphic({distribution, id, similarMovies}) {
 
     
 
@@ -26,6 +27,24 @@ export default function ScoreGraphic({distribution, id}) {
         console.log(result);
     }
 
+    // Fetch request to add the movie to the watchlist
+    const WatchListAdd = async () => {
+        const fetchWatchListAdd = await fetch(`http://localhost:4000/api/movies/${id}/watchlist`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                
+                
+            },
+            body: JSON.stringify({
+                
+                isInWatchlist: true
+
+            })
+        })
+        const result = await fetchWatchListAdd.json();
+        console.log(result);
+    }
 
 
 
@@ -44,16 +63,19 @@ export default function ScoreGraphic({distribution, id}) {
             <div className="likeAndPopuler">
 
                 <div className="likeButton">
-                    <button className="likeButtonAndPopular" onClick={likeButton}><Heart /></button>
+                    <button className="likeButtonAndPopular buttons like" onClick={likeButton}><Heart /></button>
+                    <button className="likeButtonAndPopular buttons popular"><Star /></button>
                 </div>
-                <div className="popularButton">
-                    <button className="likeButtonAndPopular"><Star /></button>
-                </div>
+               
 
                 <div className="watchListAdd">
-                    <button>İzleme Listeme Ekle</button>
+                    <button className="watchListButton" onClick={WatchListAdd}>İzleme Listeme Ekle</button>
                 </div>
             </div>
+
+
+        
+           
 
             </>
 

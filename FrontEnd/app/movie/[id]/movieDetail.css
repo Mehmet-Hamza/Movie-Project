@@ -38,3 +38,85 @@
     font-weight: 600;
     font-size: 18px;
 }
+
+.likeAndPopuler{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    JUSTIFY-CONTENT: SPACE-BETWEEN;
+    
+}
+
+.likeButton{
+    display: flex;
+    gap: 15px;
+
+}
+
+.like:focus{
+    color: red;
+    background-color: transparent;
+}
+
+.popular:focus{
+    color: yellow;
+    background-color: transparent;
+}
+
+.buttons{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.watchListButton{
+    background-color: #212529;
+    color: #f9F9F9;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.watchListButton:hover{
+    background-color: lightgray;
+    color: #212529;
+
+}
+
+.SimilarMovies{
+    background-color: #212529;
+    min-height: 100vh;
+    color: #f9F9F9;
+    padding: 40px;
+}
+
+.similarMoviesList{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.movieCardSimilar{
+    width: 350px;
+    height: 450px;
+    background-Color : lightgray;
+    border-radius: 20px;
+    border-radius: 18px;
+    overflow: hidden;
+    
+}
+
+.similarMoviesText{
+    color:#212529;
+    font-weight: 600;
+    min-height: 230px;
+    padding: 15px;
+   
+}
+.similarMoviesUL{
+
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

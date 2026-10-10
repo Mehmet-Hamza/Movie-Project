@@ -2,6 +2,7 @@ import axios from "axios"
 import Image from "next/image"
 import styles from "./movieDetail.css"
 import ScoreGraphic from "./scoreGraph"
+import Link from "next/link"
 
 
 export default async function movieDetail({params}) {
@@ -21,6 +22,9 @@ export default async function movieDetail({params}) {
    /*  const likeFetch = await axios.get(`http://localhost:4000/api/movies/${id}/like`);
     console.log(likeFetch.data.data) */
   
+    const SimilarMovies = await axios.get(`http://localhost:4000/api/movies/${id}/similar`);
+    let simMovies = SimilarMovies.data.data
+
     return(
         <div className="movieDetail">
             <div className="cardDetail">
@@ -58,7 +62,47 @@ export default async function movieDetail({params}) {
                             </div>
                         </div>
                     </div>
+
+              
                 </div>
+
+                  <div className="SimilarMovies">
+
+                    <div className="similarMoviesTitle">
+                        <h2>Benzer Filmler</h2>
+                    </div>
+
+                <div className="similarMoviesList">
+                    {simMovies.map((item, index) => {
+                        return(
+                        <Link style={{textDecoration : 'none'}} key={index} href={`/movie/${item.id}`}><div className="movieCardSimilar" >
+
+                                <Image style={{borderTopLeftRadius : '18px', borderTopRightRadius : '18px'}} src={item.posterUrl} width={350} height={220} alt="similarMovies"/>
+
+                                <div className="similarMoviesText">
+                                    <ul className="similarMoviesUL">
+                                        <li><h3>{item.title}</h3></li>
+                                        <li>{item.year}</li>
+                                        <li>{item.rating}</li>
+                                        <li>{item?.genreDetails.map(genre => {
+                                            return(
+                                            genre.nameTr
+                                            )
+                                        }).join(" , ")}</li>
+                                        
+                                    </ul>
+                                </div>
+                        </div></Link>
+                            
+                        )
+                    })}
+                        
+                </div>
+
+
+            </div>
+
+               
             
                 
                 
