@@ -10,8 +10,8 @@
     "role": "admin",
     "isActive": true,
     "createdAt": "2024-05-10T19:43:23.000Z",
-    "lastLoginAt": "2026-10-01T14:55:31.951Z",
-    "updatedAt": "2026-10-01T14:55:31.951Z"
+    "lastLoginAt": "2026-10-11T11:55:21.636Z",
+    "updatedAt": "2026-10-11T11:55:21.636Z"
   },
   {
     "id": "us_002",
@@ -558,5 +558,32 @@
     "createdAt": "2024-11-02T02:36:10.000Z",
     "lastLoginAt": "2025-05-31T14:04:25.000Z",
     "updatedAt": "2026-08-19T08:06:43.247Z"
+  },
+  {
+    "id": "us_79c2b59ce28b",
+    "username": "yenikullanici",
+    "email": "yeni@ornek.com",
+    "password": "$2a$10$cWxGar.EfILRmWFJ9dyb.uC5B9HwXT9SNxHEd5HA5L0SAniAkyiz2",
+    "fullName": "Yeni Kullanıcı",
+    "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=yenikullanici",
+    "bio": "",
+    "role": "user",
+    "isActive": true,
+    "createdAt": "2026-10-11T12:02:13.649Z",
+    "updatedAt": "2026-10-11T12:02:13.649Z"
+  },
+  {
+    "id": "us_b8c3345cd8ae",
+    "username": "mehmet",
+    "email": "hamzamehmet85@gmail.com",
+    "password": "$2a$10$Xf3a5h1aIBvOBMeC39jeFeue/yhS03brctUWO3n2Q3L8tF7ZeXIMO",
+    "fullName": "Mehmet Hamza",
+    "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=mehmet",
+    "bio": "",
+    "role": "user",
+    "isActive": true,
+    "createdAt": "2026-10-11T12:29:31.964Z",
+    "updatedAt": "2026-10-11T18:57:59.298Z",
+    "lastLoginAt": "2026-10-11T18:57:59.298Z"
   }
 ]
