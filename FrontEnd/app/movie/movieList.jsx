@@ -121,9 +121,6 @@ useEffect(() => {
   if (nextSelected.length > 0) {
     params.set("genre", nextSelected.join(","));
 
-    
-
-        
 
   } else {
     params.delete("genre");
