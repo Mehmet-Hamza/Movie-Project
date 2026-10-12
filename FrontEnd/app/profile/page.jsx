@@ -1,12 +1,16 @@
 import { signOut } from "./action";
 import { cookies } from "next/headers";
 import Image from "next/image"
+import styles from "./profile.css"
+
 
 export default async function Profile() {
 
     const store = await cookies()
 
     let username = store.get("name").value
+    let token = store.get("token")?.value
+    console.log("TOKEN:", token);
 
 
     // User Statics 
@@ -19,55 +23,124 @@ export default async function Profile() {
 
     const date = new Date().toISOString()
 
+
+    // Recommend
+    const getReco = await fetch(`http://localhost:4000/api/me/recommendations?page=1&limit=12`,{
+        headers : {
+            'Authorization' : `Bearer ${token}`
+        }
+    });
+    const dataReco = await getReco.json();
+    console.log(dataReco)
+    const recommentData = dataReco.data
     return (
         
         <form action={signOut}>
             <div className="signOut">
-                <div className="userAvatar">
-                    <img src={userInfo.avatar} width={150} height={150} alt="avatar"/>
-                </div>
+                <div className="formCard">
+                <div className="leftSide">
 
-                <div className="bio">
-                    <p><strong>Biyografi </strong>: {userInfo.bio}</p>
-                </div>
-
-                <div className="fullName">
-                    <p><strong>Tam Ad</strong> : {userInfo.fullName}</p>
-                </div>
-
-                <div className="lastLoginAt">
-                    <p><strong>Son Girilen Zaman</strong> : {new Date(userInfo.lastLoginAt).toTimeString()} | </p><p>{new Date(userInfo.lastLoginAt).toLocaleDateString('tr')}</p>
-                </div>
-
-                <div className="states">
-                        <div className="favouriteMovies">
-                            <p><strong>Favorilenmiş Film Sayısı</strong> : {userInfo.stats.favoriteCount}</p>
+                    <div className="userAvatar">
+                        <img className="avatarImage" src={userInfo.avatar} width={150} height={150} alt="avatar"/>
+                        <div className="userInfoText">
+                            <h1>{userInfo.username}</h1>
+                            <h3 style={{color :  "#6c757d"}}>{userInfo.fullName}</h3>
                         </div>
+                    </div>
 
-                        <div className="likedMovies">
-                            <p><strong>Beğenilen Film Sayısı</strong> : {userInfo.stats.likeCount}</p>
-                        </div>
+                    <div className="bio">
+                        <p><strong>Biyografi </strong>: {userInfo.bio}</p>
+                    </div>
 
-                        <div className="rating">
-                            <p><strong>Puanladıklarım</strong> : {userInfo.stats.ratingCount}</p>
-                        </div>
+                   
+                    <div className="states">
+                            <div className="favouriteMovies box">
+                                <p><strong>Favorilenmiş Film Sayısı</strong></p>
+                                <p className="boxText">{userInfo.stats.favoriteCount}</p>
+                            </div>
 
-                        <div className="watchList">
-                            <p><strong>İzleme Listemdeki Filmler Sayısı</strong> : {userInfo.stats.watchlistCount}</p>
-                        </div>
+                            <div className="likedMovies box">
+                                <p><strong>Beğenilen Film Sayısı</strong></p>
+                                <p className="boxText">{userInfo.stats.likeCount}</p>
+                            </div>
 
-                        <div className="comment">
-                            <p><strong>Yorumlar</strong> : {userInfo.stats.commentCount}</p>
-                        </div>
+                            <div className="rating box">
+                                <p><strong>Puanladıklarım</strong></p>
+                                <p className="boxText">{userInfo.stats.ratingCount}</p>
+                            </div>
+
+                            <div className="watchList box">
+                                <p><strong>İzleme Listemdeki Filmler Sayısı</strong></p>
+                                <p className="boxText">{userInfo.stats.watchlistCount}</p>
+                            </div>
+
+                            <div className="comment box">
+                                <p><strong>Yorumlar</strong></p>
+                                <p className="boxText">{userInfo.stats.commentCount}</p>
+                            </div>
+                    </div>
+
+                    <div className="accountCreateDate">
+
+                             <div className="lastLoginAt date">
+                                <p><strong>Son Girilen Zaman</strong> : {new Date(userInfo.lastLoginAt).toTimeString().split("GMT")[0].trim()}</p> <strong>|</strong> <p>{new Date(userInfo.lastLoginAt).toLocaleDateString('tr')}</p>
+                        
+                            </div>
+
+                            <div className="createAtLogin date">
+
+                                <p><strong>Hesap Oluşturma Tarihi</strong>: {new Date(userInfo.createdAt).toTimeString().split("GMT")[0].trim()}</p> <strong>|</strong> <p>{new Date(userInfo.createdAt).toLocaleDateString('tr')}</p>
+                            </div>
+                    </div>
+                
                 </div>
+                       
 
-                <div className="accountCreateDate">
+            <div className="rightSide">
+                
+                <div className="recomment">
+                    <div className="recoHeader">
+                        <h2>Senin İçin Öneriler</h2>
+                    </div>
+                    
+                    <div className="movieCard">
+                        {recommentData.map((item, index) =>{
+                            return(
+                                <div key={index} className="movieCard">
 
-                        <p><strong>Hesap Oluşturma Tarihi</strong>: {new Date(userInfo.createdAt).toTimeString()}</p> <p>{new Date(userInfo.createdAt).toLocaleDateString('tr')}</p>
+                                    <div className="posterCards">
+                                        <Image alt="moviePhoto"  src={item.posterUrl} width={150} height={200}/>
+                                    </div>
+                                    
+                                    <div className="movieInfo">
+
+                                    <p>{item.title}</p>
+                                    <p>{item.year}</p>
+                                    <p>{item.rating}</p>
+                                    <p>{item.genreDetails.map(element => {
+                                        return(
+                                            element.nameTr
+                                        )
+                                    }).join(" , ")}</p>
+
+
+                                    </div>
+                                   
+                                
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
-                <h1>{username}</h1>        
-                <button type="submit">Çıkış Yap</button>
+                
+                <div className="signoutCard">
+                        <button type="submit">Çıkış Yap</button>
+                    </div> 
             </div>
+                    
+                </div>
+                
+                </div>
         </form>
     );
 }

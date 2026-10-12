@@ -1,0 +1,124 @@
+.signOut{
+    background-color: #222222;
+    min-height: 100vh;
+    color: #F9F9F9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formCard{
+    background-color: #343a40;
+    width:75%;
+    height: 900px;
+    padding: 40px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.avatarImage{
+    border: 2px solid black;
+    border-radius: 100px;
+    background-color: #F9F9F9;
+    width: 200px;
+    height: 200px;
+    
+}
+.userInfoText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.userAvatar{
+    display: flex;
+    gap: 40px;
+    
+}
+.bio{
+    
+    margin-top: 20px;
+    width: 50%;
+}
+.states{
+   
+    width: 50%;
+    height: 350px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+}
+
+.box{
+    background-color:#22223b;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+.boxText{
+    font-size: 30px;
+    font-weight: 600;
+}
+.signoutCard{
+    
+    display: flex;
+    justify-content: right;
+    
+}
+
+.accountCreateDate{
+
+    width: 50%;
+    margin-top: 40px;
+}
+
+.date{
+    display: flex;
+    gap: 10px;
+}
+
+.movieCard{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+}
+
+.rightSide{
+    min-height: 100%;
+}
+
+.recomment{
+    background-color: #22223b;
+    overflow: hidden;
+    height: 90%;
+    padding: 20px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.recoHeader{
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid  white;
+
+
+}
+
+.movieCard{
+    
+
+    border: 2px solid black;
+}
+
+.movieInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    
+}
+

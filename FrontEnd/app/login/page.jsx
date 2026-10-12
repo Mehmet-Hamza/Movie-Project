@@ -24,7 +24,7 @@ export default function login(){
 
         if(data.success){
             
-            document.cookie = `token=${data.token}; path=/; max-age=604800; SameSite=Lax`;
+            document.cookie = `token=${data.data.token}; path=/; max-age=604800; SameSite=Lax`;
             document.cookie = `name=${data.data.user.username}; path=/; max-age=604800; SameSite=Lax`;
 
             window.location.href = "/";
