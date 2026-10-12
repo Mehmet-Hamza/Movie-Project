@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import {useRouter , useSearchParams} from "next/navigation"
 
 
-export default function Movies({allData}){
+export default function Movies({allData, genreList}){
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -20,10 +20,9 @@ export default function Movies({allData}){
     const [minYear , setMinYear] = useState(searchParams.get("sortMin") || "")
     const [maxYear , setMaxYear] = useState(searchParams.get("sortMax") || "")
     const [sortValue, setSortValue] = useState(searchParams.get("sort") || "");
-    const [selectedGen , setSelectedGen] = useState(() => {
-        const genreParam = searchParams.get("genre");
-        return genreParam ? genreParam.split(",") : [];
-    })
+    const [selectedGen, setSelectedGen] = useState(
+    searchParams.get('genre')?.split(',') || []
+);
     
     const [movieData , setMovieData] = useState(allData)
     
@@ -101,20 +100,23 @@ useEffect(() => {
 
    }
    
-   const uniqType = [...new Set(allData.flatMap(movie => movie?.genreDetails?.map(genre => genre.nameTr) || []))]
+   // const uniqType = [...new Set(allData.flatMap(movie => movie?.genreDetails?.map(genre => genre.nameTr) || []))]
 
    console.log(allData)
    
    // Type Filter
    const changeGen = (e) => {
-        const genreName = e.target.value;
+        const slug = e.target.value;
         const checked = e.target.checked;
 
+        // const value = e.target.value
+
         const nextSelected = checked
-            ? [...selectedGen, genreName]
-            : selectedGen.filter(item => item !== genreName);
+            ? [...selectedGen , slug ]
+            : selectedGen.filter(item => item !== slug);
 
   setSelectedGen(nextSelected);
+  
 
   const params = new URLSearchParams(searchParams.toString());
 
@@ -126,37 +128,16 @@ useEffect(() => {
     params.delete("genre");
   }
 
+  params.set("page", "1");
 
-  router.push(`?${params.toString()}`, { scroll: false });
+
+  router.push(`?${params.toString()}` , {scroll : false});
 };
 
 
-   useEffect(() => {
-    
-    if (searchValue.trim()) return;
-
-    const urlPage = Number(searchParams.get("page")) || 1;
-
-    if(selectedGen.length === 0){
-        setMovieData(allData);
-        setCurrentPage(urlPage)
-        return
-    }
-
-    
-
-    const filteredMovies = allData.filter(genre =>
-        genre.genreDetails?.some(genreData =>
-            selectedGen.includes(genreData.nameTr)
-        )
-    );
-    console.log("Filtrelenmiş Film Sayısı:", filteredMovies);
-
-    setMovieData(filteredMovies);
-    setCurrentPage(1)
-    
-    
-}, [selectedGen, allData, searchValue]);
+useEffect(() => {
+    setMovieData(allData ?? []);
+}, [allData]);
 
 
    // Sort  
@@ -287,12 +268,12 @@ useEffect(() => {
                 
                 <div className="filterType">
                             <ul>
-                                {uniqType?.map((item, index) => {
+                                {genreList?.map((item, index) => {
                                    
                                     return(
                                     <div key={index} className="typeMovie">
-                                        <input  value={item}  onChange = {changeGen} checked={selectedGen.includes(item)} type="checkbox"/>
-                                        <li className="typeFilterMovie">{item}</li>
+                                        <input  value={item.slug}  onChange = {changeGen} checked={selectedGen.includes(item.slug)} type="checkbox"/>
+                                        <li className="typeFilterMovie">{item.nameTr}</li>
                                     </div>
                                     )
                                 })}

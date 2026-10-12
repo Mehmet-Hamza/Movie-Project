@@ -1,6 +1,10 @@
 import { signOut } from "./action";
 
-export default function Profile() {
+export default async function Profile() {
+
+    // User Statics 
+    const getStatic = await fetch(`http://localhost:4000/api/user/`)
+
     return (
         
         <form action={signOut}>

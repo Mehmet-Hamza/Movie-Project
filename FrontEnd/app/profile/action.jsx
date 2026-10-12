@@ -10,7 +10,7 @@ export async function signOut() {
     cookieStore.delete("token");
     cookieStore.delete("name");
 
-    redirect("/login");
+    redirect("/");
 }
 
 
