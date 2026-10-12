@@ -11,6 +11,8 @@ export async function signOut() {
     cookieStore.delete("name");
 
     redirect("/");
+
+    
 }
 
 
