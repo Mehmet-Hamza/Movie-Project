@@ -53,15 +53,7 @@
 
 }
 
-.like:focus{
-    color: red;
-    background-color: transparent;
-}
 
-.popular:focus{
-    color: yellow;
-    background-color: transparent;
-}
 
 .buttons{
     background-color: transparent;

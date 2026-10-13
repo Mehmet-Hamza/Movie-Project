@@ -16144,5 +16144,14 @@
     "review": "",
     "createdAt": "2024-09-08T01:14:37.000Z",
     "updatedAt": "2026-08-19T08:06:43.288Z"
+  },
+  {
+    "id": "rt_19a3e9b7299c",
+    "userId": "us_b8c3345cd8ae",
+    "movieId": "mv_080",
+    "score": 2,
+    "review": "",
+    "createdAt": "2026-10-13T15:48:40.491Z",
+    "updatedAt": "2026-10-13T15:49:14.131Z"
   }
 ]

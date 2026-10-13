@@ -3,11 +3,14 @@ import Image from "next/image"
 import styles from "./movieDetail.css"
 import ScoreGraphic from "./scoreGraph"
 import Link from "next/link"
+import { cookies } from "next/headers"
 
 
 export default async function movieDetail({params}) {
     
-    
+    const store = await cookies()
+    const token = store.get("token").value
+
     const {id} = await params;
     
     const res = await axios.get(`http://localhost:4000/api/movies/${id}/`);
@@ -18,10 +21,24 @@ export default async function movieDetail({params}) {
     const ScorGraph = await axios.get(`http://localhost:4000/api/movies/${id}/ratings`);
         console.log(ScorGraph.data.data)
 
-    // Liked Movie
-   /*  const likeFetch = await axios.get(`http://localhost:4000/api/movies/${id}/like`);
-    console.log(likeFetch.data.data) */
-  
+    
+    
+    const resMov = await axios.get(`http://localhost:4000/api/movies/${id}`, {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+});
+
+const filmData = resMov.data.data;
+    
+const resMove = await axios.get(`http://localhost:4000/api/movies/${id}`, {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+});
+
+const filmsData = resMove.data.data;
+    
     const SimilarMovies = await axios.get(`http://localhost:4000/api/movies/${id}/similar`);
     let simMovies = SimilarMovies.data.data
 
@@ -58,9 +75,10 @@ export default async function movieDetail({params}) {
                                 <h3>Ortalama Puan : {ScorGraph.data.data.average}</h3>
                             </div>
 
-                            <ScoreGraphic distribution = {ScorGraph.data.data.distribution} id={id}/>
+                            <ScoreGraphic distribution = {ScorGraph.data.data.distribution} id={id} token = {token} liked = {filmData.isLiked} populated = {filmsData.isFavorite} watchList={filmData.isInWatchlist}/>
                             </div>
                         </div>
+                 
                     </div>
 
               
