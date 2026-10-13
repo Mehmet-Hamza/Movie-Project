@@ -75,7 +75,7 @@ const filmsData = resMove.data.data;
                                 <h3>Ortalama Puan : {ScorGraph.data.data.average}</h3>
                             </div>
 
-                            <ScoreGraphic distribution = {ScorGraph.data.data.distribution} id={id} token = {token} liked = {filmData.isLiked} populated = {filmsData.isFavorite} watchList={filmData.isInWatchlist}/>
+                            <ScoreGraphic distribution = {ScorGraph.data.data.distribution} id={id} token = {token} liked = {filmData.isLiked} populated = {filmsData.isFavorite} watchList={filmData.isInWatchlist} myRating = {filmData.myRating}/>
                             </div>
                         </div>
                  

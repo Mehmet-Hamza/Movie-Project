@@ -5,13 +5,15 @@ import { Heart, Star  } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList}) {
+export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList, myRating}) {
 
   const [isLiked , setİsLiked] = useState(liked)
   const [isFavorites, setİsFavorite] = useState(populated)
  const [isWatched, setİsWatched] = useState(watchList)
- const [rating , setRating] = useState([1,2,3,4,5,6,7,8,9,10])
+ const [rating , setRating] = useState(myRating)
+ const [hover, setHover] = useState(0);
   
+
 
     const likeButton = async () => {
 
@@ -86,20 +88,32 @@ const popularButton = async () => {
          }
     }
 
-        const ratings = async() => {
+        const ratings = async(score) => {
+
+            setRating(score)
+
             const ratingData = await fetch(`http://localhost:4000/api/movies/${id}/rate` , {
                 method : "POST",
                 headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
                 body : JSON.stringify({
-                    score : rating[1]
+                    myRating : score
                 })
 
             })
             const ratData = await ratingData.json();
             console.log(ratData)
+
+            if(ratData.data.myRating){
+                setRating(true)
+            }
+            else{
+                setRating(false)
+            }
         }
 
 
+        console.log("myRating:", myRating);
+console.log("rating state:", rating);
 
 
             return(
@@ -135,12 +149,11 @@ const popularButton = async () => {
                     </div>
 
                     <div className='ratingStar'>
-                        {rating.map((item, index) => {
+                        {[1,2,3,4,5,6,7,8,9,10].map((item, index) => {
                             return(
                            
                                
-
-                                <button onClick={ratings} key={index}><Star/></button>
+                                <Star key={item} fill={item <= (hover || rating) ? "gold" : "none"} color={item <= (hover || rating) ? "gold" : "currentColor"}  onClick={() => setRating(item)} onMouseEnter={() => {setHover(item)} } onMouseLeave={() => setHover(0)}   style={{cursor: "pointer"}}/>
                             
                             )
                         

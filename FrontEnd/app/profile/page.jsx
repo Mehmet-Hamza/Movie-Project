@@ -2,6 +2,7 @@ import { signOut } from "./action";
 import { cookies } from "next/headers";
 import Image from "next/image"
 import styles from "./profile.css"
+import { redirect } from "next/navigation";
 
 
 export default async function Profile() {
