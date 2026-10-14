@@ -9742,5 +9742,12 @@
     "commentId": "cm_0301",
     "createdAt": "2026-10-14T14:31:44.362Z",
     "updatedAt": "2026-10-14T14:31:44.362Z"
+  },
+  {
+    "id": "cl_64f200a0cdb2",
+    "userId": "us_b8c3345cd8ae",
+    "commentId": "cm_0190",
+    "createdAt": "2026-10-14T18:32:03.186Z",
+    "updatedAt": "2026-10-14T18:32:03.186Z"
   }
 ]

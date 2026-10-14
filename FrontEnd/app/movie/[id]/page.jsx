@@ -12,6 +12,7 @@ export default async function movieDetail({params}) {
 
     const store = await cookies()
     const token = store.get("token").value
+    const user = store.get("name").value
 
    
     
@@ -55,6 +56,11 @@ const filmsData = resMove.data.data;
     const isLiked = dataComment.data[0].isLikedByMe;
     console.log(isLiked)
 
+    // All
+    const allComment = await fetch(`http://localhost:4000/api/comments?sort=newest&page=1&limit=12`);
+    const data = await allComment.json()
+    console.log(data)
+
 
     
 
@@ -91,7 +97,7 @@ const filmsData = resMove.data.data;
                                 <h3>Ortalama Puan : {ScorGraph.data.data.average}</h3>
                             </div>
 
-                            <ScoreGraphic distribution = {ScorGraph.data.data.distribution} id={id} token = {token} liked = {filmData.isLiked} populated = {filmsData.isFavorite} watchList={filmData.isInWatchlist} myRating = {filmData.myRating} dataComment = {dataComment.data}/>
+                            <ScoreGraphic distribution = {ScorGraph.data.data.distribution} id={id} token = {token} liked = {filmData.isLiked} populated = {filmsData.isFavorite} watchList={filmData.isInWatchlist} myRating = {filmData.myRating} dataComment = {dataComment.data} user = {user}/>
                             </div>
                         </div>
                  

@@ -1,11 +1,11 @@
 "use client"
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
-import { Heart, Star  } from 'lucide-react';
+import { Heart, Star, Pencil , Trash } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList, myRating , dataComment}) {
+export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList, myRating , dataComment, user}) {
 
   const [isLiked , setİsLiked] = useState(liked)
   const [isLikedComment , setİsLikedComment] = useState(() => {
@@ -19,6 +19,7 @@ export default function ScoreGraphic({distribution, id, similarMovies, liked , t
  const [isWatched, setİsWatched] = useState(watchList)
  const [rating , setRating] = useState(myRating)
  const [hover, setHover] = useState(0);
+ const [writeComment , setCommentWrite] = useState("")
 
 
   
@@ -139,17 +140,27 @@ const popularButton = async () => {
             const dataCom = await comLike.json()
             console.log(dataCom)
 
-            console.log("HTTP STATUS:", comLike.status);
-console.log("API CEVABI:", dataCom);
-console.log("YORUM ID:", commentId);
-
-
-           
+      
             setİsLikedComment(prev => ({...prev, [commentId] : dataCom.data.isLikedByMe}))
         }
 
 
 
+
+        const writeMessage = async () => {
+            const write = await fetch(`http://localhost:4000/api/movies/${id}/comments`,{
+                method : "POST",
+                headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
+                body : JSON.stringify({
+                    content : writeComment,
+                   
+                })
+
+            })
+
+            const writeData = await write.json()
+            console.log(writeData)
+        }   
 
             return(
             <>
@@ -235,9 +246,22 @@ console.log("YORUM ID:", commentId);
                                         <div className='commentLike'>
                                                 <button onClick={() => {commentLikeButton(item.id)}}><Heart fill={isLikedComment[item.id] ? "red" : "none"} color={isLikedComment[item.id] ? 'red' : 'currentColor'} /></button>
                                         </div>
+                                      
+
+                                        {user === item.user.username && (<div className='MyComment'>
+                                            <button> <Pencil /></button>
+                                            <button> <Trash /></button>
+                                        </div>)}
+
+                                        
                                     </div>
+                                    
                                 )
                             })}
+                            <div className='commentWriteCard' style={{backgroundColor : 'lightGray', display : 'flex', justifyContent : 'center'}}>
+                                <input onChange={(e) => {setCommentWrite(e.target.value)}} type="text" placeholder='Bir Yorum Yaz !' style={{ minWidth : '50%'}}/>
+                                <button onClick={writeMessage}>Gönder</button>
+                            </div>
                         </div>
                     </div>
                 </div>
