@@ -4032,13 +4032,6 @@
     "updatedAt": "2026-08-19T08:06:43.312Z"
   },
   {
-    "id": "cl_a4889c4eeb78",
-    "userId": "us_001",
-    "commentId": "cm_0188",
-    "createdAt": "2024-12-25T18:32:38.000Z",
-    "updatedAt": "2026-08-19T08:06:43.312Z"
-  },
-  {
     "id": "cl_5288dbee5e53",
     "userId": "us_027",
     "commentId": "cm_0190",
@@ -9742,5 +9735,12 @@
     "commentId": "cm_0448",
     "createdAt": "2025-03-08T18:46:15.000Z",
     "updatedAt": "2026-08-19T08:06:43.312Z"
+  },
+  {
+    "id": "cl_ee4c7d21de5b",
+    "userId": "us_001",
+    "commentId": "cm_0301",
+    "createdAt": "2026-10-14T14:31:44.362Z",
+    "updatedAt": "2026-10-14T14:31:44.362Z"
   }
 ]

@@ -7,11 +7,13 @@ import { cookies } from "next/headers"
 
 
 export default async function movieDetail({params}) {
-    
+   
+    const {id} = await params;
+
     const store = await cookies()
     const token = store.get("token").value
 
-    const {id} = await params;
+   
     
     const res = await axios.get(`http://localhost:4000/api/movies/${id}/`);
     const film = await res.data.data;
@@ -30,6 +32,7 @@ export default async function movieDetail({params}) {
 });
 
 const filmData = resMov.data.data;
+console.log(filmData)
     
 const resMove = await axios.get(`http://localhost:4000/api/movies/${id}`, {
     headers: {
@@ -41,6 +44,19 @@ const filmsData = resMove.data.data;
     
     const SimilarMovies = await axios.get(`http://localhost:4000/api/movies/${id}/similar`);
     let simMovies = SimilarMovies.data.data
+
+
+    // Comments
+    const commentData = await fetch(`http://localhost:4000/api/movies/${id}/comments?sort=newest&page=1&limit=12`,{
+        headers : {"Authorization" :  `Bearer ${token}`}
+    })
+    const dataComment = await commentData.json();
+
+    const isLiked = dataComment.data[0].isLikedByMe;
+    console.log(isLiked)
+
+
+    
 
     return(
         <div className="movieDetail">
@@ -75,7 +91,7 @@ const filmsData = resMove.data.data;
                                 <h3>Ortalama Puan : {ScorGraph.data.data.average}</h3>
                             </div>
 
-                            <ScoreGraphic distribution = {ScorGraph.data.data.distribution} id={id} token = {token} liked = {filmData.isLiked} populated = {filmsData.isFavorite} watchList={filmData.isInWatchlist} myRating = {filmData.myRating}/>
+                            <ScoreGraphic distribution = {ScorGraph.data.data.distribution} id={id} token = {token} liked = {filmData.isLiked} populated = {filmsData.isFavorite} watchList={filmData.isInWatchlist} myRating = {filmData.myRating} dataComment = {dataComment.data}/>
                             </div>
                         </div>
                  
@@ -116,6 +132,8 @@ const filmsData = resMove.data.data;
                     })}
                         
                 </div>
+
+                
 
 
             </div>

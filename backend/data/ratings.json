@@ -16146,21 +16146,48 @@
     "updatedAt": "2026-08-19T08:06:43.288Z"
   },
   {
-    "id": "rt_4067c47857e0",
+    "id": "rt_19a3e9b7299c",
     "userId": "us_b8c3345cd8ae",
     "movieId": "mv_080",
-    "score": 2,
+    "score": 3,
     "review": "",
-    "createdAt": "2026-10-13T18:29:27.830Z",
-    "updatedAt": "2026-10-13T18:29:27.830Z"
+    "createdAt": "2026-10-13T15:48:40.491Z",
+    "updatedAt": "2026-10-14T07:36:57.993Z"
   },
   {
-    "id": "rt_08be05b9f887",
+    "id": "rt_7acc67344993",
     "userId": "us_b8c3345cd8ae",
-    "movieId": "mv_019",
+    "movieId": "mv_046",
+    "score": 8,
+    "review": "",
+    "createdAt": "2026-10-14T07:44:54.522Z",
+    "updatedAt": "2026-10-14T07:44:54.522Z"
+  },
+  {
+    "id": "rt_97787076e5ed",
+    "userId": "us_b8c3345cd8ae",
+    "movieId": "mv_031",
+    "score": 1,
+    "review": "",
+    "createdAt": "2026-10-14T09:32:13.083Z",
+    "updatedAt": "2026-10-14T09:32:50.715Z"
+  },
+  {
+    "id": "rt_7f6177b3d6c3",
+    "userId": "us_b8c3345cd8ae",
+    "movieId": "mv_028",
     "score": 2,
     "review": "",
-    "createdAt": "2026-10-13T18:29:54.691Z",
-    "updatedAt": "2026-10-13T18:29:54.691Z"
+    "createdAt": "2026-10-14T09:36:46.503Z",
+    "updatedAt": "2026-10-14T09:36:46.503Z"
+  },
+  {
+    "id": "rt_bdf20a3d2c79",
+    "userId": "us_001",
+    "movieId": "mv_076",
+    "score": 3,
+    "review": "",
+    "createdAt": "2026-10-14T09:38:13.863Z",
+    "updatedAt": "2026-10-14T09:38:13.863Z"
   }
 ]

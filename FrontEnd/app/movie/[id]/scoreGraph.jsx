@@ -5,15 +5,23 @@ import { Heart, Star  } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList, myRating}) {
+export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList, myRating , dataComment}) {
 
   const [isLiked , setİsLiked] = useState(liked)
+  const [isLikedComment , setİsLikedComment] = useState(() => {
+    const inital = {};
+    dataComment.forEach(comment => {
+        inital[comment.id] = comment.isLikedByMe
+    });
+    return inital;
+  })
   const [isFavorites, setİsFavorite] = useState(populated)
  const [isWatched, setİsWatched] = useState(watchList)
  const [rating , setRating] = useState(myRating)
  const [hover, setHover] = useState(0);
-  
 
+
+  
 
     const likeButton = async () => {
 
@@ -88,32 +96,59 @@ const popularButton = async () => {
          }
     }
 
-        const ratings = async(score) => {
+        const ratings = async(selectScore) => {
 
-            setRating(score)
-
+            
+        
             const ratingData = await fetch(`http://localhost:4000/api/movies/${id}/rate` , {
                 method : "POST",
                 headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
                 body : JSON.stringify({
-                    myRating : score
+                    score : selectScore
+                    
                 })
 
             })
             const ratData = await ratingData.json();
             console.log(ratData)
 
-            if(ratData.data.myRating){
-                setRating(true)
+            if(!ratingData){
+                console.log("puan kaydedilmedi")
+                return;
             }
-            else{
-                setRating(false)
-            }
+            
+            setRating(selectScore)
+
+         
+        }
+
+        
+        const commentLikeButton = async (commentId) => {
+        
+            const comLike = await fetch(`http://localhost:4000/api/comments/${commentId}/like`,{
+                method : "POST",
+                headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
+                body : JSON.stringify({
+                    isLikedByMe : true
+                })
+            })
+
+            console.log(dataComment[0])
+            console.log(commentId)
+            
+            const dataCom = await comLike.json()
+            console.log(dataCom)
+
+            console.log("HTTP STATUS:", comLike.status);
+console.log("API CEVABI:", dataCom);
+console.log("YORUM ID:", commentId);
+
+
+           
+            setİsLikedComment(prev => ({...prev, [commentId] : dataCom.data.isLikedByMe}))
         }
 
 
-        console.log("myRating:", myRating);
-console.log("rating state:", rating);
 
 
             return(
@@ -152,13 +187,60 @@ console.log("rating state:", rating);
                         {[1,2,3,4,5,6,7,8,9,10].map((item, index) => {
                             return(
                            
-                               
-                                <Star key={item} fill={item <= (hover || rating) ? "gold" : "none"} color={item <= (hover || rating) ? "gold" : "currentColor"}  onClick={() => setRating(item)} onMouseEnter={() => {setHover(item)} } onMouseLeave={() => setHover(0)}   style={{cursor: "pointer"}}/>
+                               <button 
+                                    key={item} 
+                                    type="button"
+                                    style={{ background: "none", border: "none", cursor: "pointer", padding: "2px" }}
+                                    
+                                    onClick={() => ratings(item)}
+                                    onMouseEnter={() => setHover(item)} 
+                                    onMouseLeave={() => setHover(0)}
+                                >
+                                    <Star 
+                                        fill={item <= (hover || rating) ? "gold" : "none"} 
+                                        color={item <= (hover || rating) ? "gold" : "currentColor"}  
+                                    />
+                                </button>
+                                
                             
                             )
                         
                         })}
                     </div>
+
+                    <div className="comments">
+                    <div className="commentHeader">
+                        <h2>Yorumlar</h2>
+                    </div>
+
+                    <div className="commentCard">
+                        
+                        <div className='Card'>
+                            {dataComment.map((item, index) => {
+                                return(
+                                    <div key={index} className='users' style={{backgroundColor : 'lightgray'}}>
+                                        <div className='user'>
+                                            <h3>{item.user.fullName}</h3>
+                                        </div>
+
+                                        <div className='commentContext'>
+                                            <p>{item.content}</p>
+                                        </div>
+
+                                        <div className='commentDate'>
+                                            
+                                            <p>{new Date(item.createdAt).toLocaleDateString('tr')} - {new Date(item.createdAt).toTimeString().split("GMT")[0].trim()}</p>
+                                        </div>
+
+                                        <div className='commentLike'>
+                                                <button onClick={() => {commentLikeButton(item.id)}}><Heart fill={isLikedComment[item.id] ? "red" : "none"} color={isLikedComment[item.id] ? 'red' : 'currentColor'} /></button>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
                 </div>
         
            
