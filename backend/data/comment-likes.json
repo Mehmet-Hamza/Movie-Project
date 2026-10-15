@@ -924,41 +924,6 @@
     "updatedAt": "2026-08-19T08:06:43.312Z"
   },
   {
-    "id": "cl_b2098b9a7678",
-    "userId": "us_033",
-    "commentId": "cm_0043",
-    "createdAt": "2025-03-13T06:59:03.000Z",
-    "updatedAt": "2026-08-19T08:06:43.312Z"
-  },
-  {
-    "id": "cl_ebf76306e862",
-    "userId": "us_012",
-    "commentId": "cm_0043",
-    "createdAt": "2024-11-17T17:48:13.000Z",
-    "updatedAt": "2026-08-19T08:06:43.312Z"
-  },
-  {
-    "id": "cl_52eec6531f38",
-    "userId": "us_028",
-    "commentId": "cm_0043",
-    "createdAt": "2025-01-05T16:27:07.000Z",
-    "updatedAt": "2026-08-19T08:06:43.312Z"
-  },
-  {
-    "id": "cl_4769e8a24fc8",
-    "userId": "us_006",
-    "commentId": "cm_0043",
-    "createdAt": "2025-02-15T12:37:59.000Z",
-    "updatedAt": "2026-08-19T08:06:43.312Z"
-  },
-  {
-    "id": "cl_e8915b44366e",
-    "userId": "us_021",
-    "commentId": "cm_0043",
-    "createdAt": "2025-01-12T13:05:50.000Z",
-    "updatedAt": "2026-08-19T08:06:43.312Z"
-  },
-  {
     "id": "cl_6e118cd0fef8",
     "userId": "us_029",
     "commentId": "cm_0044",
@@ -2433,20 +2398,6 @@
     "userId": "us_019",
     "commentId": "cm_0110",
     "createdAt": "2025-05-02T20:53:48.000Z",
-    "updatedAt": "2026-08-19T08:06:43.312Z"
-  },
-  {
-    "id": "cl_398fc1600b68",
-    "userId": "us_030",
-    "commentId": "cm_0111",
-    "createdAt": "2025-02-18T12:31:09.000Z",
-    "updatedAt": "2026-08-19T08:06:43.312Z"
-  },
-  {
-    "id": "cl_ebbf6ab8b9c3",
-    "userId": "us_024",
-    "commentId": "cm_0111",
-    "createdAt": "2024-12-15T10:04:41.000Z",
     "updatedAt": "2026-08-19T08:06:43.312Z"
   },
   {

@@ -49,9 +49,10 @@ const filmsData = resMove.data.data;
 
     // Comments
     const commentData = await fetch(`http://localhost:4000/api/movies/${id}/comments?sort=newest&page=1&limit=12`,{
-        headers : {"Authorization" :  `Bearer ${token}`}
+        headers : {'Content-Type' : 'application/json',"Authorization" :  `Bearer ${token}`}
     })
     const dataComment = await commentData.json();
+    console.log(dataComment)
 
     const isLiked = dataComment.data[0].isLikedByMe;
     console.log(isLiked)
@@ -60,6 +61,7 @@ const filmsData = resMove.data.data;
     const allComment = await fetch(`http://localhost:4000/api/comments?sort=newest&page=1&limit=12`);
     const data = await allComment.json()
     console.log(data)
+
 
 
     

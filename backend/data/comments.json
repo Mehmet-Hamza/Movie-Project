@@ -522,7 +522,7 @@
     "isEdited": false,
     "isDeleted": false,
     "createdAt": "2025-05-23T13:31:33.000Z",
-    "updatedAt": "2026-08-19T08:06:43.476Z"
+    "updatedAt": "2026-10-15T11:25:58.921Z"
   },
   {
     "id": "cm_0036",
@@ -537,7 +537,7 @@
     "isEdited": false,
     "isDeleted": false,
     "createdAt": "2024-10-06T06:42:47.000Z",
-    "updatedAt": "2026-08-19T08:06:43.476Z"
+    "updatedAt": "2026-10-15T07:12:21.125Z"
   },
   {
     "id": "cm_0037",
@@ -627,21 +627,6 @@
     "isEdited": false,
     "isDeleted": false,
     "createdAt": "2025-04-03T15:56:01.000Z",
-    "updatedAt": "2026-08-19T08:06:43.479Z"
-  },
-  {
-    "id": "cm_0043",
-    "movieId": "mv_010",
-    "userId": "us_001",
-    "parentId": null,
-    "content": "Bir kere izlenir, tekrar izler miyim bilmiyorum.",
-    "rating": 7,
-    "spoiler": false,
-    "likeCount": 5,
-    "replyCount": 0,
-    "isEdited": false,
-    "isDeleted": false,
-    "createdAt": "2025-05-22T00:00:04.000Z",
     "updatedAt": "2026-08-19T08:06:43.479Z"
   },
   {
@@ -1647,21 +1632,6 @@
     "isEdited": false,
     "isDeleted": false,
     "createdAt": "2024-10-13T10:35:02.000Z",
-    "updatedAt": "2026-08-19T08:06:43.513Z"
-  },
-  {
-    "id": "cm_0111",
-    "movieId": "mv_028",
-    "userId": "us_001",
-    "parentId": null,
-    "content": "Oyunculuklar iyi, senaryo ortalama.",
-    "rating": null,
-    "spoiler": false,
-    "likeCount": 2,
-    "replyCount": 0,
-    "isEdited": false,
-    "isDeleted": false,
-    "createdAt": "2025-02-18T22:21:10.000Z",
     "updatedAt": "2026-08-19T08:06:43.513Z"
   },
   {
@@ -6943,5 +6913,20 @@
     "isDeleted": false,
     "createdAt": "2026-10-14T18:58:00.291Z",
     "updatedAt": "2026-10-14T18:58:00.291Z"
+  },
+  {
+    "id": "cm_697d258265a7",
+    "movieId": "mv_010",
+    "userId": "us_001",
+    "parentId": null,
+    "content": "test1",
+    "rating": null,
+    "spoiler": false,
+    "likeCount": 0,
+    "replyCount": 0,
+    "isEdited": true,
+    "isDeleted": false,
+    "createdAt": "2026-10-15T15:29:10.221Z",
+    "updatedAt": "2026-10-15T15:29:14.176Z"
   }
 ]

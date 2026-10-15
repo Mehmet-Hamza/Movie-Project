@@ -16189,5 +16189,14 @@
     "review": "",
     "createdAt": "2026-10-14T09:38:13.863Z",
     "updatedAt": "2026-10-14T09:38:13.863Z"
+  },
+  {
+    "id": "rt_f342d74611ef",
+    "userId": "us_001",
+    "movieId": "mv_009",
+    "score": 2,
+    "review": "",
+    "createdAt": "2026-10-15T11:26:26.618Z",
+    "updatedAt": "2026-10-15T11:26:29.818Z"
   }
 ]

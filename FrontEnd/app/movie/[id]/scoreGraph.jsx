@@ -4,24 +4,28 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
 import { Heart, Star, Pencil , Trash } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
+import Swal from 'sweetalert2'
 
 export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList, myRating , dataComment, user}) {
 
   const [isLiked , setİsLiked] = useState(liked)
   const [isLikedComment , setİsLikedComment] = useState(() => {
+
     const inital = {};
     dataComment.forEach(comment => {
         inital[comment.id] = comment.isLikedByMe
     });
     return inital;
-  })
-  const [isFavorites, setİsFavorite] = useState(populated)
- const [isWatched, setİsWatched] = useState(watchList)
- const [rating , setRating] = useState(myRating)
- const [hover, setHover] = useState(0);
- const [writeComment , setCommentWrite] = useState("")
 
-
+  }) 
+    const [isFavorites, setİsFavorite] = useState(populated)
+    const [isWatched, setİsWatched] = useState(watchList)
+    const [rating , setRating] = useState(myRating)
+    const [hover, setHover] = useState(0);
+    const [writeComment , setCommentWrite] = useState("")
+    const [currentMes,setCurrentMes] = useState(dataComment)
+   
+  
   
 
     const likeButton = async () => {
@@ -146,21 +150,65 @@ const popularButton = async () => {
 
 
 
-
+       
         const writeMessage = async () => {
             const write = await fetch(`http://localhost:4000/api/movies/${id}/comments`,{
-                method : "POST",
-                headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
-                body : JSON.stringify({
-                    content : writeComment,
+                    method : "POST",
+                    headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
+                    body : JSON.stringify({
+                    content : writeComment
                    
                 })
 
             })
 
             const writeData = await write.json()
-            console.log(writeData)
+            console.log([writeData])
+
+            
+            setCurrentMes(prev => [...prev , writeData.data])
+            
+            
+ 
         }   
+
+
+        const commentDelete = async(commentId) => {
+            const deleteFetch = await fetch(`http://localhost:4000/api/comments/${commentId}`,{
+                method : "DELETE",
+                headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`}
+            })
+
+            
+            setCurrentMes(dataComment)
+        }
+
+        const patch = async (content, patchID) => {
+            
+            const { value: newText } = await Swal.fire({
+                text : "Yorum Düzenleme",
+                input : "text",
+                inputValue : content,
+                showCancelButton: true,
+                confirmButtonText: 'Kaydet',
+                cancelButtonText: 'İptal'
+            });
+
+            if(newText){
+                await fetch(`http://localhost:4000/api/comments/${patchID}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ content: newText })
+             });
+            }
+
+            // Önemli not state ile ekrana al veriyi 
+        }
+
+      
 
             return(
             <>
@@ -227,15 +275,15 @@ const popularButton = async () => {
                     <div className="commentCard">
                         
                         <div className='Card'>
-                            {dataComment.map((item, index) => {
+                            {currentMes.map((item, index) => {
                                 return(
                                     <div key={index} className='users' style={{backgroundColor : 'lightgray'}}>
                                         <div className='user'>
-                                            <h3>{item.user.fullName}</h3>
+                                            <h3>{item?.user.fullName}</h3>
                                         </div>
 
                                         <div className='commentContext'>
-                                            <p>{item.content}</p>
+                                            <p>{item?.content}</p>
                                         </div>
 
                                         <div className='commentDate'>
@@ -249,8 +297,8 @@ const popularButton = async () => {
                                       
 
                                         {user === item.user.username && (<div className='MyComment'>
-                                            <button> <Pencil /></button>
-                                            <button> <Trash /></button>
+                                            <button onClick={() => {patch(item.content, item.id)}}> <Pencil /></button>
+                                            <button onClick={() => {commentDelete(item.id)}}> <Trash /></button>
                                         </div>)}
 
                                         
