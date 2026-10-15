@@ -24,9 +24,10 @@ export default function ScoreGraphic({distribution, id, similarMovies, liked , t
     const [hover, setHover] = useState(0);
     const [writeComment , setCommentWrite] = useState("")
     const [currentMes,setCurrentMes] = useState(dataComment)
+    const [commentResponse, setCommentResponse] = useState("")
    
   
-  
+ 
 
     const likeButton = async () => {
 
@@ -180,7 +181,7 @@ const popularButton = async () => {
             })
 
             
-            setCurrentMes(dataComment)
+            setCurrentMes(prev => prev.filter(comment => comment.id !== commentId))
         }
 
         const patch = async (content, patchID) => {
@@ -195,7 +196,7 @@ const popularButton = async () => {
             });
 
             if(newText){
-                await fetch(`http://localhost:4000/api/comments/${patchID}`, {
+            const patched = await fetch(`http://localhost:4000/api/comments/${patchID}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -203,11 +204,35 @@ const popularButton = async () => {
             },
             body: JSON.stringify({ content: newText })
              });
+            
+             const  patchData = await patched.json()
+             if (patched.ok) {
+                setCurrentMes(prev =>
+                    prev.map(comment =>
+                        comment.id === patchID
+                            ? { ...comment, content: patchData.data.content }
+                : comment
+                )
+             );
             }
-
-            // Önemli not state ile ekrana al veriyi 
+              
+            }
         }
 
+        const commentResponsed = async (content) => {
+
+            console.log(commentResponse)
+            const resData = await fetch(`http://localhost:4000/api/movies/${id}/comments`,{
+                method : "POST",
+                headers : {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+                body : JSON.stringify({
+                    content : content,
+                    parentId : commentResponse  
+                })
+            })
+            const responseData = await resData.json()
+            console.log(responseData)
+        }
       
 
             return(
@@ -281,9 +306,13 @@ const popularButton = async () => {
                                         <div className='user'>
                                             <h3>{item?.user.fullName}</h3>
                                         </div>
-
+                                    {console.log(item.parentId)}
                                         <div className='commentContext'>
                                             <p>{item?.content}</p>
+
+                                            <div className='otherCommentRes'>
+                                                <p>{item.parentId}</p>
+                                            </div>
                                         </div>
 
                                         <div className='commentDate'>
@@ -293,6 +322,15 @@ const popularButton = async () => {
 
                                         <div className='commentLike'>
                                                 <button onClick={() => {commentLikeButton(item.id)}}><Heart fill={isLikedComment[item.id] ? "red" : "none"} color={isLikedComment[item.id] ? 'red' : 'currentColor'} /></button>
+                                        </div>
+
+                                        <div className='commentRes'>
+                                            <button>Yorumla</button>
+
+                                        <div>
+                                            <textarea onChange={(e) => {const comm = e.target.value ; setCommentResponse(comm)}} name="commentRes" id="comment"></textarea>
+                                            <button onClick={() => {commentResponsed(item.id)}}>Gönder</button>
+                                        </div>
                                         </div>
                                       
 
