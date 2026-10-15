@@ -221,6 +221,7 @@ const popularButton = async () => {
 
         const commentResponsed = async (content) => {
 
+            console.log(content)
             console.log(commentResponse)
             const resData = await fetch(`http://localhost:4000/api/movies/${id}/comments`,{
                 method : "POST",
@@ -329,7 +330,7 @@ const popularButton = async () => {
 
                                         <div>
                                             <textarea onChange={(e) => {const comm = e.target.value ; setCommentResponse(comm)}} name="commentRes" id="comment"></textarea>
-                                            <button onClick={() => {commentResponsed(item.id)}}>Gönder</button>
+                                            <button onClick={() => {commentResponsed(item.content)}}>Gönder</button>
                                         </div>
                                         </div>
                                       
