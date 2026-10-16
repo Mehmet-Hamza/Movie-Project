@@ -15,7 +15,7 @@ export default async function movieDetail({params}) {
     const user = store.get("name").value
 
    
-    
+    //if(token || !token){}
     const res = await axios.get(`http://localhost:4000/api/movies/${id}/`);
     const film = await res.data.data;
 

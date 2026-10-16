@@ -227,12 +227,14 @@ const popularButton = async () => {
                 method : "POST",
                 headers : {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
                 body : JSON.stringify({
-                    content : content,
-                    parentId : commentResponse  
+                    content : commentResponse,
+                    parentId : content  
                 })
             })
             const responseData = await resData.json()
             console.log(responseData)
+            console.log(currentMes);
+            // setCurrentMes(prev => [...prev , responseData.data])
         }
       
 
@@ -302,17 +304,30 @@ const popularButton = async () => {
                         
                         <div className='Card'>
                             {currentMes.map((item, index) => {
+
+                               
                                 return(
+                                    
                                     <div key={index} className='users' style={{backgroundColor : 'lightgray'}}>
                                         <div className='user'>
                                             <h3>{item?.user.fullName}</h3>
                                         </div>
-                                    {console.log(item.parentId)}
+                                    
                                         <div className='commentContext'>
                                             <p>{item?.content}</p>
 
-                                            <div className='otherCommentRes'>
-                                                <p>{item.parentId}</p>
+                                            <div style={{backgroundColor : 'lightblue', width : '500px', height : '600px'}} className='otherCommentRes'>
+                                                {item?.replies.map((element,index) => {
+                                                    console.log(element)
+                                                        return(
+                                                        <div key={index}>
+                                                            <Image src={element.user.avatar} width={50} height={50} alt='avatarPhoto' />
+                                                            {<p>{element.content}</p>}
+                                                            {<p style={{color : 'red', fontSize : '10px'}}>{new Date(element.createdAt).toLocaleDateString('tr')} - {new Date(element.createdAt).toTimeString().split("GMT")[0].trim()}</p>}
+                                                        </div>
+                                                        )
+                
+                                                })}
                                             </div>
                                         </div>
 
@@ -330,7 +345,7 @@ const popularButton = async () => {
 
                                         <div>
                                             <textarea onChange={(e) => {const comm = e.target.value ; setCommentResponse(comm)}} name="commentRes" id="comment"></textarea>
-                                            <button onClick={() => {commentResponsed(item.content)}}>Gönder</button>
+                                            <button onClick={() => {commentResponsed(item.id)}}>Gönder</button>
                                         </div>
                                         </div>
                                       

@@ -22,6 +22,10 @@ export default function login(){
         const data = await res.json();
         console.log(data);
 
+        if(!identifier || !password){
+            return alert('Giriş Başarısız Tekrar Dene !')
+        }
+
         if(data.success){
             
             document.cookie = `token=${data.data.token}; path=/; max-age=604800; SameSite=Lax`;
@@ -29,6 +33,9 @@ export default function login(){
 
             window.location.href = "/";
 
+        }
+        else{
+            alert('Mevcut Bir Hesap Bulunamadı')
         }
     }
     
