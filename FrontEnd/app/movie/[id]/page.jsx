@@ -6,16 +6,18 @@ import Link from "next/link"
 import { cookies } from "next/headers"
 
 
+
 export default async function movieDetail({params}) {
    
     const {id} = await params;
 
     const store = await cookies()
-    const token = store.get("token").value
-    const user = store.get("name").value
+    const token = store.get("token")?.value ?? null
+    const user = store.get("name")?.value ?? null
 
-   
-    //if(token || !token){}
+    
+
+
     const res = await axios.get(`http://localhost:4000/api/movies/${id}/`);
     const film = await res.data.data;
 
@@ -61,6 +63,8 @@ const filmsData = resMove.data.data;
     const allComment = await fetch(`http://localhost:4000/api/comments?sort=newest&page=1&limit=12`);
     const data = await allComment.json()
     console.log(data)
+
+    
 
 
 

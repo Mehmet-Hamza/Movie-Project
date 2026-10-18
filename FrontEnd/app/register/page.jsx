@@ -51,6 +51,7 @@ const registerButton =  async (e) => {
     if(!allowedDomains.includes(emailDomain)){
         
         setErrorType("Geçersiz e-posta. Gmail, Hotmail veya iCloud kullan.");
+
         InputRefNAME.current.value = ""
         InputRefPASSWORD.current.value = ""
         InputRefEMAİL.current.value = ""
@@ -88,7 +89,7 @@ const registerButton =  async (e) => {
     }
 
     
-      if(data.success){
+      if(data.success && name && mail && password && fullName){
         alert("Hesabınız Oluşturuldu !")
         Router.push("/login")
         return;

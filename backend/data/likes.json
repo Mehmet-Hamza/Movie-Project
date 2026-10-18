@@ -10743,5 +10743,12 @@
     "movieId": "mv_085",
     "createdAt": "2024-12-14T00:06:01.000Z",
     "updatedAt": "2026-08-19T08:06:43.264Z"
+  },
+  {
+    "id": "lk_7b2aee5682b4",
+    "userId": "us_b8c3345cd8ae",
+    "movieId": "mv_049",
+    "createdAt": "2026-07-27T22:33:25.368Z",
+    "updatedAt": "2026-07-27T22:33:25.368Z"
   }
 ]

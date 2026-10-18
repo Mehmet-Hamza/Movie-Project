@@ -16198,5 +16198,14 @@
     "review": "",
     "createdAt": "2026-10-15T11:26:26.618Z",
     "updatedAt": "2026-10-15T11:26:29.818Z"
+  },
+  {
+    "id": "rt_8505a3955043",
+    "userId": "us_b8c3345cd8ae",
+    "movieId": "mv_049",
+    "score": 9,
+    "review": "",
+    "createdAt": "2026-07-27T22:34:21.192Z",
+    "updatedAt": "2026-07-27T22:34:21.192Z"
   }
 ]

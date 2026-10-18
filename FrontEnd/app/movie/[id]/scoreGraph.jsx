@@ -5,8 +5,12 @@ import { Heart, Star, Pencil , Trash } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import Swal from 'sweetalert2'
+import { redirect  } from 'next/navigation';
 
 export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList, myRating , dataComment, user}) {
+
+    
+
 
   const [isLiked , setİsLiked] = useState(liked)
   const [isLikedComment , setİsLikedComment] = useState(() => {
@@ -26,11 +30,15 @@ export default function ScoreGraphic({distribution, id, similarMovies, liked , t
     const [currentMes,setCurrentMes] = useState(dataComment)
     const [commentResponse, setCommentResponse] = useState("")
    
-  
+    
  
 
     const likeButton = async () => {
 
+        if(!token){
+            redirect("/login")
+        }
+        
         const likeFetch = await fetch(`http://localhost:4000/api/movies/${id}/like/toggle`,{
         method : "POST",
         headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
@@ -53,6 +61,11 @@ export default function ScoreGraphic({distribution, id, similarMovies, liked , t
 }
 
 const popularButton = async () => {
+
+    if(!token){
+            redirect("/login")
+        }
+
     const PopFetch = await fetch(`http://localhost:4000/api/movies/${id}/favorite/toggle`,{
         method : "POST",
         headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
@@ -78,6 +91,11 @@ const popularButton = async () => {
 
     // Fetch request to add the movie to the watchlist
     const WatchListAdd = async () => {
+        
+        if(!token){
+            redirect("/login")
+        }
+        
         const fetchWatchListAdd = await fetch(`http://localhost:4000/api/movies/${id}/watchlist/toggle`,{
             method: "POST",
             headers: {
@@ -104,6 +122,9 @@ const popularButton = async () => {
 
         const ratings = async(selectScore) => {
 
+            if(!token){
+            redirect("/login")
+        }
             
         
             const ratingData = await fetch(`http://localhost:4000/api/movies/${id}/rate` , {
@@ -131,6 +152,10 @@ const popularButton = async () => {
         
         const commentLikeButton = async (commentId) => {
         
+        if(!token){
+            redirect("/login")
+        }
+
             const comLike = await fetch(`http://localhost:4000/api/comments/${commentId}/like`,{
                 method : "POST",
                 headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
@@ -153,6 +178,12 @@ const popularButton = async () => {
 
        
         const writeMessage = async () => {
+        
+            if(!token){
+            redirect("/login")
+        }
+         
+         
             const write = await fetch(`http://localhost:4000/api/movies/${id}/comments`,{
                     method : "POST",
                     headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`},
@@ -175,6 +206,11 @@ const popularButton = async () => {
 
 
         const commentDelete = async(commentId) => {
+        
+            if(!token){
+            redirect("/login")
+        }
+        
             const deleteFetch = await fetch(`http://localhost:4000/api/comments/${commentId}`,{
                 method : "DELETE",
                 headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`}
@@ -185,7 +221,12 @@ const popularButton = async () => {
         }
 
         const patch = async (content, patchID) => {
+        
+            if(!token){
+            redirect("/login")
+        }
             
+
             const { value: newText } = await Swal.fire({
                 text : "Yorum Düzenleme",
                 input : "text",
@@ -221,6 +262,10 @@ const popularButton = async () => {
 
         const commentResponsed = async (content) => {
 
+        if(!token){
+            redirect("/login")
+        }
+
             console.log(content)
             console.log(commentResponse)
             const resData = await fetch(`http://localhost:4000/api/movies/${id}/comments`,{
@@ -234,7 +279,7 @@ const popularButton = async () => {
             const responseData = await resData.json()
             console.log(responseData)
             console.log(currentMes);
-            // setCurrentMes(prev => [...prev , responseData.data])
+           
         }
       
 
