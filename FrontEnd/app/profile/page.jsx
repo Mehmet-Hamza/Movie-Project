@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import Image from "next/image"
 import styles from "./profile.css"
 import { redirect } from "next/navigation";
+import  ProfileDesing  from "./profileDesign.jsx"
 
 
 export default async function Profile() {
@@ -34,8 +35,12 @@ export default async function Profile() {
     const dataReco = await getReco.json();
     console.log(dataReco)
     const recommentData = dataReco.data
+
+   
+    
     return (
-        
+    <>
+                           <ProfileDesing />
         <form action={signOut}>
             <div className="signOut">
                 <div className="formCard">
@@ -47,6 +52,7 @@ export default async function Profile() {
                             <h1>{userInfo.username}</h1>
                             <h3 style={{color :  "#6c757d"}}>{userInfo.fullName}</h3>
                         </div>
+                        
                     </div>
 
                     <div className="bio">
@@ -92,6 +98,8 @@ export default async function Profile() {
 
                                 <p><strong>Hesap Oluşturma Tarihi</strong>: {new Date(userInfo.createdAt).toTimeString().split("GMT")[0].trim()}</p> <strong>|</strong> <p>{new Date(userInfo.createdAt).toLocaleDateString('tr')}</p>
                             </div>
+
+                           
                     </div>
                 
                 </div>
@@ -132,16 +140,23 @@ export default async function Profile() {
                             )
                         })}
                     </div>
+                     
                 </div>
                 
                 <div className="signoutCard">
+                        
                         <button type="submit">Çıkış Yap</button>
                     </div> 
+
+                   
             </div>
                     
                 </div>
                 
                 </div>
+                            
         </form>
+                           
+    </>
     );
 }

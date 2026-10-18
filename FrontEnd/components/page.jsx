@@ -21,7 +21,11 @@ async function Header() {
 
                 <Link className="FilmListLink" href="/movie">Film Listesi</Link>
                 <Link className="FilmListLink" href="#">İzleme Listem</Link>
-                <Link className="FilmListLink" href="/profile">Profil</Link>
+
+                {token && user && (
+                    <Link className="FilmListLink" href="/profile">Profil</Link>
+                )}
+                
 
                 {token && user ? (
                     <p className="FilmListLink">{user}</p>

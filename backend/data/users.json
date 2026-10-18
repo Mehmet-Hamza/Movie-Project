@@ -10,8 +10,8 @@
     "role": "admin",
     "isActive": true,
     "createdAt": "2024-05-10T19:43:23.000Z",
-    "lastLoginAt": "2026-10-16T14:43:06.888Z",
-    "updatedAt": "2026-10-16T14:43:06.888Z"
+    "lastLoginAt": "2026-10-18T15:47:43.893Z",
+    "updatedAt": "2026-10-18T15:47:43.893Z"
   },
   {
     "id": "us_002",
@@ -583,47 +583,7 @@
     "role": "user",
     "isActive": true,
     "createdAt": "2026-10-11T12:29:31.964Z",
-    "updatedAt": "2026-07-27T22:35:40.374Z",
-    "lastLoginAt": "2026-07-27T22:35:40.374Z"
-  },
-  {
-    "id": "us_8ceb041baadd",
-    "username": "berat utku",
-    "email": "beratutku@gmail.com",
-    "password": "$2a$10$Q2ofqb67FYTTvoelnDpW1.rYhWk/Fo2NEIf/NmnP/GK23uxfZ5rcq",
-    "fullName": "Berat Utku",
-    "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=berat%20utku",
-    "bio": "",
-    "role": "user",
-    "isActive": true,
-    "createdAt": "2026-07-27T21:54:01.166Z",
-    "updatedAt": "2026-07-27T21:54:01.166Z"
-  },
-  {
-    "id": "us_abb5e1c32ab4",
-    "username": "azim",
-    "email": "tanriverdi@gmail.com",
-    "password": "$2a$10$Q3XosifGn3bi5bnQax0xDO/LKOmqaPIjBsJTAdY1oqRm04Kr0/9OC",
-    "fullName": "azim123",
-    "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=azim",
-    "bio": "",
-    "role": "user",
-    "isActive": true,
-    "createdAt": "2026-07-27T22:01:10.850Z",
-    "updatedAt": "2026-07-27T22:01:10.850Z"
-  },
-  {
-    "id": "us_7401725a4c2a",
-    "username": "mehmet hamza",
-    "email": "hamzamehmet85@icloud.com",
-    "password": "$2a$10$GNucb/C8ElhBpqj9JNGg5egkIQmdVlTwUStsQ3X6.dWGxCi3CKVx6",
-    "fullName": "Mehmet Hamza",
-    "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=mehmet%20hamza",
-    "bio": "",
-    "role": "user",
-    "isActive": true,
-    "createdAt": "2026-07-27T22:04:29.595Z",
-    "updatedAt": "2026-07-27T22:04:54.619Z",
-    "lastLoginAt": "2026-07-27T22:04:54.619Z"
+    "updatedAt": "2026-10-18T15:44:12.318Z",
+    "lastLoginAt": "2026-10-18T15:44:12.318Z"
   }
 ]
