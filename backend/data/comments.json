@@ -6823,5 +6823,20 @@
     "isDeleted": false,
     "createdAt": "2026-10-16T06:43:40.680Z",
     "updatedAt": "2026-10-16T06:43:40.680Z"
+  },
+  {
+    "id": "cm_74874e7bf94e",
+    "movieId": "mv_049",
+    "userId": "us_b8c3345cd8ae",
+    "parentId": null,
+    "content": "Jordan'ın Telefonla konuşma sahnesi çok iyiydi !",
+    "rating": null,
+    "spoiler": false,
+    "likeCount": 0,
+    "replyCount": 0,
+    "isEdited": false,
+    "isDeleted": false,
+    "createdAt": "2026-10-19T13:26:31.031Z",
+    "updatedAt": "2026-10-19T13:26:31.031Z"
   }
 ]

@@ -6,13 +6,15 @@ import { redirect } from "next/navigation";
 import  ProfileDesing  from "./profileDesign.jsx"
 
 
-export default async function Profile() {
+export default async function Profile({gettingData}) {
 
     const store = await cookies()
 
     let username = store.get("name").value
     let token = store.get("token")?.value
     console.log("TOKEN:", token);
+
+    console.log(gettingData);
 
 
     // User Statics 
@@ -36,11 +38,14 @@ export default async function Profile() {
     console.log(dataReco)
     const recommentData = dataReco.data
 
+
+
+
    
     
     return (
     <>
-                           <ProfileDesing />
+                           <ProfileDesing userName = {username} token = {token}/>
         <form action={signOut}>
             <div className="signOut">
                 <div className="formCard">

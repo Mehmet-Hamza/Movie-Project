@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 
 
-function Movie({featData,popApi , newApi, scorApi, typeApi , backMov}){
+function Movie({featData,popApi , newApi, scorApi, typeApi , backMov,stateRes}){
     
 
     const [scorMovie , scorSetMovie] = useState(scorApi)
@@ -18,6 +18,8 @@ function Movie({featData,popApi , newApi, scorApi, typeApi , backMov}){
     const [index , setİndex] = useState(0);
     const [filtered , setFilter] = useState([])
     const [showAll, setShowAll] = useState(false)
+
+    console.log(stateRes)
 
     
 
@@ -39,6 +41,8 @@ useEffect(() => {
     const  typeButton = () =>{
        setShowAll(prev => !prev )
     }
+
+  
     return(
     <>
    
@@ -88,6 +92,8 @@ useEffect(() => {
                                 })}
                               </ul>
                           </div>
+
+                          
               </div>
 
               <div className="NewFilms">
@@ -128,7 +134,7 @@ useEffect(() => {
                 <h2>Film Türleri</h2>
               </div>
 
-            
+            {console.log(typeApi.data)}
               <div className="typeCard" >
                 {filtered.map((item , index) => {
                     return(
@@ -136,7 +142,7 @@ useEffect(() => {
                     <div key = {index} style={{ position : 'relative'}}>
                         <h3 className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white', }}>{`${item.nameTr} ${item.emoji}`}</h3>
                         
-                        <Link href = {`/movie?genre=${item.nameTr}`}><div className="img1"><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div></Link>
+                        <Link href = {`/movie?genre=${item.name}&page=1`}><div className="img1"><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div></Link>
                     
                     </div>
                         
@@ -145,6 +151,7 @@ useEffect(() => {
                 {showAll && (
 
                     typeApi.data.map((element , index) => {
+                        
                     return(
                         <div key = {index} style={{ position : 'relative'}}>
                              <h3  className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white'}}>{element.nameTr}</h3>
@@ -162,6 +169,42 @@ useEffect(() => {
              
               </div>
               
+        </div>
+
+        <div className="Statics">
+            <div>
+                <div className="head">
+                    <h3>Toplam Film</h3>
+                
+
+                    <h3>{stateRes.data.totals.movies}</h3>
+                </div>
+            </div>
+
+            <div>
+
+                <div className="head">
+                    <h3>Toplam Kullanıcı</h3>
+                
+
+                
+                    <h3>{stateRes.data.totals.users}</h3>
+                </div>
+
+            </div>
+
+            <div>
+
+                  <div className="head">
+                    <h3>Toplam Yorum</h3>
+                
+
+               
+                    <h3>{stateRes.data.totals.comments}</h3>
+                </div>
+
+
+            </div>
         </div>
     
     </div>

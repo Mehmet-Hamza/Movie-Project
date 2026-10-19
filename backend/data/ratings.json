@@ -16207,5 +16207,14 @@
     "review": "",
     "createdAt": "2026-07-27T22:34:21.192Z",
     "updatedAt": "2026-07-27T22:34:21.192Z"
+  },
+  {
+    "id": "rt_20cbd1fd3616",
+    "userId": "us_4ea7ee131c5b",
+    "movieId": "mv_044",
+    "score": 3,
+    "review": "",
+    "createdAt": "2026-10-19T15:38:59.077Z",
+    "updatedAt": "2026-10-19T15:38:59.077Z"
   }
 ]

@@ -401,11 +401,11 @@
     "favoriteCount": 2,
     "watchlistCount": 4,
     "commentCount": 5,
-    "viewCount": 47532,
+    "viewCount": 47535,
     "popularity": 565.02,
     "createdBy": "us_001",
     "createdAt": "2025-04-27T13:45:19.000Z",
-    "updatedAt": "2026-10-15T11:27:46.334Z"
+    "updatedAt": "2026-07-27T22:30:26.402Z"
   },
   {
     "id": "mv_010",
@@ -446,11 +446,11 @@
     "favoriteCount": 6,
     "watchlistCount": 8,
     "commentCount": 14,
-    "viewCount": 48296,
+    "viewCount": 48353,
     "popularity": 625.87,
     "createdBy": "us_001",
     "createdAt": "2025-04-07T17:14:35.000Z",
-    "updatedAt": "2026-10-18T15:39:28.881Z"
+    "updatedAt": "2026-10-19T12:31:04.155Z"
   },
   {
     "id": "mv_011",
@@ -490,11 +490,11 @@
     "favoriteCount": 5,
     "watchlistCount": 9,
     "commentCount": 12,
-    "viewCount": 45828,
+    "viewCount": 45840,
     "popularity": 584.36,
     "createdBy": "us_001",
     "createdAt": "2024-08-19T16:14:04.000Z",
-    "updatedAt": "2026-10-18T15:39:18.801Z"
+    "updatedAt": "2026-10-19T12:37:19.699Z"
   },
   {
     "id": "mv_012",
@@ -1258,11 +1258,11 @@
     "favoriteCount": 6,
     "watchlistCount": 3,
     "commentCount": 1,
-    "viewCount": 47743,
+    "viewCount": 47755,
     "popularity": 575.97,
     "createdBy": "us_001",
     "createdAt": "2025-04-13T14:04:41.000Z",
-    "updatedAt": "2026-10-15T12:37:18.205Z"
+    "updatedAt": "2026-10-19T13:25:51.066Z"
   },
   {
     "id": "mv_029",
@@ -2003,17 +2003,17 @@
     "revenue": 727154860,
     "status": "released",
     "featured": true,
-    "rating": 9.3,
-    "ratingCount": 29,
+    "rating": 9.1,
+    "ratingCount": 30,
     "likeCount": 27,
     "favoriteCount": 6,
     "watchlistCount": 3,
     "commentCount": 9,
-    "viewCount": 23424,
-    "popularity": 370.23,
+    "viewCount": 23448,
+    "popularity": 369.67,
     "createdBy": "us_001",
     "createdAt": "2025-05-21T20:54:47.000Z",
-    "updatedAt": "2026-10-10T18:47:53.304Z"
+    "updatedAt": "2026-10-19T15:42:12.136Z"
   },
   {
     "id": "mv_045",
@@ -2103,11 +2103,11 @@
     "favoriteCount": 7,
     "watchlistCount": 7,
     "commentCount": 4,
-    "viewCount": 47180,
+    "viewCount": 47192,
     "popularity": 590.53,
     "createdBy": "us_001",
     "createdAt": "2025-05-30T09:16:26.000Z",
-    "updatedAt": "2026-10-18T16:06:05.752Z"
+    "updatedAt": "2026-10-19T15:35:59.369Z"
   },
   {
     "id": "mv_047",
@@ -2195,11 +2195,11 @@
     "favoriteCount": 5,
     "watchlistCount": 2,
     "commentCount": 7,
-    "viewCount": 47063,
+    "viewCount": 47072,
     "popularity": 572.12,
     "createdBy": "us_001",
     "createdAt": "2025-04-01T15:54:22.000Z",
-    "updatedAt": "2026-10-15T07:12:04.220Z"
+    "updatedAt": "2026-10-19T13:25:07.581Z"
   },
   {
     "id": "mv_049",
@@ -2238,16 +2238,16 @@
     "status": "released",
     "featured": true,
     "rating": 9.3,
-    "ratingCount": 21,
-    "likeCount": 31,
-    "favoriteCount": 9,
-    "watchlistCount": 3,
-    "commentCount": 16,
-    "viewCount": 48354,
-    "popularity": 653.52,
+    "ratingCount": 22,
+    "likeCount": 32,
+    "favoriteCount": 10,
+    "watchlistCount": 4,
+    "commentCount": 5,
+    "viewCount": 48390,
+    "popularity": 633.45,
     "createdBy": "us_001",
     "createdAt": "2024-12-17T09:56:21.000Z",
-    "updatedAt": "2026-10-18T15:40:52.898Z"
+    "updatedAt": "2026-10-19T15:32:09.823Z"
   },
   {
     "id": "mv_050",
@@ -2374,11 +2374,11 @@
     "favoriteCount": 2,
     "watchlistCount": 3,
     "commentCount": 9,
-    "viewCount": 43421,
+    "viewCount": 43427,
     "popularity": 517.18,
     "createdBy": "us_001",
     "createdAt": "2025-05-27T07:13:42.000Z",
-    "updatedAt": "2026-10-15T12:54:43.144Z"
+    "updatedAt": "2026-10-19T13:27:31.656Z"
   },
   {
     "id": "mv_053",
@@ -2600,11 +2600,11 @@
     "favoriteCount": 7,
     "watchlistCount": 2,
     "commentCount": 11,
-    "viewCount": 37211,
+    "viewCount": 37214,
     "popularity": 498.29,
     "createdBy": "us_001",
     "createdAt": "2024-05-21T17:51:18.000Z",
-    "updatedAt": "2026-10-10T18:47:42.253Z"
+    "updatedAt": "2026-10-19T15:46:21.331Z"
   },
   {
     "id": "mv_058",
@@ -3236,11 +3236,11 @@
     "favoriteCount": 5,
     "watchlistCount": 7,
     "commentCount": 5,
-    "viewCount": 47821,
+    "viewCount": 47827,
     "popularity": 588.25,
     "createdBy": "us_001",
     "createdAt": "2024-06-30T17:29:58.000Z",
-    "updatedAt": "2026-10-15T18:55:24.198Z"
+    "updatedAt": "2026-10-19T12:36:53.584Z"
   },
   {
     "id": "mv_072",
@@ -3654,13 +3654,13 @@
     "ratingCount": 27,
     "likeCount": 17,
     "favoriteCount": 5,
-    "watchlistCount": 8,
-    "commentCount": 14,
-    "viewCount": 48493,
-    "popularity": 606.19,
+    "watchlistCount": 7,
+    "commentCount": 20,
+    "viewCount": 48999,
+    "popularity": 631.39,
     "createdBy": "us_001",
     "createdAt": "2024-11-22T00:39:48.000Z",
-    "updatedAt": "2026-10-18T15:38:41.657Z"
+    "updatedAt": "2026-10-19T15:36:52.615Z"
   },
   {
     "id": "mv_081",
@@ -3702,11 +3702,11 @@
     "favoriteCount": 3,
     "watchlistCount": 9,
     "commentCount": 7,
-    "viewCount": 31843,
+    "viewCount": 31876,
     "popularity": 401.62,
     "createdBy": "us_001",
     "createdAt": "2024-06-01T18:04:29.000Z",
-    "updatedAt": "2026-10-10T07:08:25.867Z"
+    "updatedAt": "2026-10-19T15:00:36.221Z"
   },
   {
     "id": "mv_082",

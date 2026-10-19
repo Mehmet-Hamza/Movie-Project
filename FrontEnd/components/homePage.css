@@ -197,4 +197,28 @@ Image {
 
 }
 
+.Statics{
+    background-color: #121212;
+    display: flex;
+    min-width: 100%;
+    padding: 35px;
+    justify-content: center;
+    align-items: center;
+}
+
+.head{
+    background-color: #2F2F2F;
+    min-width: 475px;
+    min-height: 300px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap : 50px;
+    color:#E5E5E5
+    
+    
+}
+
 

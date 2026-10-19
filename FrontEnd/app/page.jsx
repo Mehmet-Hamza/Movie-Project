@@ -45,7 +45,7 @@ async function Home(){
     <div className="homePage">
 
    
-      <Movie featData = {featureData} popApi = {popData} newApi = {newData} scorApi = {puanData} typeApi = {typeData} backMov = {dataVideo}/>
+      <Movie featData = {featureData} popApi = {popData} newApi = {newData} scorApi = {puanData} typeApi = {typeData} backMov = {dataVideo} stateRes = {stateRes.data}/>
       
         
       

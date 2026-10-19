@@ -20,10 +20,14 @@ async function Header() {
             <div style={{display: "flex",gap: "100px",marginRight: "40px"}}>
 
                 <Link className="FilmListLink" href="/movie">Film Listesi</Link>
-                <Link className="FilmListLink" href="#">İzleme Listem</Link>
+                
+                
 
                 {token && user && (
+                <>
+                    <Link className="FilmListLink" href="#">İzleme Listem</Link>
                     <Link className="FilmListLink" href="/profile">Profil</Link>
+                </>
                 )}
                 
 

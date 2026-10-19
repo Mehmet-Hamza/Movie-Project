@@ -18,43 +18,43 @@ Daha sade, Türkçe anlatımı bir liste istersen: `http://localhost:4000/docs`
 ## 1. Zorunlu ekranlar
 
 ### 🏠 Anasayfa
-- Öne çıkan filmlerden bir **slider / hero** alanı — `GET /api/movies/featured`
-- "Popüler", "En yüksek puanlı", "Yeni çıkanlar" başlıklı yatay film şeritleri
+- Öne çıkan filmlerden bir **slider / hero** alanı — `GET /api/movies/featured` ( okey)
+- "Popüler", "En yüksek puanlı", "Yeni çıkanlar" başlıklı yatay film şeritleri ( okey)
   — `/api/movies/trending`, `/api/movies/top-rated`, `/api/movies/latest`
-- Tür kartları — `GET /api/genres` (her türün `color`, `emoji` ve `coverUrl` alanı var)
+- Tür kartları — `GET /api/genres` (her türün `color`, `emoji` ve `coverUrl` alanı var) ( okey )
 - İstatistik şeridi (toplam film / kullanıcı / yorum) — `GET /api/stats/overview`
 
 ### 🎞️ Film listesi
-- Kart görünümünde grid — poster, başlık, yıl, puan, tür etiketleri
-- **Arama kutusu** (yazarken 300-500 ms debounce uygula) — `?search=`
-- **Tür filtresi** (çoklu seçim) — `?genre=action,drama`
-- **Sıralama** açılır menüsü — puan / yıl / popülerlik / alfabetik
-- **Yıl ve puan aralığı** filtresi
-- **Sayfalama** veya sonsuz kaydırma — `meta.pagination` bilgisini kullan
+- Kart görünümünde grid — poster, başlık, yıl, puan, tür etiketleri ( okey )
+- **Arama kutusu** (yazarken 300-500 ms debounce uygula) — `?search=` (okey)
+- **Tür filtresi** (çoklu seçim) — `?genre=action,drama`(okey)
+- **Sıralama** açılır menüsü — puan / yıl / popülerlik / alfabetik(okey)
+- **Yıl ve puan aralığı** filtresi (okey)
+- **Sayfalama** veya sonsuz kaydırma — `meta.pagination` bilgisini kullan (okey )
 - Filtreler URL'ye yansısın (`/movies?genre=action&sort=-rating`) ki sayfa
-  yenilenince veya link paylaşılınca aynı sonuç gelsin
+  yenilenince veya link paylaşılınca aynı sonuç gelsin ( okey )
 
 ### 🎬 Film detayı
-- Poster, başlık, yıl, süre, yönetmen, türler, Türkçe özet (`overviewTr`)
-- Puan göstergesi ve **puan dağılımı grafiği** — `GET /api/movies/:id/ratings`
-- Beğen / Favoriye ekle / İzleme listesine ekle butonları (dolu-boş durumları çalışsın)
-- Yıldızla **puan verme** (1-10) — `POST /api/movies/:id/rate`
-- **Yorumlar bölümü:** yorum yazma, cevap yazma, yorum beğenme, kendi yorumunu
-  düzenleme ve silme
-- "Benzer filmler" şeridi — `GET /api/movies/:id/similar`
-- Spoiler işaretli yorumlar varsayılan olarak gizli olsun, tıklayınca açılsın
+- Poster, başlık, yıl, süre, yönetmen, türler, Türkçe özet (`overviewTr`)(okey)
+- Puan göstergesi ve **puan dağılımı grafiği** — `GET /api/movies/:id/ratings`(okey)
+- Beğen / Favoriye ekle / İzleme listesine ekle butonları (dolu-boş durumları çalışsın) ( okey)
+- Yıldızla **puan verme** (1-10) — `POST /api/movies/:id/rate` (okey)
+- **Yorumlar bölümü:** yorum yazma, cevap yazma, yorum beğenme, kendi yorumunu 
+  düzenleme ve silme (okey)
+- "Benzer filmler" şeridi — `GET /api/movies/:id/similar`(okey)
+- Spoiler işaretli yorumlar varsayılan olarak gizli olsun, tıklayınca açılsın ( okey )
 
 ### 🔐 Giriş / Kayıt
-- Form doğrulaması (boş alan, kısa şifre, geçersiz e-posta)
-- Sunucudan gelen `error.details` dizisini ilgili input'un altında göster
-- Token'ı sakla, sayfa yenilenince oturum kaybolmasın
-- Giriş yapmamış kullanıcı beğenmeye çalışırsa giriş modalı / yönlendirmesi
+- Form doğrulaması (boş alan, kısa şifre, geçersiz e-posta) (okey)
+- Sunucudan gelen `error.details` dizisini ilgili input'un altında göster (okey)
+- Token'ı sakla, sayfa yenilenince oturum kaybolmasın (okey)
+- Giriş yapmamış kullanıcı beğenmeye çalışırsa giriş modalı / yönlendirmesi (okey)
 
 ### 👤 Profil
-- Kullanıcı bilgileri ve istatistikleri — `GET /api/users/:username`
-- Sekmeler: Favoriler · Beğeniler · İzleme listesi · Puanladıklarım · Yorumlarım
-- Kendi profilinde profil düzenleme formu — `PATCH /api/auth/me`
-- "Sana özel öneriler" bölümü — `GET /api/me/recommendations`
+- Kullanıcı bilgileri ve istatistikleri — `GET /api/users/:username` (okey)
+- Sekmeler: Favoriler · Beğeniler · İzleme listesi · Puanladıklarım · Yorumlarım (okey)
+- Kendi profilinde profil düzenleme formu — `PATCH /api/auth/me`(okey)
+- "Sana özel öneriler" bölümü — `GET /api/me/recommendations` (okey)
 
 ### 🏷️ Tür sayfası
 - `/tur/action` gibi bir adres, o türe ait filmler — `GET /api/genres/:slug/movies`

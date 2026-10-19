@@ -11,7 +11,7 @@ export default function ScoreGraphic({distribution, id, similarMovies, liked , t
 
     
 
-
+    const [showSpoiler, setShowSpoiler] = useState({});
   const [isLiked , setİsLiked] = useState(liked)
   const [isLikedComment , setİsLikedComment] = useState(() => {
 
@@ -358,14 +358,20 @@ const popularButton = async () => {
                                             <h3>{item?.user.fullName}</h3>
                                         </div>
                                     
+                                    
                                         <div className='commentContext'>
-                                            <p>{item?.content}</p>
+                                            {item.spoiler && !showSpoiler[item.id] ? (
+                                                <div>
+                                                    <h3>Spoiler İçerir</h3>
+                                                    <button onClick={() => setShowSpoiler(prev => ({...prev,[item.id]: true}))}>Yine de göster</button>    
+                                                </div>) : <p>{item?.content}</p>}
 
                                             <div style={{backgroundColor : 'lightblue', width : '500px', height : '600px'}} className='otherCommentRes'>
                                                 {item?.replies.map((element,index) => {
                                                     console.log(element)
                                                         return(
                                                         <div key={index}>
+                                                            
                                                             <Image src={element.user.avatar} width={50} height={50} alt='avatarPhoto' />
                                                             {<p>{element.content}</p>}
                                                             {<p style={{color : 'red', fontSize : '10px'}}>{new Date(element.createdAt).toLocaleDateString('tr')} - {new Date(element.createdAt).toTimeString().split("GMT")[0].trim()}</p>}
