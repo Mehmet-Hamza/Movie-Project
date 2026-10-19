@@ -130,15 +130,39 @@ Image {
 .filmCard{
     background-color: #121212;
     overflow: hidden;
-    overflow-x: scroll;
+    overflow-x: auto;
     margin-bottom: 50px;
     border-radius: 15px;
+    scrollbar-width: thin;
+    border-radius: 15px;
+}
+/* Chrome, Edge, Safari için Siyah Scrollbar */
+.filmCard::-webkit-scrollbar {
+    height: 10px !important; /* Yüksekliğini belirginleştirdik */
+    display: block !important;
+}
+
+.filmCard::-webkit-scrollbar-track {
+    background: #121212 !important; /* Arka planı kart rengi yaptık */
+    border-radius: 10px;
+}
+
+.filmCard::-webkit-scrollbar-thumb {
+    background: #000000 !important; /* TAM SİYAH ÇUBUK */
+    border-radius: 10px;
+    border: 1px solid #222222; /* Siyah çubuk belli olsun diye ince koyu çerçeve */
+}
+
+.filmCard::-webkit-scrollbar-thumb:hover {
+    background: #1a1a1a !important;
 }
 
 .filmsImage{
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 300px;
     padding: 20px;
+    object-fit: cover;
+    object-position: center;
 }
 .filmsImage:hover{
     opacity: 0.5;

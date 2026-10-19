@@ -142,7 +142,7 @@ useEffect(() => {
                     <div key = {index} style={{ position : 'relative'}}>
                         <h3 className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white', }}>{`${item.nameTr} ${item.emoji}`}</h3>
                         
-                        <Link href = {`/movie?genre=${item.name}&page=1`}><div className="img1"><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div></Link>
+                        <Link href = {`/movie?genre=${item.slug}&page=1`}><div className="img1"><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div></Link>
                     
                     </div>
                         
@@ -155,7 +155,7 @@ useEffect(() => {
                     return(
                         <div key = {index} style={{ position : 'relative'}}>
                              <h3  className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white'}}>{element.nameTr}</h3>
-                            <Link href={`/movie?genre=${element.nameTr}`} ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {150} height = {150}/></div></Link>
+                            <Link href={`/movie?genre=${element.slug}&page=1`} ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {150} height = {150}/></div></Link>
                         </div>
                     )
                 }
