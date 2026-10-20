@@ -18,6 +18,7 @@ function Movie({featData,popApi , newApi, scorApi, typeApi , backMov,stateRes}){
     const [index , setİndex] = useState(0);
     const [filtered , setFilter] = useState([])
     const [showAll, setShowAll] = useState(false)
+    const [FilterFilmTür , SetFilterFilmTür] = useState([])
 
     console.log(stateRes)
 
@@ -42,6 +43,9 @@ useEffect(() => {
        setShowAll(prev => !prev )
     }
 
+    
+
+   
   
     return(
     <>
@@ -131,31 +135,32 @@ useEffect(() => {
     
     <div className="filmTypes">
               <div className="filmTypeText">
-                <h2>Film Türleri</h2>
+                <h1 style={{fontSize : '50px'}}>Film Türleri</h1>
               </div>
 
-            {console.log(typeApi.data)}
               <div className="typeCard" >
+                <div className="scrollCard">
                 {filtered.map((item , index) => {
                     return(
 
-                    <div key = {index} style={{ position : 'relative'}}>
-                        <h3 className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white', }}>{`${item.nameTr} ${item.emoji}`}</h3>
+                    <div key = {index} style={{position : 'relative' , minWidth : '350px', minHeight : '200px', display : 'flex', justifyContent : 'center', alignItems : 'center'}}>
+                        <h3 className="typeText" style={{fontSize : '20px', color : 'white', position : 'absolute'}}>{`${item.nameTr}`}</h3>
                         
-                        <Link href = {`/movie?genre=${item.slug}&page=1`}><div className="img1"><Image  alt = "typePhoto" src={item.coverUrl} width = {150} height = {150}/></div></Link>
+                        <Link href = {`/movie?genre=${item.slug}&page=1`}><div className="img1"><Image style={{borderRadius :'15px'}} alt = "typePhoto" src={item.coverUrl} width = {350} height = {200}/></div></Link>
                     
                     </div>
                         
                     )
                 })}
+                
                 {showAll && (
 
                     typeApi.data.map((element , index) => {
                         
                     return(
-                        <div key = {index} style={{ position : 'relative'}}>
-                             <h3  className="typeText" style={{fontSize : '15px', position : 'absolute', top : '50px' , left : '50px', color : 'white'}}>{element.nameTr}</h3>
-                            <Link href={`/movie?genre=${element.slug}&page=1`} ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {150} height = {150}/></div></Link>
+                        <div key = {index} style={{ position : 'relative' , minWidth : '350px', minHeight : '200px', display : 'flex', justifyContent : 'center', alignItems : 'center'}}>
+                             <h3  className="typeText" style={{fontSize : '20px', color : 'white', position : 'absolute'}}>{element.nameTr}</h3>
+                            <Link href={`/movie?genre=${element.slug}&page=1`} ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {350} height = {200}/></div></Link>
                         </div>
                     )
                 }
@@ -163,10 +168,12 @@ useEffect(() => {
 
 
                 )}
-                
-                
+               
+                          
+             
               <button className="buttonMore"  onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>  
              
+              </div>
               </div>
               
         </div>

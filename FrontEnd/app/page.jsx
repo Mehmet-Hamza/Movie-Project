@@ -1,5 +1,6 @@
 import axios from "axios"
 import  Movie  from "@/components/movieCard.jsx"
+import { type } from "os";
 
 
 
@@ -35,7 +36,6 @@ async function Home(){
   // Türler 
   const categoryRes = await axios.get(`http://localhost:4000/api/genres?sort=name`);
   let typeData = categoryRes.data
-
 
   // İstatistikler
   const stateRes = await axios.get(`http://localhost:4000/api/stats/overview`);

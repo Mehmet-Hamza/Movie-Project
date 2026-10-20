@@ -185,27 +185,42 @@ Image {
 
 .filmTypeText{
     color: #E5E5E5;
-    
     margin-top: 40px;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     min-width: 100%;
     padding-inline: 20px  ;
+    
 }
 
 .typeCard{
     background-color:#2F2F2F;
     width: 100%;
-    display: grid;
-    grid-template-columns: 160px 160px ;
+    display: flex;
     justify-content: center;
-    padding: 55px 25px;
-    gap: 20px;
+    padding: 35px;
     
 }
 
+.scrollCard{
+    background-color:#0a0a0a;
+    border-radius: 15px;
+    min-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    padding: 55px 25px;
+    gap: 15px;
+    
+    height: 575px;
+    overflow: auto;
+}
+
+
 .img1{
-   opacity: 0.2;
+   opacity: 0.3;
+   border: 2px solid whitesmoke;
+   border-radius: 15px;
 }
 .img1:hover{
     opacity: 0.8;
@@ -214,11 +229,14 @@ Image {
 }
 
 .buttonMore{
-    background-color: var(--home-background);
+    background-color: #0a0a0a;
     border: none;
     font-size: 20px;
     color:#E5E5E5;
 
+}
+.buttonMore:hover{
+    opacity: 0.2;
 }
 
 .Statics{
