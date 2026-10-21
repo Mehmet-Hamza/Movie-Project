@@ -46,10 +46,12 @@
     display: flex;
     gap: 20px;
     align-items: center;
-    JUSTIFY-CONTENT: SPACE-BETWEEN;
+    justify-content: right;
     
 }
-
+.RatingHeader{
+    margin-top: 25px;
+}
 .likeButton{
     display: flex;
     gap: 15px;
@@ -114,4 +116,21 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.scoreGraph{
+    background-color: #353535;
+    padding: 25px;
+    color: whitesmoke;
+}
+
+.comments{
+    
+    padding: 15px;
+}
+
+
+
+.commentContext{
+    padding: 15px;
 }

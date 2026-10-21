@@ -297,8 +297,6 @@ const popularButton = async () => {
             <div className="likeAndPopuler">
 
                 <div className="likeButton">
-                 
-                 
                     <button className="likeButtonAndPopular buttons like" onClick={likeButton}><Heart fill={isLiked ? 'red' : 'none'} color={isLiked ? "red" : "currentColor"}/></button>
                   
                     <button className="likeButtonAndPopular buttons popular" onClick={popularButton}><Star fill={isFavorites ? 'purple' : 'none'} color={isFavorites ? 'purple' : 'currentColor'}/></button>

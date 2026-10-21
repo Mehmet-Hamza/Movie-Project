@@ -90,16 +90,11 @@ const filmsData = resMove.data.data;
 
                 </div>
                 
-                <div className="detailText">
-                    {/* Başlık */}    <h1>{film.title}</h1>    
-                    {/* Özet */}    <p>{film.overview}</p>
-
-
-
-
-
-
+                    <div className="detailText">
+                        {/* Başlık */}    <h1>{film.title}</h1>    
+                        {/* Özet */}    <p>{film.overview}</p>
                     </div>
+                </div>
 
 
                     <div className="scoreGraph">
@@ -115,11 +110,6 @@ const filmsData = resMove.data.data;
                             </div>
                         </div>
                  
-                    </div>
-
-              
-                
-
                   <div className="SimilarMovies">
 
                     <div className="similarMoviesTitle">

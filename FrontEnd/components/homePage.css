@@ -246,12 +246,14 @@ Image {
     padding: 35px;
     justify-content: center;
     align-items: center;
+    gap: 150px;
+   
 }
 
 .head{
     background-color: #2F2F2F;
-    min-width: 475px;
-    min-height: 300px;
+    min-width: 375px;
+    min-height: 200px;
     border: 2px solid black;
     display: flex;
     flex-direction: column;
