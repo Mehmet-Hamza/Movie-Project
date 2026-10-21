@@ -5,12 +5,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 40px;
 }
 
 .formCard{
+    overflow: hidden;
     background-color: #343a40;
-    width:75%;
-    height: 900px;
+    width:95%;
+    height: 750px;
     padding: 40px;
     border-radius: 20px;
     display: grid;
@@ -21,8 +23,8 @@
     border: 2px solid black;
     border-radius: 100px;
     background-color: #F9F9F9;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     
 }
 .userInfoText{
@@ -37,19 +39,27 @@
     
 }
 .bio{
-    
+    overflow-wrap: break-word;
     margin-top: 20px;
     width: 50%;
+    height: 100px;
 }
 .states{
-   
-    width: 50%;
-    height: 350px;
+     
+    overflow: hidden; 
+    width: 100%;
+    padding-inline: 20px;
+    height: 310px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap : 10px;
+
+
 }
 
 .box{
+    
+    border-radius: 10px;
     background-color:#22223b;
     border: 2px solid black;
     display: flex;
@@ -57,22 +67,44 @@
     align-items: center;
     flex-direction: column;
     gap: 30px;
+    text-align: center
+    
 }
 .boxText{
     font-size: 30px;
     font-weight: 600;
 }
 .signoutCard{
+    margin-top: 30px;
     
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     
 }
 
-.accountCreateDate{
+.SignOutButtonAndDesignButton{
+    border: none;
+    background-color: rgb(56, 56, 224);
+    color: #F9F9F9;
+    min-width: 150px;
+    min-height: 30px;
+    border-radius: 50px;
+}
 
-    width: 50%;
-    margin-top: 40px;
+.SignOutButtonAndDesignButton:hover{
+    opacity: 0.5;
+}
+
+.accountCreateDate{
+  
+    width: 100%;
+    margin-top: 80px;
+    display: flex;
+    gap:50px;
+    padding-inline : 15px;
+    font-size: 12px;
+
+
 }
 
 .date{
@@ -80,13 +112,17 @@
     gap: 10px;
 }
 
+
 .movieCard{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    
+    gap: 10px;
+    border: 2px solid black;
+        
 }
 
 .rightSide{
+    
     min-height: 100%;
 }
 
@@ -99,6 +135,16 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border-radius: 10px;
+}
+
+.posterCards{
+    background-color: pink;
+    height: 100%;
+}
+
+.posterImg{
+    min-height: 100%;
 }
 .recoHeader{
     display: flex;
@@ -108,17 +154,30 @@
 
 }
 
-.movieCard{
-    
-
-    border: 2px solid black;
-}
 
 .movieInfo{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding-block: 10px;
+    font-size: 13px;
+    gap:20px;
+    color: #F9F9F9;
     
     
+}
+
+.modalBody{
+    background-color: #222222;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modalInput{
+    border: 2px solid black;
+    width: 50%;
+    padding-inline: 10px;
+    border-radius: 5px;
+    height: 40px;
 }
 

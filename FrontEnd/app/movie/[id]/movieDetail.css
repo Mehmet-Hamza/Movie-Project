@@ -1,8 +1,10 @@
 .movieDetail{
-    background-color: gray;
+    background-color: aliceblue;
     width: 100%;
     min-height: 100vh;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 .cardDetail{
     background-color: aliceblue;
@@ -20,6 +22,7 @@
     padding: 20px;
     gap: 50px;
     color: #f9F9F9;
+    height: 750px;
 }
 .posterImgDetail{
     border-radius: 18px;

@@ -64,11 +64,12 @@ const filmsData = resMove.data.data;
     const data = await allComment.json()
     console.log(data)
 
-    
+    if(!token){
+        Router.push("/login")
+    }
 
 
 
-    
 
     return(
         <div className="movieDetail">
@@ -94,6 +95,13 @@ const filmsData = resMove.data.data;
                     {/* Özet */}    <p>{film.overview}</p>
 
 
+
+
+
+
+                    </div>
+
+
                     <div className="scoreGraph">
                         <div className="scoreHeader">
                             <h2>Puan Dağılımı</h2>
@@ -110,7 +118,7 @@ const filmsData = resMove.data.data;
                     </div>
 
               
-                </div>
+                
 
                   <div className="SimilarMovies">
 

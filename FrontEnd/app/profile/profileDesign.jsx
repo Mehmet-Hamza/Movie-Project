@@ -47,23 +47,23 @@ export default function ProfileDesing({userName, token}) {
     <>
        
 
-<Button onClick={() => setShow(true)}>Profili Düzenle</Button>
+<Button className="SignOutButtonAndDesignButton" onClick={() => setShow(true)}>Profili Düzenle</Button>
 
 <Modal show={show} onHide={() => setShow(false)}>
-    <Modal.Header closeButton>
-        <Modal.Title>Profili Düzenle</Modal.Title>
+    <Modal.Header closeButton style={{backgroundColor : '#343a40'}}>
+        <Modal.Title style={{color:'white'}}>Profili Düzenle</Modal.Title>
     </Modal.Header>
     
-    <Modal.Body>
+    <Modal.Body className="modalBody">
         {/* inputlar */}
-        <input onChange={(e) => {setNewFullName(e.target.value)}} placeholder="Tam İsim" type="text" />
-        <input onChange={(e) => {setNewBio(e.target.value)}} placeholder="Biyografi" type="text" />
+        <input className="modalInput" onChange={(e) => {setNewFullName(e.target.value)}} placeholder="Tam İsim" type="text" />
+        <input className="modalInput" onChange={(e) => {setNewBio(e.target.value)}} placeholder="Biyografi" type="text" />
 
     </Modal.Body>
-    <Modal.Footer>
+    <Modal.Footer style={{backgroundColor : '#343a40'}}>
         <Button onClick={() => setShow(false)}>Kapat</Button>
         <Button onClick={newProfileİnfo}>Kaydet</Button>
-    </Modal.Footer>
+    </Modal.Footer  >
 </Modal>
 </>
     );

@@ -4,6 +4,7 @@ import Image from "next/image"
 import styles from "./profile.css"
 import { redirect } from "next/navigation";
 import  ProfileDesing  from "./profileDesign.jsx"
+import Link from 'next/link'
 
 
 export default async function Profile({gettingData}) {
@@ -45,7 +46,7 @@ export default async function Profile({gettingData}) {
     
     return (
     <>
-                           <ProfileDesing userName = {username} token = {token}/>
+                           
         <form action={signOut}>
             <div className="signOut">
                 <div className="formCard">
@@ -81,7 +82,7 @@ export default async function Profile({gettingData}) {
                                 <p className="boxText">{userInfo.stats.ratingCount}</p>
                             </div>
 
-                            <div className="watchList box">
+                            <div className="box">
                                 <p><strong>İzleme Listemdeki Filmler Sayısı</strong></p>
                                 <p className="boxText">{userInfo.stats.watchlistCount}</p>
                             </div>
@@ -101,7 +102,7 @@ export default async function Profile({gettingData}) {
 
                             <div className="createAtLogin date">
 
-                                <p><strong>Hesap Oluşturma Tarihi</strong>: {new Date(userInfo.createdAt).toTimeString().split("GMT")[0].trim()}</p> <strong>|</strong> <p>{new Date(userInfo.createdAt).toLocaleDateString('tr')}</p>
+                                <p><strong>Hesap Oluşturma Tarihi</strong> : {new Date(userInfo.createdAt).toTimeString().split("GMT")[0].trim()}</p> <strong>|</strong> <p>{new Date(userInfo.createdAt).toLocaleDateString('tr')}</p>
                             </div>
 
                            
@@ -120,10 +121,10 @@ export default async function Profile({gettingData}) {
                     <div className="movieCard">
                         {recommentData.map((item, index) =>{
                             return(
-                                <div key={index} className="movieCard">
+                                <Link style={{textDecoration : 'none'}} key={index} href={`/movie/${item.id}`}><div key={index} className="movieCard">
 
                                     <div className="posterCards">
-                                        <Image alt="moviePhoto"  src={item.posterUrl} width={150} height={200}/>
+                                        <Image alt="moviePhoto" className="posterImg"  src={item.posterUrl} width={150} height={200}/>
                                     </div>
                                     
                                     <div className="movieInfo">
@@ -141,7 +142,7 @@ export default async function Profile({gettingData}) {
                                     </div>
                                    
                                 
-                                </div>
+                                </div></Link>
                             )
                         })}
                     </div>
@@ -150,7 +151,8 @@ export default async function Profile({gettingData}) {
                 
                 <div className="signoutCard">
                         
-                        <button type="submit">Çıkış Yap</button>
+                        <ProfileDesing userName = {username} token = {token}/>
+                        <button className="SignOutButtonAndDesignButton" type="submit">Çıkış Yap</button>
                     </div> 
 
                    

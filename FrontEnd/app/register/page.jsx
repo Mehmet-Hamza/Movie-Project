@@ -78,12 +78,10 @@ const registerButton =  async (e) => {
     const data = await res.json()
     console.log(data);
 
-    console.log("STATUS:", res.status);
-        console.log("BACKEND CEVABI:", JSON.stringify(data, null, 2));
-            console.log("MESSAGES:", data.error?.messages);
+    console.log(data)
 
     if(!data.success){
-        setErrorType(data.error.details[0].message)
+        setErrorType(data.error.message)
         
         return;
     }
