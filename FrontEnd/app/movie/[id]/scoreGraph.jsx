@@ -6,14 +6,16 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Swal from 'sweetalert2'
 import { redirect  } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function ScoreGraphic({distribution, id, similarMovies, liked , token, populated , watchList, myRating , dataComment, user}) {
 
-    
 
-    const [showSpoiler, setShowSpoiler] = useState({});
-  const [isLiked , setİsLiked] = useState(liked)
-  const [isLikedComment , setİsLikedComment] = useState(() => {
+    const Router = useRouter();
+
+const [showSpoiler, setShowSpoiler] = useState({});
+const [isLiked , setİsLiked] = useState(liked)
+const [isLikedComment , setİsLikedComment] = useState(() => {
 
     const inital = {};
     dataComment.forEach(comment => {
@@ -266,8 +268,7 @@ const popularButton = async () => {
             redirect("/login")
         }
 
-            console.log(content)
-            console.log(commentResponse)
+            
             const resData = await fetch(`http://localhost:4000/api/movies/${id}/comments`,{
                 method : "POST",
                 headers : {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
@@ -279,8 +280,20 @@ const popularButton = async () => {
             const responseData = await resData.json()
             console.log(responseData)
             console.log(currentMes);
+            Router.refresh()
            
         }
+
+        const responseDelete = async (commentId) => {
+
+            const deleteRes = fetch(`http://localhost:4000/api/comments/${commentId}`,{
+                method : "DELETE",
+                headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`}
+
+            })
+            Router.refresh()
+        }
+            
       
 
             return(
@@ -339,21 +352,21 @@ const popularButton = async () => {
                     </div>
 
                     <div className="comments">
-                    <div className="commentHeader">
-                        <h2>Yorumlar</h2>
-                    </div>
+                        <div className="commentHeader">
+                            <h2>Yorumlar</h2>
+                        </div>
 
                     <div className="commentCard">
                         
                         <div className='Card'>
                             {currentMes.map((item, index) => {
 
-                               
+                               console.log(item)
                                 return(
                                     
-                                    <div key={index} className='users' style={{backgroundColor : 'lightgray'}}>
+                                    <div key={index} className='users'>
                                         <div className='user'>
-                                            <h3>{item?.user.fullName}</h3>
+                                            <Image src={item.user.avatar} width={50} height={50} alt='userPhoto' /><h3>{item?.user.fullName}</h3>
                                         </div>
                                     
                                     
@@ -364,15 +377,21 @@ const popularButton = async () => {
                                                     <button onClick={() => setShowSpoiler(prev => ({...prev,[item.id]: true}))}>Yine de göster</button>    
                                                 </div>) : <p>{item?.content}</p>}
 
-                                            <div style={{backgroundColor : 'lightblue', width : '500px', height : '600px'}} className='otherCommentRes'>
+                                            <div className='otherCommentRes'>
                                                 {item?.replies.map((element,index) => {
                                                     console.log(element)
                                                         return(
                                                         <div key={index}>
                                                             
-                                                            <Image src={element.user.avatar} width={50} height={50} alt='avatarPhoto' />
+                                                            <Image src={element.user.avatar} width={50} height={50} alt='avatarPhoto' /> <h5>{element.user.fullName}</h5>
                                                             {<p>{element.content}</p>}
                                                             {<p style={{color : 'red', fontSize : '10px'}}>{new Date(element.createdAt).toLocaleDateString('tr')} - {new Date(element.createdAt).toTimeString().split("GMT")[0].trim()}</p>}
+                                                            
+                                                            {console.log(element)}
+                                                            {user === element.user.username && (
+                                                                <button onClick={() => {responseDelete(element.id)} }>SİL</button>
+                                                            )}
+                                                            
                                                         </div>
                                                         )
                 
@@ -390,10 +409,10 @@ const popularButton = async () => {
                                         </div>
 
                                         <div className='commentRes'>
-                                            <button>Yorumla</button>
+                                            
 
                                         <div>
-                                            <textarea onChange={(e) => {const comm = e.target.value ; setCommentResponse(comm)}} name="commentRes" id="comment"></textarea>
+                                            <textarea placeholder = {"Cevapla"}onChange={(e) => {const comm = e.target.value ; setCommentResponse(comm)}} name="commentRes" id="comment"></textarea>
                                             <button onClick={() => {commentResponsed(item.id)}}>Gönder</button>
                                         </div>
                                         </div>

@@ -125,12 +125,51 @@
 }
 
 .comments{
-    
+   
     padding: 15px;
+    
 }
 
 
 
 .commentContext{
     padding: 15px;
+    height: 100%;
+    color: black;
+    
+}
+
+.users{
+    padding: 25px;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: lightgray;
+    
+}
+
+.otherCommentRes{
+    background-color: lightgray;
+    width: 50%;
+    padding-left: 50px;    
+}
+
+.commentCard{
+    background-color: #353535;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+.Card{
+    background-color: #353535;;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;    
 }

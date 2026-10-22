@@ -440,17 +440,17 @@
     "revenue": 1099198495,
     "status": "released",
     "featured": false,
-    "rating": 8,
+    "rating": 7.9,
     "ratingCount": 24,
     "likeCount": 23,
     "favoriteCount": 6,
     "watchlistCount": 8,
     "commentCount": 14,
-    "viewCount": 48353,
-    "popularity": 625.87,
+    "viewCount": 48623,
+    "popularity": 628.77,
     "createdBy": "us_001",
     "createdAt": "2025-04-07T17:14:35.000Z",
-    "updatedAt": "2026-10-19T12:31:04.155Z"
+    "updatedAt": "2026-10-22T13:06:42.292Z"
   },
   {
     "id": "mv_011",
@@ -2107,7 +2107,7 @@
     "popularity": 590.53,
     "createdBy": "us_001",
     "createdAt": "2025-05-30T09:16:26.000Z",
-    "updatedAt": "2026-10-21T18:24:39.368Z"
+    "updatedAt": "2026-10-22T07:30:47.594Z"
   },
   {
     "id": "mv_047",
@@ -3656,11 +3656,11 @@
     "favoriteCount": 5,
     "watchlistCount": 7,
     "commentCount": 20,
-    "viewCount": 49059,
-    "popularity": 633.63,
+    "viewCount": 49026,
+    "popularity": 631.39,
     "createdBy": "us_001",
     "createdAt": "2024-11-22T00:39:48.000Z",
-    "updatedAt": "2026-10-21T18:48:44.699Z"
+    "updatedAt": "2026-10-22T07:19:45.208Z"
   },
   {
     "id": "mv_081",
