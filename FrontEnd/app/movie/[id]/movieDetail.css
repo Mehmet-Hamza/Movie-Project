@@ -173,3 +173,43 @@
     flex-direction: column;
     gap: 20px;    
 }
+
+.commentDate{
+    font-weight: 600;
+    display: flex;
+    justify-content: left;
+    opacity: 0.5;
+    margin-top: 30px;
+}
+.commentLike{
+    
+    display: flex;
+    justify-content: right;
+}
+
+.commentRes{
+    
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+
+.responseButton{
+    padding: 15px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    background-color: #353535;
+}
+
+.responseInput{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}

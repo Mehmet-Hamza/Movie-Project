@@ -3,7 +3,7 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
 import { Heart, Star, Pencil , Trash } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 import { redirect  } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -291,9 +291,14 @@ const popularButton = async () => {
                 headers : {'Content-Type' : 'application/json' , 'Authorization' : `Bearer ${token}`}
 
             })
+
             Router.refresh()
+            
         }
             
+        useEffect(() => {
+            setCurrentMes(dataComment)
+        },[responseDelete, commentResponsed])
       
 
             return(
@@ -387,7 +392,7 @@ const popularButton = async () => {
                                                             {<p>{element.content}</p>}
                                                             {<p style={{color : 'red', fontSize : '10px'}}>{new Date(element.createdAt).toLocaleDateString('tr')} - {new Date(element.createdAt).toTimeString().split("GMT")[0].trim()}</p>}
                                                             
-                                                            {console.log(element)}
+                                                           
                                                             {user === element.user.username && (
                                                                 <button onClick={() => {responseDelete(element.id)} }>SİL</button>
                                                             )}
@@ -399,22 +404,22 @@ const popularButton = async () => {
                                             </div>
                                         </div>
 
-                                        <div className='commentDate'>
-                                            
-                                            <p>{new Date(item.createdAt).toLocaleDateString('tr')} - {new Date(item.createdAt).toTimeString().split("GMT")[0].trim()}</p>
-                                        </div>
+                                        
 
                                         <div className='commentLike'>
-                                                <button onClick={() => {commentLikeButton(item.id)}}><Heart fill={isLikedComment[item.id] ? "red" : "none"} color={isLikedComment[item.id] ? 'red' : 'currentColor'} /></button>
+                                                <button  className = "buttons" onClick={() => {commentLikeButton(item.id)}}><Heart size={30} fill={isLikedComment[item.id] ? "red" : "none"} color={isLikedComment[item.id] ? 'red' : 'currentColor'} /></button>
                                         </div>
 
                                         <div className='commentRes'>
-                                            
+                                        
+                                            <div className='response'>
+                                                <textarea className='responseInput' placeholder = {"Cevapla"}onChange={(e) => {const comm = e.target.value ; setCommentResponse(comm)}} name="commentRes" id="comment"></textarea>
+                                                
+                                            </div>
 
-                                        <div>
-                                            <textarea placeholder = {"Cevapla"}onChange={(e) => {const comm = e.target.value ; setCommentResponse(comm)}} name="commentRes" id="comment"></textarea>
-                                            <button onClick={() => {commentResponsed(item.id)}}>Gönder</button>
-                                        </div>
+                                            <div className='responseButtonCard'>
+                                                <button className='responseButton' onClick={() => {commentResponsed(item.id)}}>Gönder</button>
+                                            </div>
                                         </div>
                                       
 
@@ -423,7 +428,10 @@ const popularButton = async () => {
                                             <button onClick={() => {commentDelete(item.id)}}> <Trash /></button>
                                         </div>)}
 
-                                        
+                                        <div className='commentDate'>
+                                            
+                                            <p>{new Date(item.createdAt).toLocaleDateString('tr')}</p>
+                                        </div>
                                     </div>
                                     
                                 )
