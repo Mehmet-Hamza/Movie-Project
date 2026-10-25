@@ -91,11 +91,16 @@
     display: flex;
     gap: 30px;
     justify-content: center;
+    background-color:#212529;
+    overflow: hidden;
+    overflow-x: auto;
+    padding: 20px;
+    
 }
 
 .movieCardSimilar{
-    width: 350px;
-    height: 450px;
+    width: 300px;
+    height: 400px;
     background-Color : lightgray;
     border-radius: 20px;
     border-radius: 18px;
@@ -125,7 +130,7 @@
 }
 
 .comments{
-   
+    margin-top : 30px;
     padding: 15px;
     
 }
@@ -178,8 +183,12 @@
     font-weight: 600;
     display: flex;
     justify-content: left;
+    align-items: center;
     opacity: 0.5;
-    margin-top: 30px;
+    
+    
+    
+    
 }
 .commentLike{
     
@@ -212,4 +221,35 @@
     padding: 10px;
     display: flex;
     align-items: center;
+    margin-bottom: 40px;
+}
+
+.commentWriteCard{
+    
+    padding: 30px;
+    background-color:#D3D3D3;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+.ComInput{
+    min-width: 50%;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    padding-inline: 15px;
+    padding-block: 5px;
+}
+
+.comButton{
+    border: none;
+    width: 100px;
+    border-radius: 10px;
+    background-color: #0466c8;
+    color: #F9F9F9;
+    
+}
+.comButton:hover{
+    opacity: 0.8;
 }

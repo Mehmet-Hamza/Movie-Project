@@ -201,6 +201,8 @@ const popularButton = async () => {
 
             
             setCurrentMes(prev => [...prev , writeData.data])
+
+            Router.refresh()
             
             
  
@@ -220,6 +222,7 @@ const popularButton = async () => {
 
             
             setCurrentMes(prev => prev.filter(comment => comment.id !== commentId))
+            Router.refresh()
         }
 
         const patch = async (content, patchID) => {
@@ -298,7 +301,7 @@ const popularButton = async () => {
             
         useEffect(() => {
             setCurrentMes(dataComment)
-        },[responseDelete, commentResponsed])
+        },[dataComment])
       
 
             return(
@@ -371,7 +374,7 @@ const popularButton = async () => {
                                     
                                     <div key={index} className='users'>
                                         <div className='user'>
-                                            <Image src={item.user.avatar} width={50} height={50} alt='userPhoto' /><h3>{item?.user.fullName}</h3>
+                                            <Image style = {{border : '1px solid black', borderRadius : '50px', backgroundColor : '#F9F9F9'}}src={item.user.avatar} width={60} height={60} alt='userPhoto' /><h3>{item?.user.fullName}</h3>
                                         </div>
                                     
                                     
@@ -390,7 +393,7 @@ const popularButton = async () => {
                                                             
                                                             <Image src={element.user.avatar} width={50} height={50} alt='avatarPhoto' /> <h5>{element.user.fullName}</h5>
                                                             {<p>{element.content}</p>}
-                                                            {<p style={{color : 'red', fontSize : '10px'}}>{new Date(element.createdAt).toLocaleDateString('tr')} - {new Date(element.createdAt).toTimeString().split("GMT")[0].trim()}</p>}
+                                                            {<p style={{opacity : '0.5', fontWeight : '600', fontSize : '10px'}}>{new Date(element.createdAt).toLocaleDateString('tr')}</p>}
                                                             
                                                            
                                                             {user === element.user.username && (
@@ -436,9 +439,9 @@ const popularButton = async () => {
                                     
                                 )
                             })}
-                            <div className='commentWriteCard' style={{backgroundColor : 'lightGray', display : 'flex', justifyContent : 'center'}}>
-                                <input onChange={(e) => {setCommentWrite(e.target.value)}} type="text" placeholder='Bir Yorum Yaz !' style={{ minWidth : '50%'}}/>
-                                <button onClick={writeMessage}>Gönder</button>
+                            <div className='commentWriteCard'>
+                                <input onChange={(e) => {setCommentWrite(e.target.value)}} type="text" placeholder='Bir Yorum Yaz !' className='ComInput'/>
+                                <button className='comButton' onClick={writeMessage}>Gönder</button>
                             </div>
                         </div>
                     </div>

@@ -172,6 +172,13 @@ Image {
     color : var(--text-color);
     padding-bottom: 15px;
     font-size: 25px;
+    background-color: #403d39;
+    padding: 20px;
+    margin-bottom: 15px;
+    width: 20%;
+    height: 75px;
+    border-top-right-radius: 20px;
+    
     
 }
 

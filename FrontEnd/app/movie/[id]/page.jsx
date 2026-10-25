@@ -7,7 +7,9 @@ import { cookies } from "next/headers"
 
 
 
+
 export default async function movieDetail({params}) {
+   
    
     const {id} = await params;
 
@@ -64,10 +66,7 @@ const filmsData = resMove.data.data;
     const data = await allComment.json()
     console.log(data)
 
-    if(!token){
-        Router.push("/login")
-    }
-
+   
 
 
 
@@ -121,7 +120,7 @@ const filmsData = resMove.data.data;
                         return(
                         <Link style={{textDecoration : 'none'}} key={index} href={`/movie/${item.id}`}><div className="movieCardSimilar" >
 
-                                <Image style={{borderTopLeftRadius : '18px', borderTopRightRadius : '18px'}} src={item.posterUrl} width={350} height={220} alt="similarMovies"/>
+                                <Image style={{borderTopLeftRadius : '18px', borderTopRightRadius : '18px'}} src={item.posterUrl} width={300} height={180} alt="similarMovies"/>
 
                                 <div className="similarMoviesText">
                                     <ul className="similarMoviesUL">

@@ -25,7 +25,7 @@ async function Header() {
 
                 {token && user && (
                 <>
-                    <Link className="FilmListLink" href="#">İzleme Listem</Link>
+                    <Link className="FilmListLink" href="/watchList">İzleme Listem</Link>
                     <Link className="FilmListLink" href="/profile">Profil</Link>
                 </>
                 )}
