@@ -14,6 +14,16 @@ const [fullName , setFullName] = useState("")
 
 const [errorType , setErrorType] = useState("")
 
+const [loading , setLoading] = useState(true)
+
+      useEffect(() => {
+                const time = setTimeout(() => {
+                    setLoading(false)
+                }, 500)
+    
+                return () => clearTimeout(time)
+            },[])
+
 
 const InputRefNAME = useRef();
 const InputRefPASSWORD = useRef();
@@ -107,6 +117,11 @@ useEffect(() => {
 
     return(
     <div className="register">
+               {loading && (
+        <div className="loading">
+            <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
+        </div>
+    )}
         <form className = "formCard" onSubmit={registerButton} action="">
             <div className="personalInputs">
                 {errorType && (

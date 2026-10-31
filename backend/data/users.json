@@ -10,8 +10,8 @@
     "role": "admin",
     "isActive": true,
     "createdAt": "2024-05-10T19:43:23.000Z",
-    "lastLoginAt": "2026-10-22T18:37:23.193Z",
-    "updatedAt": "2026-10-22T18:37:23.193Z"
+    "lastLoginAt": "2026-10-31T16:48:20.202Z",
+    "updatedAt": "2026-10-31T16:48:20.202Z"
   },
   {
     "id": "us_002",
@@ -583,8 +583,8 @@
     "role": "user",
     "isActive": true,
     "createdAt": "2026-10-11T12:29:31.964Z",
-    "updatedAt": "2026-10-25T11:32:51.429Z",
-    "lastLoginAt": "2026-10-25T11:32:51.429Z"
+    "updatedAt": "2026-10-31T16:56:36.415Z",
+    "lastLoginAt": "2026-10-31T16:56:36.415Z"
   },
   {
     "id": "us_4ea7ee131c5b",

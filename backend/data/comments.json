@@ -612,7 +612,7 @@
     "isEdited": false,
     "isDeleted": false,
     "createdAt": "2024-11-05T23:26:33.000Z",
-    "updatedAt": "2026-10-25T11:39:39.995Z"
+    "updatedAt": "2026-08-19T08:06:43.478Z"
   },
   {
     "id": "cm_0042",
@@ -2532,7 +2532,7 @@
     "isEdited": true,
     "isDeleted": false,
     "createdAt": "2024-10-29T16:37:08.000Z",
-    "updatedAt": "2026-10-25T11:57:24.846Z"
+    "updatedAt": "2026-08-19T08:06:43.547Z"
   },
   {
     "id": "cm_0172",
@@ -3882,7 +3882,7 @@
     "isEdited": false,
     "isDeleted": false,
     "createdAt": "2024-11-15T03:54:49.000Z",
-    "updatedAt": "2026-10-25T11:11:41.127Z"
+    "updatedAt": "2026-10-22T18:38:28.120Z"
   },
   {
     "id": "cm_0262",
@@ -3897,7 +3897,7 @@
     "isEdited": false,
     "isDeleted": false,
     "createdAt": "2024-12-23T04:20:06.000Z",
-    "updatedAt": "2026-10-25T11:00:56.710Z"
+    "updatedAt": "2026-10-22T18:54:59.623Z"
   },
   {
     "id": "cm_0263",
@@ -4463,11 +4463,11 @@
     "rating": 9,
     "spoiler": false,
     "likeCount": 6,
-    "replyCount": 6,
+    "replyCount": 0,
     "isEdited": false,
     "isDeleted": false,
     "createdAt": "2025-04-21T04:34:46.000Z",
-    "updatedAt": "2026-10-16T06:43:40.689Z"
+    "updatedAt": "2026-10-31T16:09:29.439Z"
   },
   {
     "id": "cm_0301",
@@ -6733,96 +6733,6 @@
     "isDeleted": true,
     "createdAt": "2026-10-15T15:29:10.221Z",
     "updatedAt": "2026-10-22T10:36:13.333Z"
-  },
-  {
-    "id": "cm_141b3adf347c",
-    "movieId": "mv_080",
-    "userId": "us_001",
-    "parentId": "cm_0300",
-    "content": "cvp",
-    "rating": null,
-    "spoiler": false,
-    "likeCount": 0,
-    "replyCount": 0,
-    "isEdited": false,
-    "isDeleted": false,
-    "createdAt": "2026-10-16T06:30:11.842Z",
-    "updatedAt": "2026-10-16T06:30:11.842Z"
-  },
-  {
-    "id": "cm_b3949b540424",
-    "movieId": "mv_080",
-    "userId": "us_001",
-    "parentId": "cm_0300",
-    "content": "cvp",
-    "rating": null,
-    "spoiler": false,
-    "likeCount": 0,
-    "replyCount": 0,
-    "isEdited": false,
-    "isDeleted": false,
-    "createdAt": "2026-10-16T06:31:58.768Z",
-    "updatedAt": "2026-10-16T06:31:58.768Z"
-  },
-  {
-    "id": "cm_921800e91488",
-    "movieId": "mv_080",
-    "userId": "us_001",
-    "parentId": "cm_0300",
-    "content": "cvp",
-    "rating": null,
-    "spoiler": false,
-    "likeCount": 0,
-    "replyCount": 0,
-    "isEdited": false,
-    "isDeleted": false,
-    "createdAt": "2026-10-16T06:33:38.800Z",
-    "updatedAt": "2026-10-16T06:33:38.800Z"
-  },
-  {
-    "id": "cm_b8237b1862c9",
-    "movieId": "mv_080",
-    "userId": "us_001",
-    "parentId": "cm_0300",
-    "content": "cvp",
-    "rating": null,
-    "spoiler": false,
-    "likeCount": 0,
-    "replyCount": 0,
-    "isEdited": false,
-    "isDeleted": false,
-    "createdAt": "2026-10-16T06:34:15.684Z",
-    "updatedAt": "2026-10-16T06:34:15.684Z"
-  },
-  {
-    "id": "cm_fbd33b048cfa",
-    "movieId": "mv_080",
-    "userId": "us_001",
-    "parentId": "cm_0300",
-    "content": "cvp",
-    "rating": null,
-    "spoiler": false,
-    "likeCount": 0,
-    "replyCount": 0,
-    "isEdited": false,
-    "isDeleted": false,
-    "createdAt": "2026-10-16T06:34:41.063Z",
-    "updatedAt": "2026-10-16T06:34:41.063Z"
-  },
-  {
-    "id": "cm_094a5600fa9e",
-    "movieId": "mv_080",
-    "userId": "us_001",
-    "parentId": "cm_0300",
-    "content": "cvp",
-    "rating": null,
-    "spoiler": false,
-    "likeCount": 0,
-    "replyCount": 0,
-    "isEdited": false,
-    "isDeleted": false,
-    "createdAt": "2026-10-16T06:43:40.680Z",
-    "updatedAt": "2026-10-16T06:43:40.680Z"
   },
   {
     "id": "cm_74874e7bf94e",

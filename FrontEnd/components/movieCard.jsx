@@ -19,6 +19,7 @@ function Movie({featData,popApi , newApi, scorApi, typeApi , backMov,stateRes}){
     const [filtered , setFilter] = useState([])
     const [showAll, setShowAll] = useState(false)
     const [FilterFilmTür , SetFilterFilmTür] = useState([])
+    const [loading , setLoading] = useState(true)
 
     console.log(stateRes)
 
@@ -32,7 +33,11 @@ useEffect(() => {
 
     setFilter(filterData)
     
+    const LoadingTime = setTimeout(() => {
+        setLoading(false)    
+    }, 1000);
     
+    return () =>  clearTimeout(LoadingTime)
 
 }, [])
 
@@ -50,6 +55,11 @@ useEffect(() => {
     return(
     <>
    
+   {loading && (
+    <div className="loading">
+        <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
+    </div>
+   )}
     <div className="homePage">
         <div className="featured">
 

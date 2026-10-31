@@ -25,16 +25,21 @@ export default function Movies({allData, genreList}){
 );
     
     const [movieData , setMovieData] = useState(allData)
-    
     const [searchValue , setSearchValue] = useState(searchParams.get("search") || "");
-
     const [currentPage , setCurrentPage] = useState(searchParams.get("page") || 1)
+    const [loading , setLoading] = useState(true)
 
     
     useEffect(() => {
         if(!selectedGen){
             searchParams.get("page") || 1;
         }
+
+        const timer = setTimeout(() => {
+            setLoading(false)
+        }, 800)
+
+        return () => clearTimeout(timer)
     },[])
     
     // Search value
@@ -249,6 +254,12 @@ useEffect(() => {
 
     return(
     <div className="filmList">
+
+               {loading && (
+        <div className="loading">
+            <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
+        </div>
+    )}
 
         <div className="filmBar">
             <h3>Film Listesi</h3>

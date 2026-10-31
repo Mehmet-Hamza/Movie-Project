@@ -1,4 +1,4 @@
-     
+    
 import Link from "next/link";
 import { cookies } from "next/headers";
 import "./homePage.css";
@@ -25,7 +25,7 @@ async function Header() {
 
                 {token && user && (
                 <>
-                    <Link className="FilmListLink" href="/watchList">İzleme Listem</Link>
+                    <Link  className="FilmListLink" href="/watchList">İzleme Listem</Link>
                     <Link className="FilmListLink" href="/profile">Profil</Link>
                 </>
                 )}

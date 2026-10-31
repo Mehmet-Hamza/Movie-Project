@@ -1,7 +1,9 @@
 "use client"
-import { useState } from "react"
- import { Modal, Button } from 'react-bootstrap';
- import { useRouter } from "next/navigation"
+import { useState , useEffect } from "react"
+import { Modal, Button } from 'react-bootstrap';
+import { useRouter } from "next/navigation"
+import styles from "./profile.css"
+
 
 
 
@@ -15,6 +17,15 @@ export default function ProfileDesing({userName, token}) {
     const [newFullName, setNewFullName] = useState("");
     const [newBio, setNewBio] = useState("");
     const [datas , setDatas] = useState([]);
+    const [loading , setLoading] = useState(true)
+
+      useEffect(() => {
+                const time = setTimeout(() => {
+                    setLoading(false)
+                }, 500)
+    
+                return () => clearTimeout(time)
+            },[])
 
     const newProfileİnfo = async () => {
         try{
@@ -46,8 +57,14 @@ export default function ProfileDesing({userName, token}) {
     return (
     <>
        
-
+              {loading && (
+        <div className="loading">
+            <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
+        </div>
+    )}
 <Button className="SignOutButtonAndDesignButton" onClick={() => setShow(true)}>Profili Düzenle</Button>
+
+
 
 <Modal show={show} onHide={() => setShow(false)}>
     <Modal.Header closeButton style={{backgroundColor : '#343a40'}}>
