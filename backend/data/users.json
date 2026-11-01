@@ -4,14 +4,14 @@
     "username": "admin",
     "email": "admin@movieapi.dev",
     "password": "$2a$10$EJS88uRXz13rp/DVL93RVePxrWNODGmcvFNgMas.RGnvwyP52sFGa",
-    "fullName": "Site Yöneticisi",
+    "fullName": "site Yöneticisi",
     "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=admin",
-    "bio": "Bu API demo projesinin yöneticisi.",
-    "role": "admin",
+    "bio": "Test",
+    "role": "user",
     "isActive": true,
     "createdAt": "2024-05-10T19:43:23.000Z",
-    "lastLoginAt": "2026-10-31T16:48:20.202Z",
-    "updatedAt": "2026-10-31T16:48:20.202Z"
+    "lastLoginAt": "2026-11-01T13:54:32.803Z",
+    "updatedAt": "2026-11-01T13:54:32.803Z"
   },
   {
     "id": "us_002",
@@ -577,41 +577,13 @@
     "username": "mehmet",
     "email": "hamzamehmet85@gmail.com",
     "password": "$2a$10$Xf3a5h1aIBvOBMeC39jeFeue/yhS03brctUWO3n2Q3L8tF7ZeXIMO",
-    "fullName": "Mehmet Hamza",
+    "fullName": "Koli Bali",
     "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=mehmet",
-    "bio": "Focus To Yourself",
+    "bio": "Test",
     "role": "user",
     "isActive": true,
     "createdAt": "2026-10-11T12:29:31.964Z",
-    "updatedAt": "2026-10-31T16:56:36.415Z",
-    "lastLoginAt": "2026-10-31T16:56:36.415Z"
-  },
-  {
-    "id": "us_4ea7ee131c5b",
-    "username": "azim",
-    "email": "tanrierdiazim@gmail.com",
-    "password": "$2a$10$A8UQC.bcifZcTj34a52umeUPkpk/fcLwyFIRZo6uFKLEgVYUkcXW2",
-    "fullName": "azim",
-    "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=azim",
-    "bio": "",
-    "role": "user",
-    "isActive": true,
-    "createdAt": "2026-10-19T15:30:18.321Z",
-    "updatedAt": "2026-10-19T15:30:28.065Z",
-    "lastLoginAt": "2026-10-19T15:30:28.065Z"
-  },
-  {
-    "id": "us_dfd430eccb45",
-    "username": "burak_123",
-    "email": "burak@gmail.com",
-    "password": "$2a$10$RE22wmNyLO36x6oW5RVhCOnqaMWFc84na7xdil3BkJ0JW8LibCtZu",
-    "fullName": "Burak Oyunda",
-    "avatar": "https://api.dicebear.com/9.x/avataaars/svg?seed=burak_123",
-    "bio": "",
-    "role": "user",
-    "isActive": true,
-    "createdAt": "2026-10-21T12:59:30.432Z",
-    "updatedAt": "2026-10-21T13:00:16.821Z",
-    "lastLoginAt": "2026-10-21T13:00:16.821Z"
+    "updatedAt": "2026-11-01T14:58:56.035Z",
+    "lastLoginAt": "2026-11-01T14:58:56.035Z"
   }
 ]

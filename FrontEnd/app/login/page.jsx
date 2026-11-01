@@ -1,9 +1,10 @@
     "use client"
 
-    import { useEffect, useState } from "react"
+    import { useEffect, useState , useRef} from "react"
     import styles from "./login.css"
-
-    import Link from "next/link"
+    
+    import LoadingLink from "@/components/LoadingLink.jsx"
+import { Router } from "next/dist/client/router";
 
 
     export default function login(){
@@ -11,16 +12,9 @@
     // const Router = useRouter()
         const [identifier , setİdenTifier] = useState("");
         const [password , setPassword] = useState("");
-        const [loading , setLoading] = useState(true)
+        const [loginAlert, setLoginAlert] = useState(false)
 
     
-        useEffect(() => {
-            const time = setTimeout(() => {
-                setLoading(false)
-            }, 500)
-
-            return () => clearTimeout(time)
-        },[])
 
         const loginAuth = async (e) => {
             e.preventDefault()
@@ -33,7 +27,12 @@
             console.log(data);
 
             if(!identifier || !password){
-                return alert('Giriş Başarısız Tekrar Dene !')
+                setLoginAlert(true)
+
+                setTimeout(() => {
+                    setLoginAlert(false)
+                },2000)
+                return;
             }
 
             if(data.success){
@@ -45,7 +44,15 @@
 
             }
             else{
-                alert('Mevcut Bir Hesap Bulunamadı')
+                setLoginAlert(true)
+
+                setİdenTifier("");
+                setPassword("")
+                setTimeout(() => {
+                    setLoginAlert(false)
+                }, 2000);
+                
+
             }
         }
         
@@ -53,19 +60,19 @@
         return(
 
         <div className="login">
+        {loginAlert && (<div class="alert theme-danger dangerAlert" role="alert">
+            <p>Giriş Başarısız Tekrar Deneyin !</p>
+        </div>)}
+        
 
-            {loading && (
-        <div className="loading">
-            <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
-        </div>
-    )}
+    
             <form className="formCard" onSubmit={loginAuth} action="">
                 <div className="emailCard">
                     <input className="loginInput" placeholder="Kullanıcı adı" onChange={(e) => {setİdenTifier(e.target.value)}} type="text" />
                 </div>
 
                 <div className="passwordCard">
-                    <input className="loginInput" placeholder="Şifre" onChange={(e) => {setPassword(e.target.value)}} type="text" />
+                    <input  className="loginInput" placeholder="Şifre" onChange={(e) => {setPassword(e.target.value)}} type="text" />
                 </div>
 
                 <div className="submitCard">
@@ -75,7 +82,7 @@
                 <div className="registerRouterCard">
                     <p style={{color : 'white'}}>Hesabın yok mu?</p>
                     
-                    <Link className="registerRouter" href={"/register"}>Kayıt Ol</Link>
+                    <LoadingLink className="registerRouter" href={"/register"}>Kayıt Ol</LoadingLink>
                 </div>
             </form>
         </div>

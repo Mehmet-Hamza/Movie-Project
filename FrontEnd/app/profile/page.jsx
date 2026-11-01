@@ -4,7 +4,7 @@ import Image from "next/image"
 import styles from "./profile.css"
 import { redirect } from "next/navigation";
 import  ProfileDesing  from "./profileDesign.jsx"
-import Link from 'next/link'
+import LoadingLink from '@/components/LoadingLink.jsx'
 
 
 export default async function Profile({gettingData}) {
@@ -121,7 +121,7 @@ export default async function Profile({gettingData}) {
                     <div className="movieCard">
                         {recommentData.map((item, index) =>{
                             return(
-                                <Link style={{textDecoration : 'none'}} key={index} href={`/movie/${item.id}`}><div key={index} className="movieCard">
+                                <LoadingLink key={index} href={`/movie/${item.id}`}><div key={index} className="movieCard">
 
                                     <div className="posterCards">
                                         <Image alt="moviePhoto" className="posterImg"  src={item.posterUrl} width={150} height={200}/>
@@ -142,7 +142,7 @@ export default async function Profile({gettingData}) {
                                     </div>
                                    
                                 
-                                </div></Link>
+                                </div></LoadingLink>
                             )
                         })}
                     </div>

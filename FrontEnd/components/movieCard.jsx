@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./homePage.css"
 import Link from 'next/link'
+import LoadingLink from "@/components/LoadingLink.jsx"
 
 
 
@@ -19,7 +20,7 @@ function Movie({featData,popApi , newApi, scorApi, typeApi , backMov,stateRes}){
     const [filtered , setFilter] = useState([])
     const [showAll, setShowAll] = useState(false)
     const [FilterFilmTür , SetFilterFilmTür] = useState([])
-    const [loading , setLoading] = useState(true)
+  
 
     console.log(stateRes)
 
@@ -32,12 +33,8 @@ useEffect(() => {
     });
 
     setFilter(filterData)
-    
-    const LoadingTime = setTimeout(() => {
-        setLoading(false)    
-    }, 1000);
-    
-    return () =>  clearTimeout(LoadingTime)
+    window.scrollTo(0,0)
+   
 
 }, [])
 
@@ -55,11 +52,7 @@ useEffect(() => {
     return(
     <>
    
-   {loading && (
-    <div className="loading">
-        <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
-    </div>
-   )}
+   
     <div className="homePage">
         <div className="featured">
 
@@ -81,7 +74,7 @@ useEffect(() => {
 
           <div>
             {movie[index]?.posterUrl && (
-              <Link key={index} href={`/movie/${movie[index].id}`}><Image quality={95} className="sliderImg" src={featData[index].posterUrl} alt="headerPhoto" width={400} height={400}/></Link>
+              <LoadingLink key={index} href={`/movie/${movie[index].id}`}><Image quality={95} className="sliderImg" src={featData[index].posterUrl} alt="headerPhoto" width={400} height={400}/></LoadingLink>
 
               )}
               <div className="dialog-Text">
@@ -101,7 +94,7 @@ useEffect(() => {
                                 
                                 {popMovie.data.map((item, index) => {
                                     return(
-                                        <Link  key={index} href={`/movie/${item.id}`}><li ><Image className="filmsImage" src = {item.posterUrl} width = {70} height = {70} alt= "popularPhoto"/></li></Link> 
+                                        <LoadingLink  key={index} href={`/movie/${item.id}`}><li ><Image className="filmsImage" src = {item.posterUrl} width = {70} height = {70} alt= "popularPhoto"/></li></LoadingLink> 
                                     )
                                 })}
                               </ul>
@@ -119,7 +112,7 @@ useEffect(() => {
                           <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
                             {newMovie.data.map((item , index) => {
                                 return(
-                                    <Link key = {index} href={`/movie/${item.id}`}><li><Image className="filmsImage" alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li></Link>
+                                    <LoadingLink key = {index} href={`/movie/${item.id}`}><li><Image className="filmsImage" alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li></LoadingLink>
                                 )
                             })}
                           </ul>
@@ -135,7 +128,7 @@ useEffect(() => {
                           <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
                             {scorMovie.data.map((item , index) => {
                                 return(
-                                <Link  key = {index } href={`/movie/${item.id}`}><li><Image className="filmsImage" alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li> </Link>
+                                <LoadingLink  key = {index } href={`/movie/${item.id}`}><li><Image className="filmsImage" alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li> </LoadingLink>
                                 )
                             })}
                           </ul>
@@ -156,7 +149,7 @@ useEffect(() => {
                     <div key = {index} style={{position : 'relative' , minWidth : '350px', minHeight : '200px', display : 'flex', justifyContent : 'center', alignItems : 'center'}}>
                         <h3 className="typeText" style={{fontSize : '20px', color : 'white', position : 'absolute'}}>{`${item.nameTr}`}</h3>
                         
-                        <Link href = {`/movie?genre=${item.slug}&page=1`}><div className="img1"><Image style={{borderRadius :'15px'}} alt = "typePhoto" src={item.coverUrl} width = {350} height = {200}/></div></Link>
+                        <LoadingLink href = {`/movie?genre=${item.slug}&page=1`}><div className="img1"><Image style={{borderRadius :'15px'}} alt = "typePhoto" src={item.coverUrl} width = {350} height = {200}/></div></LoadingLink>
                     
                     </div>
                         
@@ -170,7 +163,7 @@ useEffect(() => {
                     return(
                         <div key = {index} style={{ position : 'relative' , minWidth : '350px', minHeight : '200px', display : 'flex', justifyContent : 'center', alignItems : 'center'}}>
                              <h3  className="typeText" style={{fontSize : '20px', color : 'white', position : 'absolute'}}>{element.nameTr}</h3>
-                            <Link href={`/movie?genre=${element.slug}&page=1`} ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {350} height = {200}/></div></Link>
+                            <LoadingLink href={`/movie?genre=${element.slug}&page=1`} ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {350} height = {200}/></div></LoadingLink>
                         </div>
                     )
                 }
@@ -214,9 +207,6 @@ useEffect(() => {
 
                   <div className="head">
                     <h3>Toplam Yorum</h3>
-                
-
-               
                     <h3>{stateRes.data.totals.comments}</h3>
                 </div>
 
@@ -229,5 +219,6 @@ useEffect(() => {
     
     </>
     )
+
 }
 export default Movie

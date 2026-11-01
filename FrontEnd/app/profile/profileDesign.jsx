@@ -16,16 +16,9 @@ export default function ProfileDesing({userName, token}) {
     const [show, setShow] = useState(false);
     const [newFullName, setNewFullName] = useState("");
     const [newBio, setNewBio] = useState("");
-    const [datas , setDatas] = useState([]);
-    const [loading , setLoading] = useState(true)
-
-      useEffect(() => {
-                const time = setTimeout(() => {
-                    setLoading(false)
-                }, 500)
+    const [alert , setAlert] = useState(false);
     
-                return () => clearTimeout(time)
-            },[])
+
 
     const newProfileİnfo = async () => {
         try{
@@ -39,8 +32,19 @@ export default function ProfileDesing({userName, token}) {
                     role : "user",
                     isActive : true
                 })
+                
 
             })
+            setAlert(true)
+
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+                Router.refresh();
+            }, 150);
+
+            setTimeout(() => {
+                setAlert(false)
+            },2000)
 
             const data = await newProfileData.json();
             console.log(data)
@@ -56,12 +60,13 @@ export default function ProfileDesing({userName, token}) {
 
     return (
     <>
-       
-              {loading && (
-        <div className="loading">
-            <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
-        </div>
-    )}
+    {alert && (<div className="alert alert-success DesignAlert" role="alert">
+        <p>Bilgiler Başarıyla Değiştirildi!</p>
+    </div>)}
+
+  
+    
+
 <Button className="SignOutButtonAndDesignButton" onClick={() => setShow(true)}>Profili Düzenle</Button>
 
 

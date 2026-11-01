@@ -192,3 +192,12 @@
     z-index: 9999;
 }
 
+.DesignAlert{
+    width: 50%;
+    z-index: 9999;
+    position: absolute;
+    top:110px;
+    left: 10px;
+    
+}
+

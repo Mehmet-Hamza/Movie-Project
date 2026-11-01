@@ -4,7 +4,7 @@
 import styles from "./movies.css"
 import { Search } from 'lucide-react';
 import  Image  from "next/image";
-import Link from "next/link"
+import LoadingLink from "@/components/LoadingLink.jsx"
 import { useEffect, useState } from "react";
 import {useRouter , useSearchParams} from "next/navigation"
 
@@ -27,7 +27,7 @@ export default function Movies({allData, genreList}){
     const [movieData , setMovieData] = useState(allData)
     const [searchValue , setSearchValue] = useState(searchParams.get("search") || "");
     const [currentPage , setCurrentPage] = useState(searchParams.get("page") || 1)
-    const [loading , setLoading] = useState(true)
+    
 
     
     useEffect(() => {
@@ -35,11 +35,8 @@ export default function Movies({allData, genreList}){
             searchParams.get("page") || 1;
         }
 
-        const timer = setTimeout(() => {
-            setLoading(false)
-        }, 800)
-
-        return () => clearTimeout(timer)
+        
+         
     },[])
     
     // Search value
@@ -255,11 +252,7 @@ useEffect(() => {
     return(
     <div className="filmList">
 
-               {loading && (
-        <div className="loading">
-            <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
-        </div>
-    )}
+    
 
         <div className="filmBar">
             <h3>Film Listesi</h3>
@@ -361,7 +354,7 @@ useEffect(() => {
                 movieData.slice((currentPage - 1) * 10, currentPage * 10).map((item , index) => {
                    
                    return(
-                   <Link className="link" href = {`/movie/${item.id}`} key = {index}><div className="poster">
+                   <LoadingLink className="link" href = {`/movie/${item.id}`} key = {index}><div className="poster">
                     <Image  src={item.posterUrl} alt="poster" width={350} height={175} style={{ width: "100%", height: "180px", borderTopLeftRadius :'20px', borderTopRightRadius : '20px'}}/>
                     {/*Image Location */}
                     
@@ -373,7 +366,7 @@ useEffect(() => {
                             <p className="MovieType">{item?.genreDetails.map(g => g.nameTr).join(" , ")}</p>
 
                         </div>    
-                    </div></Link>
+                    </div></LoadingLink>
                    ) 
                 })}
 

@@ -97,3 +97,31 @@
     font-size: 24px;
     z-index: 9999;
 }
+
+.dangerAlert{
+    width: 40%;
+    z-index: 99999;
+    position: absolute;
+    top:130px;
+    background-color: tomato;
+    place-items: center;
+    font-weight: 600;
+    color: white;
+    align-items: center;
+    left: 30%;
+
+
+}
+
+.succesAlert{
+    width: 40%;
+    z-index: 99999;
+    position: absolute;
+    top:130px;
+    background-color:#006400;
+    place-items: center;
+    font-weight: 600;
+    color: white;
+    align-items: center;
+    left: 30%;
+}

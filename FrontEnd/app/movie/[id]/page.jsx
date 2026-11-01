@@ -2,7 +2,7 @@ import axios from "axios"
 import Image from "next/image"
 import styles from "./movieDetail.css"
 import ScoreGraphic from "./scoreGraph"
-import Link from "next/link"
+import LoadingLink from "@/components/LoadingLink.jsx"
 import { cookies } from "next/headers"
 
 
@@ -118,7 +118,7 @@ const filmsData = resMove.data.data;
                 <div className="similarMoviesList">
                     {simMovies.map((item, index) => {
                         return(
-                        <Link style={{textDecoration : 'none'}} key={index} href={`/movie/${item.id}`}><div className="movieCardSimilar" >
+                        <LoadingLink key={index} href={`/movie/${item.id}`}><div className="movieCardSimilar" >
 
                                 <Image style={{borderTopLeftRadius : '18px', borderTopRightRadius : '18px'}} src={item.posterUrl} width={300} height={180} alt="similarMovies"/>
 
@@ -135,7 +135,7 @@ const filmsData = resMove.data.data;
                                         
                                     </ul>
                                 </div>
-                        </div></Link>
+                        </div></LoadingLink>
                             
                         )
                     })}

@@ -7,8 +7,7 @@ import { type } from "os";
 
 async function Home(){
 
-   
-  // Öne Çıkan Fİlmler
+    // Öne Çıkan Fİlmler
   const res = await axios.get(`http://localhost:4000/api/movies/featured`);
   const featureData = res.data.data
 
@@ -41,6 +40,7 @@ async function Home(){
   const stateRes = await axios.get(`http://localhost:4000/api/stats/overview`);
   console.log(stateRes.data) 
 
+ 
   return(
     <div className="homePage">
 
@@ -50,6 +50,7 @@ async function Home(){
         
       
     </div>
-  )  
+  )
+  
 }
 export default Home

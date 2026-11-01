@@ -11,18 +11,14 @@ const [name, setName] = useState("");
 const [mail, setMail] = useState("");
 const [password, setPassword] = useState("")
 const [fullName , setFullName] = useState("")
-
-const [errorType , setErrorType] = useState("")
-
-const [loading , setLoading] = useState(true)
-
-      useEffect(() => {
-                const time = setTimeout(() => {
-                    setLoading(false)
-                }, 500)
-    
-                return () => clearTimeout(time)
-            },[])
+const [alertDanger , setAlert] = useState({
+    isTrue  : false,
+    message : ""
+})
+const [succesLoginAlert , setSuccesLoginAlert] = useState({
+    isTrue : false,
+    message : ""
+})
 
 
 const InputRefNAME = useRef();
@@ -36,7 +32,11 @@ const registerButton =  async (e) => {
     console.log(mail.split("@")[1]);
 
     if(!name || !mail || !password || !fullName){
-        alert("Bilgiler Eksiksiz Doldurulmalıdır")
+        setAlert({isTrue : true , message : "Bilgiler Eksiksiz Girilmelidir !"})
+
+        setTimeout(() => {
+            setAlert({isTrue : false , message : ""})
+        }, 2000);
 
         InputRefNAME.current.value = ""
         InputRefPASSWORD.current.value = ""
@@ -55,12 +55,15 @@ const registerButton =  async (e) => {
     ];
     
 
-  
-
 
     if(!allowedDomains.includes(emailDomain)){
         
-        setErrorType("Geçersiz e-posta. Gmail, Hotmail veya iCloud kullan.");
+        
+        setAlert({isTrue : true , message : "Geçersiz e-posta. Gmail, Hotmail veya iCloud kullan"})
+
+        setTimeout(() => {
+            setAlert({isTrue : false , message : ""})
+        },2000)
 
         InputRefNAME.current.value = ""
         InputRefPASSWORD.current.value = ""
@@ -86,49 +89,52 @@ const registerButton =  async (e) => {
 
     })
     const data = await res.json()
-    console.log(data);
-
-    console.log(data)
+    
 
     if(!data.success){
-        setErrorType(data.error.message)
+        
+        setAlert({isTrue : true , message : data.error.message})
+
+        setTimeout(() => {
+            setAlert({isTrue : false , message : ""})
+        },2000)
         
         return;
     }
 
     
       if(data.success && name && mail && password && fullName){
-        alert("Hesabınız Oluşturuldu !")
-        Router.push("/login")
+        setSuccesLoginAlert({isTrue : true , message : "Hesabınız Başarıyla Oluşturuldu !"})
+
+        setTimeout(() => {
+            setSuccesLoginAlert({isTrue : false, message : ""})
+            Router.push("/login")
+        }, 2500);
+        
         return;
         
     }
     
 }
 
-useEffect(() => {
-
-    const timer = setTimeout(() => {
-        setErrorType("");
-    },2000)
-
-    return () => clearTimeout(timer)
-},[errorType])
-
     return(
     <div className="register">
-               {loading && (
-        <div className="loading">
-            <h2  style={{fontSize : '35px' , color : 'white'}}>Yükleniyor</h2>
+
+        {alertDanger.isTrue &&  (<div className="alert theme-danger dangerAlert" role="alert">
+            <p>{alertDanger.message}</p>
+        </div>)}
+
+        {succesLoginAlert.isTrue && (
+            <div className="alert theme-success succesAlert" role="alert">
+            <p>{succesLoginAlert.message}</p>
         </div>
-    )}
+        
+        )}
+        
+     
         <form className = "formCard" onSubmit={registerButton} action="">
             <div className="personalInputs">
-                {errorType && (
-                    <div className="errorCard">
-                    <p style={{color : 'white'}} className="ErrorText">{errorType}</p>
-                </div>
-                )}
+               
                 
                 <div className="UserNameInput">
                     <input ref={InputRefNAME} type="text" className="registerInput" onChange={(e) => {setName(e.target.value)}} placeholder="Kullanıcı Adı"/>
