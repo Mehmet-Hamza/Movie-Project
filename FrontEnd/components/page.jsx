@@ -15,20 +15,20 @@ async function Header() {
         <div className="navbar">
             <LoadingLink style={{ textDecoration: "none" }} href="/">
                 <div className="HeaderCard">
-                    <h2>headers Movie</h2>
+                    <h2 className="Title">headers Movie</h2>
                 </div>
             </LoadingLink>
 
-            <div style={{display: "flex",gap: "100px",marginRight: "40px"}}>
+            <div className="categoryCard">
 
-                <LoadingLink styleclassName="FilmListLink" href="/movie"><p style={{color : 'white', fontWeight : '600'}}>Film Listesi</p></LoadingLink>
+                <LoadingLink styleclassName="FilmListLink" href="/movie"><p className="Category">Film Listesi</p></LoadingLink>
                 
                 
 
                 {token && user && (
                 <>
-                    <LoadingLink className="FilmListLink" href="/watchList"><p style={{color : 'white', fontWeight : '600'}}>İzleme Listem</p></LoadingLink>
-                    <LoadingLink className="FilmListLink" href="/profile"><p style={{color : 'white', fontWeight : '600'}}>Profil</p></LoadingLink>
+                    <LoadingLink className="FilmListLink" href="/watchList"><p className="Category">İzleme Listem</p></LoadingLink>
+                    <LoadingLink className="FilmListLink" href="/profile"><p className="Category">Profil</p></LoadingLink>
                 </>
                 )}
                 
@@ -37,7 +37,7 @@ async function Header() {
                     <p className="FilmListLink">{user}</p>
                 ) : (
                     <LoadingLink className="FilmListLink" href="/login">
-                        <p style={{color : 'white', fontWeight : '600'}}>Giriş Yap</p>
+                        <p className="Category">Giriş Yap</p>
                     </LoadingLink>
                 )}
             </div>
