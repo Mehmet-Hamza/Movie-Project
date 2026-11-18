@@ -60,13 +60,18 @@ import { Router } from "next/dist/client/router";
         return(
 
         <div className="login">
+
+            
+            
         {loginAlert && (<div class="alert theme-danger dangerAlert" role="alert">
             <p>Giriş Başarısız Tekrar Deneyin !</p>
         </div>)}
         
-
+            
     
             <form className="formCard" onSubmit={loginAuth} action="">
+
+
                 <div className="emailCard">
                     <input className="loginInput" placeholder="Kullanıcı adı" onChange={(e) => {setİdenTifier(e.target.value)}} type="text" />
                 </div>

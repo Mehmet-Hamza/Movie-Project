@@ -4,8 +4,10 @@
     display: flex;
     justify-content: center;
     align-items: start;
+    padding : 40px 20px;
     
 }
+
 
 .formCard{
     background-color: #212529;

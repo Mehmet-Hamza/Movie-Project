@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import styles from "./homePage.css"
+import "./homePage.css";
 import Link from 'next/link'
 import LoadingLink from "@/components/LoadingLink.jsx"
 
@@ -90,7 +90,7 @@ useEffect(() => {
                         <h3>Popüler Fİlmler</h3>
                     </div>
                           <div  className="filmCard">
-                              <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
+                              <ul className="filmRow">
                                 
                                 {popMovie.data.map((item, index) => {
                                     return(
@@ -109,7 +109,7 @@ useEffect(() => {
                     </div>
 
                         <div className="filmCard">
-                          <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
+                          <ul className="filmRow">
                             {newMovie.data.map((item , index) => {
                                 return(
                                     <LoadingLink key = {index} href={`/movie/${item.id}`}><li><Image className="filmsImage" alt = "newMovie" src = {item.posterUrl} width = {70} height = {70}/></li></LoadingLink>
@@ -119,13 +119,13 @@ useEffect(() => {
                         </div>
               </div>
 
-              <div className="En Yüks">
+              <div className="En-Yuksek">
                     <div className="films-text">
                           <h3>En Yüksek Puanlı</h3>
                     </div>
 
                         <div className="filmCard">
-                          <ul style={{ display : 'flex' , flexDirection : 'row' , gap : '50px', listStyle : 'none' }}>
+                          <ul className="filmRow">
                             {scorMovie.data.map((item , index) => {
                                 return(
                                 <LoadingLink  key = {index } href={`/movie/${item.id}`}><li><Image className="filmsImage" alt = "scorMovie" src = {item.posterUrl} width = {70} height = {70}/></li> </LoadingLink>
@@ -138,7 +138,7 @@ useEffect(() => {
     
     <div className="filmTypes">
               <div className="filmTypeText">
-                <h1 style={{fontSize : '50px'}}>Film Türleri</h1>
+                <h1>Film Türleri</h1>
               </div>
 
               <div className="typeCard" >
@@ -146,8 +146,8 @@ useEffect(() => {
                 {filtered.map((item , index) => {
                     return(
 
-                    <div key = {index} style={{position : 'relative' , minWidth : '350px', minHeight : '200px', display : 'flex', justifyContent : 'center', alignItems : 'center'}}>
-                        <h3 className="typeText" style={{fontSize : '20px', color : 'white', position : 'absolute'}}>{`${item.nameTr}`}</h3>
+                    <div key={index} className="typeItem">
+                        <h3 className="typeText">{`${item.nameTr}`}</h3>
                         
                         <LoadingLink href = {`/movie?genre=${item.slug}&page=1`}><div className="img1"><Image style={{borderRadius :'15px'}} alt = "typePhoto" src={item.coverUrl} width = {350} height = {200}/></div></LoadingLink>
                     
@@ -157,21 +157,25 @@ useEffect(() => {
                 })}
                 
                 {showAll && (
+                    typeApi.data.map((element, index) => {
+                        return (
+                            <div key={index} className="typeItem">
+                                <h3 className="typeText">{element.nameTr}</h3>
 
-                    typeApi.data.map((element , index) => {
-                        
-                    return(
-                        <div key = {index} style={{ position : 'relative' , minWidth : '350px', minHeight : '200px', display : 'flex', justifyContent : 'center', alignItems : 'center'}}>
-                             <h3  className="typeText" style={{fontSize : '20px', color : 'white', position : 'absolute'}}>{element.nameTr}</h3>
-                            <LoadingLink href={`/movie?genre=${element.slug}&page=1`} ><div  className="img1" ><Image  alt = "typePhoto" src={element.coverUrl} width = {350} height = {200}/></div></LoadingLink>
-                        </div>
-                    )
-                }
-            )
-
-
+                                <LoadingLink href={`/movie?genre=${element.slug}&page=1`}>
+                                    <div className="img1">
+                                        <Image
+                                            alt="typePhoto"
+                                            src={element.coverUrl}
+                                            width={350}
+                                            height={200}
+                                        />
+                                    </div>
+                                </LoadingLink>
+                            </div>
+                        )
+                    })
                 )}
-               
                           
              
               <button className="buttonMore"  onClick ={typeButton} >{showAll === true ? "Daha az Göster" : "Daha Fazla Göster"}</button>  
